@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<channel>
+    <title>Traffic Scotland - Current Incidents</title>
+    <description>Current incidents on the road network e.g. accidents</description>
+    <link>http://trafficscotland.org/currentincidents/</link>
+    <language />
+    <copyright />
+    <managingEditor />
+    <webMaster />
+    <lastBuildDate>Wed, 22 Oct 2014 08:00:32 GMT</lastBuildDate>
+    <docs>http://trafficscotland.org/rss/</docs>
+    <rating />
+    <generator>Traffic Scotland | www.trafficscotland.org</generator>
+    <ttl>5</ttl>
+    <item>
+      <title>A87 Skye Bridge - High winds</title>
+      <description>Road users are advised to use caution crossing the A87 Skye Bridge due to high winds currently affecting driving conditions.</description>
+      <link>http://tscot.org/01a4853</link>
+      <georss:point>57.280078453052 -5.73791105297846</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 07:17:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A751 A75 Aird - A77 Innermessan - Closure</title>
+      <description>All lanes closed in both directions indefinitely</description>
+      <link>http://tscot.org/01c70584</link>
+      <georss:point>54.9175894228322 -4.97687569046634</georss:point>
+      <author />
+      <comments />
+      <pubDate>Tue, 21 Oct 2014 17:29:39 GMT</pubDate>
+    </item>
+    <item>
+      <title>M8 J25 - J24 Helen St - Queue</title>
+      <description>3 lanes restricted Eastbound indefinitely</description>
+      <link>http://tscot.org/01c70613</link>
+      <georss:point>55.8516230545993 -4.3269910870107</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 06:17:32 GMT</pubDate>
+    </item>
+    <item>
+      <title>M77 J3 North - Slip On - Queue</title>
+      <description>2 lanes restricted Northbound indefinitely</description>
+      <link>http://tscot.org/01c70615</link>
+      <georss:point>55.8041669357186 -4.33700391829674</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 07:06:45 GMT</pubDate>
+    </item>
+    <item>
+      <title>M8 J29 St. James - Queue</title>
+      <description>2 lanes restricted Eastbound indefinitely</description>
+      <link>http://tscot.org/01c70620</link>
+      <georss:point>55.8589259917923 -4.45165970586765</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 07:24:56 GMT</pubDate>
+    </item>
+    <item>
+      <title>M74 J2a Fullarton Rd North - Slip On - Queue</title>
+      <description>1 lane restricted Northbound indefinitely</description>
+      <link>http://tscot.org/01c70625</link>
+      <georss:point>55.8359373011822 -4.17542075726035</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 07:32:13 GMT</pubDate>
+    </item>
+    <item>
+      <title>M8 J12 Between Slips - Queue</title>
+      <description>3 lanes restricted Westbound indefinitely</description>
+      <link>http://tscot.org/01c70627</link>
+      <georss:point>55.8729489306554 -4.18241409717527</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 07:32:51 GMT</pubDate>
+    </item>
+    <item>
+      <title>M80 J2 Robroyston - J3 Hornshill - Queue</title>
+      <description>2 lanes restricted Southbound indefinitely</description>
+      <link>http://tscot.org/01c70630</link>
+      <georss:point>55.8966378078822 -4.15290602055257</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 07:36:15 GMT</pubDate>
+    </item>
+    <item>
+      <title>A737 South of M8 - Queue</title>
+      <description>2 lanes restricted Eastbound indefinitely</description>
+      <link>http://tscot.org/01c70631</link>
+      <georss:point>55.8530959031259 -4.46992314835357</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 07:30:51 GMT</pubDate>
+    </item>
+    <item>
+      <title>M8 J19 Clydeside Expressway - Queue</title>
+      <description>1 lane restricted Eastbound indefinitely</description>
+      <link>http://tscot.org/01c70632</link>
+      <georss:point>55.8592874087118 -4.27035220810529</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 07:36:51 GMT</pubDate>
+    </item>
+    <item>
+      <title>M8 J2 Eastbound - slip on - Queue</title>
+      <description>2 lanes restricted Eastbound indefinitely</description>
+      <link>http://tscot.org/01c70633</link>
+      <georss:point>55.9278462695918 -3.40004065363279</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 07:38:39 GMT</pubDate>
+    </item>
+    <item>
+      <title>M80 J4a Low Wood - Queue</title>
+      <description>2 lanes restricted Northbound indefinitely</description>
+      <link>http://tscot.org/01c70636</link>
+      <georss:point>55.9378991818165 -4.0256921951181</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 07:40:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A720 Straiton Jct - Lasswade Jct - Queue</title>
+      <description>All lanes restricted Westbound for up to 15 minutes</description>
+      <link>http://tscot.org/01c70640</link>
+      <georss:point>55.8899474181973 -3.14794408431191</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 07:55:47 GMT</pubDate>
+    </item>
+    <item>
+      <title>M77 J3 - J4 - Queue</title>
+      <description>2 lanes restricted Northbound indefinitely</description>
+      <link>http://tscot.org/01c70645</link>
+      <georss:point>55.7916443554717 -4.34375134824635</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 08:00:31 GMT</pubDate>
+    </item>
+    <item>
+      <title>M77 J2 North - Slip On - Queue</title>
+      <description>2 lanes restricted Northbound indefinitely</description>
+      <link>http://tscot.org/01c70647</link>
+      <georss:point>55.8238710582141 -4.33542363739732</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 08:00:32 GMT</pubDate>
+    </item>
+    <item>
+      <title>M8 Railway - J2 (Claylands) - Queue</title>
+      <description>2 lanes restricted Eastbound indefinitely</description>
+      <link>http://tscot.org/01c70648</link>
+      <georss:point>55.9251429349301 -3.42498993176116</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 07:31:11 GMT</pubDate>
+    </item>
+    <item>
+      <title>M8 J27 East - Slip On - Queue</title>
+      <description>1 lane restricted Eastbound indefinitely</description>
+      <link>http://tscot.org/01c70650</link>
+      <georss:point>55.8612331179517 -4.40582618005679</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 07:58:21 GMT</pubDate>
+    </item>
+ </channel>
