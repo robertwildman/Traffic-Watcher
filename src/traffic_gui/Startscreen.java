@@ -1,9 +1,11 @@
 package traffic_gui;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
+import traffic_analyze.Incident;
 import traffic_analyze.Postcode_Processing;
 import traffic_input.Postcodeinput;
 import traffic_input.traffic_input;
@@ -12,7 +14,9 @@ import traffic_input.traffic_input;
 public class Startscreen {
 
 	public static JPanel postcodepanel;
-	public static JTextField tfpostcode1 , tfpostcode2; 
+	public static JTextField tfpostcode1 , tfpostcode2;
+	public static JTextArea output;
+	public static JScrollPane sp;
 	public static JLabel lpostcode1,lpostcode2;
 	public static void main(String[] args) {
 		//This will display the starting screen for the program with input of postcodes.
@@ -50,6 +54,8 @@ public class Startscreen {
 		        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		        //Setting up the postcode panel
 		        postcodepanel = new JPanel();
+		        output = new JTextArea();
+		        sp = new JScrollPane(output);
 		        BoxLayout layout = new BoxLayout(postcodepanel, BoxLayout.X_AXIS);
 		        postcodepanel.setLayout(layout);
 		        //Adding the Postcode Labels and TextFields
@@ -74,11 +80,14 @@ public class Startscreen {
 		        		 // System.out.println("Postcode1 :"+tfpostcode1.getText());
 		        		   // System.out.println("Postcode2 :"+tfpostcode2.getText());
 		        		  // String[] cords = Postcode_Processing.createarea(tfpostcode1.getText(),tfpostcode2.getText());
-		        		  	
-		        		    
+		        		  	ArrayList<Incident> incidentlist = traffic_input.allincidents;
+		        		    for(int i = 0; i < incidentlist.size(); i++)
+		        		    {
+		        		    	output.append(incidentlist.get(i).printdata());
+		        		    }
 		        		  }
 		        		});
-
+		        frame.add(sp, BorderLayout.CENTER);
 		        frame.add(bchecktraffic, BorderLayout.SOUTH);
 		        //Sets the size of the Frame
 		        frame.setSize(500, 300);
