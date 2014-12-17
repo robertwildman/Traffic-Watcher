@@ -16,6 +16,28 @@ public class Incident {
 		longa = inlonga;
 		this.type = type;
 	}
+	public Boolean inrange(double inlong,double inlong2,double inlat,double inlat2)
+	{
+		// 
+		if(lat <= inlat2 && lat >= inlat && longa <= inlong && longa >= inlong2)
+		{
+			//In range!
+			return true;
+		}else
+		{
+			//Out of range!
+			return false;
+		}
+				
+	}
+	public String getdesc()
+	{
+		return desc;
+	}
+	public String gettitle()
+	{
+		return title;
+	}
 	public String printdata()
 	{
 		String output = "Title: " + title +"\n";

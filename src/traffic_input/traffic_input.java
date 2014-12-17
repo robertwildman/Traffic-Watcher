@@ -14,7 +14,7 @@ import org.xml.sax.SAXException;
 public class traffic_input {
 	public static ArrayList<Incident> allincidents;
 	
-	 public static void gettraffic(boolean test){
+	 public static ArrayList<Incident> gettraffic(boolean test){
 		//This class will be called at the start of the program 
 		if(test == true)
 		{
@@ -35,21 +35,14 @@ public class traffic_input {
 					
 					Element el = (Element)currentincidents_sco_nl.item(i);
 					//Gets title
-					System.out.println(gettextvalue(el,"title"));
-					System.out.println(gettextvalue(el,"description"));
 					String[] cords = gettextvalue(el,"georss:point").split(" ");
 					double lat = Double.parseDouble(cords[0]);
 					double longitude = Double.parseDouble(cords[1]);
-					System.out.println("Lat: " + String.valueOf(lat) + "  Long" + String.valueOf(longitude));
 					Incident temp = new Incident(gettextvalue(el,"title"),gettextvalue(el,"description"),lat,longitude,"Incident"); 
 					allincidents.add(temp);
 				}
 						
 				//Scotland roadworks
-				System.out.println();
-				System.out.println("_________________");
-				System.out.println("	ROADWORKS    ");
-				System.out.println("-----------------");
 				Document roadworks_sco_doc = readdata("Test-Data/roadworks.xml");
 				Element roadworks_sco_all = roadworks_sco_doc.getDocumentElement();
 				NodeList roadworks_sco_nl = roadworks_sco_all.getElementsByTagName("item");
@@ -57,22 +50,14 @@ public class traffic_input {
 				{
 					Element el = (Element)roadworks_sco_nl.item(i);
 					//Gets title
-					System.out.println();
-					System.out.println(gettextvalue(el,"title"));
-					System.out.println(gettextvalue(el,"description"));
 					String[] cords = gettextvalue(el,"georss:point").split(" ");
 					double lat = Double.parseDouble(cords[0]);
 					double longitude = Double.parseDouble(cords[1]);
-					System.out.println("Lat: " + String.valueOf(lat) + "  Long" + String.valueOf(longitude));
 					Incident temp = new Incident(gettextvalue(el,"title"),gettextvalue(el,"description"),lat,longitude,"Roadworks");
 					allroadworks.add(temp);
 				}
 				
 				//England current Incident
-				System.out.println();
-				System.out.println("_________________");
-				System.out.println("	Incident    ");
-				System.out.println("-----------------");
 				Document roadworks_elg_doc = readdata("Test-Data/CurrentAndFutureEvents.xml");
 				Element roadworks_elg_all = roadworks_elg_doc.getDocumentElement();
 				NodeList roadworks_elg_nl = roadworks_elg_all.getElementsByTagName("item");
@@ -80,12 +65,8 @@ public class traffic_input {
 				{
 					Element el = (Element)roadworks_elg_nl.item(i);
 					//Gets title
-					System.out.println();
-					System.out.println(gettextvalue(el,"title"));
-					System.out.println(gettextvalue(el,"description"));
 					double lat = Double.parseDouble(gettextvalue(el,"latitude"));
 					double longitude = Double.parseDouble(gettextvalue(el,"longitude"));
-					System.out.println("Lat: " + String.valueOf(lat) + "  Long" + String.valueOf(longitude));
 					Incident temp = new Incident(gettextvalue(el,"title"),gettextvalue(el,"description"),lat,longitude,"Incident");
 					allincidents.add(temp);
 				}
@@ -102,9 +83,12 @@ public class traffic_input {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			return allincidents;
 		}else
 		{
 			//Will work with the online data.
+			return allincidents;
 		}
 	 }
 	 public static String gettextvalue(Element el , String tag)
