@@ -65,6 +65,7 @@ public class Startscreen implements ActionListener {
 	public void onlinelayout()
 	{
 		JFrame frame = new JFrame("Online Mode");
+		
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel mainpanel = new JPanel();
         //Setting up the postcode panel
