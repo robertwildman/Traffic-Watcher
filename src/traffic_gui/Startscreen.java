@@ -53,9 +53,16 @@ public class Startscreen implements ActionListener {
         		  offlinelayout();
       		  }
       		});
-        
+        JButton testfeature = new JButton("Test Feature");
+        testfeature.addActionListener(new ActionListener() {
+        	  public void actionPerformed(ActionEvent actionEvent) {
+        		 //Input test function and call methords 
+        		  Journey_input.getJourneys(true);
+      		  }
+      		});
         mainpanel.add(bOnline);
         mainpanel.add(bOffline);
+        mainpanel.add(testfeature);
         frame.add(mainpanel, BorderLayout.CENTER);
         //Sets the size of the Frame
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 

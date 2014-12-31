@@ -12,16 +12,17 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
 import traffic_analyze.Journeytime;
 
 public class Journey_input {
 	public static ArrayList<Journeytime> allJourneytime;
 	public static void getJourneys(boolean test){
-	//This creates an array of objects that use the roadwork class
+	//This creates an array of objects that use the roadworks class
 	 allJourneytime = new ArrayList<Journeytime>();
 	 try {
-	 //Now will collect the infomation from the xml file
-	 //Scotland Current Incidents
+		 //This class will read the location of journey time data and then will collect the data
+		 //From a different xml file that has the information on the time based of sector numbers 
 		Document journeytimeloc_doc = readdata("Test-Data/Journeytime-loc.xml");
 		Element journeytimeloc_all = journeytimeloc_doc.getDocumentElement();
 		NodeList journeytimeloc_nl = journeytimeloc_all.getElementsByTagName("predefinedLocation");
@@ -39,6 +40,7 @@ public class Journey_input {
 				//Header
 				Element el = (Element)journeytimeloc_nl.item(i);
 				String section = el.getAttribute("id").substring(7);
+				System.out.println(section);
 				
 			}else
 			{
@@ -51,6 +53,11 @@ public class Journey_input {
 				Element pointsto = (Element) journeytimeloc_to.item(i/2);
 				System.out.println(gettextvalue(pointsto,"latitude"));
 				System.out.println(gettextvalue(pointsto,"longitude"));
+				for(int i2 = 0; i2 < pointsto.getChildNodes().getLength(); i2++)
+				{
+					 System.out.println(pointsto.getChildNodes().item(i2));
+				}
+				
 			
 				
 				Element juction_el_to_1 = (Element) journeytimeloc_to_desc.item(i/2);
