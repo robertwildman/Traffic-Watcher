@@ -58,7 +58,7 @@ public class Startscreen implements ActionListener {
         mainpanel.add(bOffline);
         frame.add(mainpanel, BorderLayout.CENTER);
         //Sets the size of the Frame
-        frame.setSize(1000, 500);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         //Shows the frame
         frame.setVisible(true);
 	}
@@ -89,7 +89,7 @@ public class Startscreen implements ActionListener {
         JLabel info = new JLabel("This would be the online section");
         frame.add(mainpanel, BorderLayout.CENTER);
         //Sets the size of the Frame
-        frame.setSize(1000, 500);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         //Shows the frame
         frame.setVisible(true);
 	}
@@ -120,15 +120,13 @@ public class Startscreen implements ActionListener {
 	public void offlinelayout()
 	{
 				//This will display the starting screen for the program with input of postcodes.
-				JFrame frame = new JFrame("Offline Modce");
+				JFrame frame = new JFrame("Offline Mode");
 		        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		        //Setting up the postcode panel
-		        postcodepanel = new JPanel();
 		        //Setting up the panel of set cords for offline testing
 		        setcordpanel = new JPanel();
 		        output = new JTextArea();
 		        sp = new JScrollPane(output);
-		        
+		        output.setEditable(false);
 		        BoxLayout layout = new BoxLayout(postcodepanel, BoxLayout.X_AXIS);
 		        BoxLayout setcordlayout = new BoxLayout(setcordpanel, BoxLayout.Y_AXIS);
 		        setcordpanel.setLayout(setcordlayout);
@@ -167,67 +165,23 @@ public class Startscreen implements ActionListener {
 		        setcordpanel.add(bBristol);
 		        setcordpanel.add(bLondon); 
 		        setcordpanel.add(bPlymouth);
-		        
-		        postcodepanel.setLayout(layout);
-		        //Adding the Postcode Labels and TextFields
-		        lpostcode1 = new JLabel("Postcode of starting point: ");
-		        tfpostcode1 = new JTextField();
-		        lpostcode2 = new JLabel("Postcode of end point: ");
-		        tfpostcode2 = new JTextField();
-		        lpostcode1.setLabelFor(tfpostcode1);
-		        lpostcode2.setLabelFor(tfpostcode2);
-		        //Adding them to the panel
-		        postcodepanel.add(lpostcode1);
-		        postcodepanel.add(tfpostcode1);
-		        postcodepanel.add(lpostcode2);
-		        postcodepanel.add(tfpostcode2);
-		        //Setting it to the top
-		        frame.add(postcodepanel, BorderLayout.PAGE_START);
-		        //Button and its listener 
-		        JButton bchecktraffic = new JButton("Check Traffic");
-		        bchecktraffic.addActionListener(new ActionListener() {
-		        	  public void actionPerformed(ActionEvent actionEvent) {
-		        		  traffic_input.gettraffic(true);
-		        		 // System.out.println("Postcode1 :"+tfpostcode1.getText());
-		        		   // System.out.println("Postcode2 :"+tfpostcode2.getText());
-		        		  // String[] cords = Postcode_Processing.createarea(tfpostcode1.getText(),tfpostcode2.getText());
-		        		  	ArrayList<Incident> incidentlist = traffic_input.allincidents;
-		        		    for(int i = 0; i < incidentlist.size(); i++)
-		        		    {
-		        		    	if(incidentlist.get(i).inrange(-1.59136223450466,-3.96991837398933,54.974954339257, 56.1830655993085) == true)
-		        		    	{
-		        		    		output.append("Title: " + incidentlist.get(i).gettitle());
-		        		    		output.append("\n");
-		        		    		output.append("Desc: " + incidentlist.get(i).getdesc());
-		        		    		output.append("\n");
-		        		    		output.append(" ");
-		        		    		output.append("\n");
-		        		    	}else
-		        		    	{
-		        		    		//not in range
-		        		    		//System.out.println("Error");
-		        		    	}
-		        		    	
-		        		    	
-		        		    }
-		        		  }
-		        		});
 		        frame.add(sp, BorderLayout.CENTER);
 		        frame.add(setcordpanel, BorderLayout.EAST);
-		        frame.add(bchecktraffic, BorderLayout.SOUTH);
 		        //Sets the size of the Frame
-		        frame.setSize(1000, 500);
+		        //ONLINE AT http://stackoverflow.com/questions/11570356/jframe-in-full-screen-java
+		        frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		        //Shows the frame
 		        frame.setVisible(true);
 	}
 	public void actionPerformed(ActionEvent e) {
 			 //This will deal with the handling the to and from button pushes
-			if(Startscreen.Toaddress == true)
+			if(Toaddress == true)
 			{
+				output.append("Journey to " + e.getActionCommand());
 				//This will add the cords to the to address
 				String[] address = getcordsoftown(e.getActionCommand());
-				Startscreen.tolat = Double.valueOf(address[0]);
-				Startscreen.tolong = Double.valueOf(address[1]);
+				tolat = Double.valueOf(address[0]);
+				tolong = Double.valueOf(address[1]);
 		  		//Then it will set the ToAddress to false
 		  		Toaddress = false;
 		  		//Then will set the to: to from:
@@ -235,19 +189,20 @@ public class Startscreen implements ActionListener {
 				
 			}else
 			{
+				output.append(" from "+ e.getActionCommand() + "\n");
 				//This means that it wants to get the from address and has the to address
 				String[] address = getcordsoftown(e.getActionCommand());
-				Startscreen.fromlat = Double.valueOf(address[0]);
-				Startscreen.fromlong = Double.valueOf(address[1]);
+				fromlat = Double.valueOf(address[0]);
+				fromlong = Double.valueOf(address[1]);
 				//Then it will set the ToAddress to true
 		  		Toaddress = true;
 		  		//Then will set the From: to To:
 		  		info.setText("     To:");
 				traffic_input.gettraffic(true);
        		 	ArrayList<Incident> incidentlist = traffic_input.allincidents;
-       		    output.append(String.valueOf(tolong) +"   "+ String.valueOf(fromlong) +"   "+ String.valueOf(tolat)+"   "+String.valueOf(fromlat));	
        		    for(int i = 0; i < incidentlist.size(); i++)
        		    {
+       		    	
        		    	//REMEMBER TO CHANGE THIS TO VARS
        		    	if(incidentlist.get(i).inrange(tolong,fromlong,tolat, fromlat) == true)
        		    	{
@@ -268,7 +223,6 @@ public class Startscreen implements ActionListener {
        		  }
        	
 		 }
-		
 	public String[] getcordsoftown(String intown) {
 			//Returns the cords of the town 
 			System.out.println(intown);
@@ -291,72 +245,72 @@ public class Startscreen implements ActionListener {
 			{
 				//Lat Long
 				String[] address = new String[2];
-				address[0]="56.183059";
-				address[1]="-3.969917";
+				address[0]="56.1172";
+				address[1]="-3.9397";
 				return address;
 			}
 			else if(intown.equalsIgnoreCase("Glasgow"))
 			{
 				//Lat Long
 				String[] address = new String[2];
-				address[0]="56.183059";
-				address[1]="-3.969917";
+				address[0]="55.8580";
+				address[1]="-4.2590";
 				return address;
 			}
 			else if(intown.equalsIgnoreCase("Edinburgh"))
 			{
 				//Lat Long
 				String[] address = new String[2];
-				address[0]="56.183059";
-				address[1]="-3.969917";
+				address[0]="55.9531";
+				address[1]="-3.1889";
 				return address;
 			}
 			else if(intown.equalsIgnoreCase("Liverpool"))
 			{
 				//Lat Long
 				String[] address = new String[2];
-				address[0]="56.183059";
-				address[1]="-3.969917";
+				address[0]="53.4000";
+				address[1]="-3";
 				return address;
 			}
 			else if(intown.equalsIgnoreCase("Manchester"))
 			{
 				//Lat Long
 				String[] address = new String[2];
-				address[0]="56.183059";
-				address[1]="-3.969917";
+				address[0]="53.4667";
+				address[1]="-2.2333";
 				return address;
 			}
 			else if(intown.equalsIgnoreCase("Birmingham"))
 			{
 				//Lat Long
 				String[] address = new String[2];
-				address[0]="56.183059";
-				address[1]="-3.969917";
+				address[0]="52.4831";
+				address[1]="-1.8936";
 				return address;	
 			}
 			else if(intown.equalsIgnoreCase("Bristol"))
 			{
 				//Lat Long
 				String[] address = new String[2];
-				address[0]="56.183059";
-				address[1]="-3.969917";
+				address[0]="51.4500";
+				address[1]="-2.5833";
 				return address;
 			}
 			else if(intown.equalsIgnoreCase("London"))
 			{
 				//Lat Long
 				String[] address = new String[2];
-				address[0]="56.183059";
-				address[1]="-3.969917";
+				address[0]="52.5072";
+				address[1]="-0.1275";
 				return address;	
 			}
 			else if(intown.equalsIgnoreCase("Plymouth"))
 			{
 				//Lat Long
 				String[] address = new String[2];
-				address[0]="56.183059";
-				address[1]="-3.969917";
+				address[0]="50.3714";
+				address[1]="-4.1422";
 				return address;
 			}
 			

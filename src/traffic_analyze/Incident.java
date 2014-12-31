@@ -18,8 +18,30 @@ public class Incident {
 	}
 	public Boolean inrange(double inlong,double inlong2,double inlat,double inlat2)
 	{
-		// 
-		if(lat <= inlat2 && lat >= inlat && longa <= inlong && longa >= inlong2)
+		//This will work out what lat and long is bigger
+		double highlat = 0,lowlat = 0,highlong = 0,lowlong = 0;
+		//This deals with setting the higgest and lowest lat and long. 
+		if(inlat > inlat2)
+		{
+			highlat = inlat;
+			lowlat = inlat2;
+		}else
+		{
+			highlat = inlat2;
+			lowlat = inlat;
+		}
+		
+		if(inlong > inlong2)
+		{
+			highlong = inlong;
+			lowlong = inlong2;
+		}else
+		{
+			highlong = inlong2;
+			lowlong = inlong;
+		}
+		//Will now check to see if its inrange
+		if(lat <= highlat && lat >= lowlat && longa <= highlong && longa >= lowlong)
 		{
 			//In range!
 			return true;
