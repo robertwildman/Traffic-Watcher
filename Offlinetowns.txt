@@ -1,0 +1,11 @@
+Elgin,57.646452,-3,312664,\n
+Dunblane,56.183059,-3.969917,\n
+Stirling,56.1172,-3.9397,\n
+Glasgow,55.8580,-4.2590,\n
+Edinburgh,55.9531,-3.1889,\n
+Liverpool,53.4000,-3,\n
+Manchester,53.4667,-2.2333,\n
+Birmingham,52.4831,-1.8936,\n
+Bristol,51.4500,-2.5833,\n
+London,52.5072,-0.1275,\n
+Plymouth,50.3714,-4.1422,\n

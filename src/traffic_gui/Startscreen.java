@@ -1,7 +1,14 @@
 package traffic_gui;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -20,6 +27,7 @@ public class Startscreen implements ActionListener {
 	public static JTextArea output;
 	public static JFrame frame;
 	public static JScrollPane sp;
+	public static ArrayList<String> Towninfo;
 	public static Boolean Toaddress;
 	public static Double tolat,fromlat,tolong,fromlong;
 	public static JLabel lpostcode1,lpostcode2,info;
@@ -127,7 +135,30 @@ public class Startscreen implements ActionListener {
 	}
 	public ArrayList<String> readtowns()
 	{
-		//This class will read the file then will return 2 arrays one with towname|lat|long and one with just townname
+	
+		try {
+			//This class will read the file then will return 2 arrays one with towname|lat|long and one with just townname
+			ArrayList<String> townnames = new ArrayList<String>();
+			Towninfo = new ArrayList<String>();
+			File townfile = new File("Offlinetowns.txt");
+			BufferedReader in = new BufferedReader(new FileReader(townfile));
+			String nextline = in.readLine();
+			while(nextline != null)
+			{
+				Towninfo.add(nextline);
+				String[] parts = nextline.split(",");
+				System.out.println(parts[0] + ","+parts[1]);
+				townnames.add(parts[0]);
+				nextline = in.readLine();
+			}
+			return townnames;
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 	public void offlinelayout()
@@ -157,18 +188,20 @@ public class Startscreen implements ActionListener {
 		        	setcordpanel.add(addtown);
 		        }else
 		        {
+		        	 JButton addtown = new JButton("Add New Town");
+			        	addtown.addActionListener(new ActionListener() {
+			            	  public void actionPerformed(ActionEvent actionEvent) {
+			            		  	addtown();
+			          		  }
+			          		});
+			        setcordpanel.add(info);
 			        for(int i = 0; i < Towns.size(); i++)
 			        {
-			        	JButton temp = new JButton(Towns.get(i));
+			        	JButton temp = new JButton(Towns.get(i).toString());
 			        	temp.addActionListener(this);
 			        	setcordpanel.add(temp);
 			        }
-			        JButton addtown = new JButton("Add New Town");
-		        	addtown.addActionListener(new ActionListener() {
-		            	  public void actionPerformed(ActionEvent actionEvent) {
-		            		  	addtown();
-		          		  }
-		          		});
+			      
 		        	setcordpanel.add(addtown);
 			        
 		        }
@@ -194,7 +227,7 @@ public class Startscreen implements ActionListener {
 		        bBristol.addActionListener(this);
 		        bLondon.addActionListener(this);
 		        bPlymouth.addActionListener(this);
-		        setcordpanel.add(info);
+		        
 		        setcordpanel.add(bElgin);
 		        setcordpanel.add(bDunblane);
 		        setcordpanel.add(bStirling);
@@ -248,13 +281,24 @@ public class Startscreen implements ActionListener {
     		
   		  }
   		});
+        main.add(ok);
+        main.add(Cancel);
         frame.add(main);
-        frame.setSize(200, 200);
+        frame.setSize(200, 260);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 	}
-	public void savetown(String text, String text2, String text3) {
-		// TODO Auto-generated method stub
+	public void savetown(String Townname, String TownLat, String TownLong) {
+		//This will add to the file which holds all of the saved town data 
+		try {
+			File townfile = new File("Offlinetowns.txt");
+			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(townfile)),true);
+			out.append(Townname +"," + TownLat +","+TownLong+",\n");
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	public void actionPerformed(ActionEvent e) {
@@ -310,13 +354,12 @@ public class Startscreen implements ActionListener {
 		 }
 	public String[] getcordsoftown(String intown) {
 			//Returns the cords of the town 
-			ArrayList<String> towncords = new ArrayList<String>();
-			towncords.add("erg,egr,erg");
-			for(int i = 0; i < towncords.size(); i++)
+			
+			for(int i = 0; i < Towninfo.size(); i++)
 			{
-				if(towncords.get(i).contains(intown))
+				if(Towninfo.get(i).contains(intown))
 				{
-					String[] arrayparts = towncords.get(i).split("|");
+					String[] arrayparts = Towninfo.get(i).split(",");
 					String[] address = new String[2];
 					address[0]= arrayparts[1];
 					address[1]= arrayparts[2];
