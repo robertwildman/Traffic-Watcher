@@ -10,6 +10,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -26,6 +27,53 @@ public class Journey_input {
 		Document journeytimeloc_doc = readdata("Test-Data/Journeytime-loc.xml");
 		Element journeytimeloc_all = journeytimeloc_doc.getDocumentElement();
 		NodeList journeytimeloc_nl = journeytimeloc_all.getElementsByTagName("predefinedLocation");
+		//Working with a new input system
+		for(int i = 0; i < journeytimeloc_nl.getLength(); i = i + 2 )
+		{
+			Element idel = (Element)journeytimeloc_nl.item(i);
+			System.out.println("This is Section: " + idel.getAttribute("id"));
+			Element Direction = (Element)journeytimeloc_nl.item(i+1).getFirstChild();
+			System.out.println(gettextvalue(Direction,"tpegDirection"));
+			Node to = journeytimeloc_nl.item(i+1).getFirstChild().getChildNodes().item(2);
+			Element toel = (Element) to;
+			System.out.println(toel.getAttribute("xsi:type"));
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	/*	
+		
+		
 		NodeList journeytimeloc_to = journeytimeloc_all.getElementsByTagName("to");
 		NodeList journeytimeloc_from = journeytimeloc_all.getElementsByTagName("from");
 		NodeList journeytimeloc_to_desc = journeytimeloc_all.getElementsByTagName("descriptor");
@@ -51,21 +99,55 @@ public class Journey_input {
 				System.out.println(gettextvalue(pointsto,"longitude"));
 				Element juctionto = (Element) journeytimeloc_to_desc.item(itempos);
 				System.out.println(gettextvalue(juctionto,"value"));
-				Element roadonto = (Element) journeytimeloc_to_desc.item(itempos+1);
-				System.out.println(gettextvalue(roadonto,"value"));
-				Element roadcomingto = (Element) journeytimeloc_to_desc.item(itempos+2);
-				System.out.println(gettextvalue(roadcomingto,"value"));
-				Element pointsfrom = (Element) journeytimeloc_from.item(i);
-				System.out.println("From Info");
-				System.out.println(gettextvalue(pointsfrom,"latitude"));
-				System.out.println(gettextvalue(pointsfrom,"longitude"));
-				Element juctionfrom = (Element) journeytimeloc_to_desc.item(itempos+3);
-				System.out.println(gettextvalue(juctionfrom,"value"));
-				Element roadonfrom = (Element) journeytimeloc_to_desc.item(itempos+4);
-				System.out.println(gettextvalue(roadonfrom,"value"));
-				Element roadcomingfrom = (Element) journeytimeloc_to_desc.item(itempos+5);
-				System.out.println(gettextvalue(roadcomingfrom,"value"));
-				count = count + 5;
+				if(gettextvalue(juctionto,"value").toLowerCase().contains("node"))
+				{
+					//Has to ignore the next 3 and not add 3 onto count
+					Element pointsfrom = (Element) journeytimeloc_from.item(i);
+					System.out.println("From Info");
+					System.out.println(gettextvalue(pointsfrom,"latitude"));
+					System.out.println(gettextvalue(pointsfrom,"longitude"));
+					Element juctionfrom = (Element) journeytimeloc_to_desc.item(itempos+3);
+					if(gettextvalue(juctionfrom,"value").toLowerCase().contains("node"))
+					{
+						count = count + 1;
+					}else
+					{
+						System.out.println(gettextvalue(juctionfrom,"value"));
+						Element roadonfrom = (Element) journeytimeloc_to_desc.item(itempos+4);
+						System.out.println(gettextvalue(roadonfrom,"value"));
+						Element roadcomingfrom = (Element) journeytimeloc_to_desc.item(itempos+5);
+						System.out.println(gettextvalue(roadcomingfrom,"value"));
+						count = count + 3;
+					}
+					
+				}
+				else
+				{
+					Element roadonto = (Element) journeytimeloc_to_desc.item(itempos+1);
+					System.out.println(gettextvalue(roadonto,"value"));
+					Element roadcomingto = (Element) journeytimeloc_to_desc.item(itempos+2);
+					System.out.println(gettextvalue(roadcomingto,"value"));
+					Element pointsfrom = (Element) journeytimeloc_from.item(i);
+					System.out.println("From Info");
+					Element juctionfrom = (Element) journeytimeloc_to_desc.item(itempos+3);
+					System.out.println(gettextvalue(pointsfrom,"latitude"));
+					System.out.println(gettextvalue(pointsfrom,"longitude"));
+					Element juctionfrom1 = (Element) journeytimeloc_to_desc.item(itempos+3);
+					if(gettextvalue(juctionfrom1,"value").toLowerCase().contains("node"))
+					{
+						count = count + 3;
+					}else
+					{
+						System.out.println(gettextvalue(juctionfrom1,"value"));
+						Element roadonfrom = (Element) journeytimeloc_to_desc.item(itempos+4);
+						System.out.println(gettextvalue(roadonfrom,"value"));
+						Element roadcomingfrom = (Element) journeytimeloc_to_desc.item(itempos+5);
+						System.out.println(gettextvalue(roadcomingfrom,"value"));
+						count = count + 5;
+					}
+					
+				}
+				
 				System.out.println("");
 			
 			
@@ -76,6 +158,7 @@ public class Journey_input {
 			//Journeytime temp = new Journeytime(gettextvalue(el,"title"),gettextvalue(el,"description"),lat,longitude,"Incident"); 
 			//allJourneytime.add(temp);
 		}
+		*/
 	 } catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

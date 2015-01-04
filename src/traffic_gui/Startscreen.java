@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import traffic_analyze.Incident;
-import traffic_analyze.Postcode_Processing;
 import traffic_input.Journey_input;
 import traffic_input.Postcodeinput;
 import traffic_input.traffic_input;
