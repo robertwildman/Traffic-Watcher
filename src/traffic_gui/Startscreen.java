@@ -15,9 +15,10 @@ import traffic_input.traffic_input;
 
 public class Startscreen implements ActionListener {
 
-	public static JPanel postcodepanel,setcordpanel;
-	public static JTextField tfpostcode1 , tfpostcode2;
+	public static JPanel postcodepanel,setcordpanel,main;
+	public static JTextField tfpostcode1 , tfpostcode2, townname,townlat,townlong;
 	public static JTextArea output;
+	public static JFrame frame;
 	public static JScrollPane sp;
 	public static Boolean Toaddress;
 	public static Double tolat,fromlat,tolong,fromlong;
@@ -124,6 +125,11 @@ public class Startscreen implements ActionListener {
 		return Areacords;
 		
 	}
+	public ArrayList<String> readtowns()
+	{
+		//This class will read the file then will return 2 arrays one with towname|lat|long and one with just townname
+		return null;
+	}
 	public void offlinelayout()
 	{
 				//This will display the starting screen for the program with input of postcodes.
@@ -138,6 +144,34 @@ public class Startscreen implements ActionListener {
 		        BoxLayout setcordlayout = new BoxLayout(setcordpanel, BoxLayout.Y_AXIS);
 		        setcordpanel.setLayout(setcordlayout);
 		        info = new JLabel("     To:");
+		        ArrayList<String> Towns = readtowns();
+		        if(Towns == null)
+		        {
+		        	//Allows user to add towns due to no towns.  
+		        	JButton addtown = new JButton("Add New Town");
+		        	addtown.addActionListener(new ActionListener() {
+		            	  public void actionPerformed(ActionEvent actionEvent) {
+		            		  	addtown();
+		          		  }
+		          		});
+		        	setcordpanel.add(addtown);
+		        }else
+		        {
+			        for(int i = 0; i < Towns.size(); i++)
+			        {
+			        	JButton temp = new JButton(Towns.get(i));
+			        	temp.addActionListener(this);
+			        	setcordpanel.add(temp);
+			        }
+			        JButton addtown = new JButton("Add New Town");
+		        	addtown.addActionListener(new ActionListener() {
+		            	  public void actionPerformed(ActionEvent actionEvent) {
+		            		  	addtown();
+		          		  }
+		          		});
+		        	setcordpanel.add(addtown);
+			        
+		        }
 		        JButton bElgin = new JButton("Elgin");
 		        JButton bDunblane = new JButton("Dunblane");
 		        JButton bStirling = new JButton("Stirling");
@@ -179,6 +213,49 @@ public class Startscreen implements ActionListener {
 		        frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		        //Shows the frame
 		        frame.setVisible(true);
+	}
+	public void addtown() {
+		//Custom view allowing to enter Town Name and lat and long;
+		frame = new JFrame("Add New Town");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        main = new JPanel();
+        main.add(new JLabel("Enter Town Name: "));
+        townname = new JTextField(15);
+        main.add(townname);
+        main.add(new JLabel("Enter Town Lat:  "));
+        townlat = new JTextField(15);
+        main.add(townlat);
+        main.add(new JLabel("Enter Town Long: "));
+         townlong = new JTextField(15);
+        main.add(townlong);
+        JButton ok = new JButton("Create Town");
+        JButton Cancel = new JButton("Cancel");
+        ok.addActionListener(new ActionListener() {
+		            	  public void actionPerformed(ActionEvent actionEvent) {
+		            		  if(townname.getText().length() > 0 && townlat.getText().length() > 0 && townlong.getText().length() > 0 )
+		            		  {
+		            		  	savetown(townname.getText(),townlat.getText(),townlong.getText());
+		            		  	frame.setVisible(false);
+		            		  }else
+		            		  {
+		            			  JOptionPane.showMessageDialog(frame, "Please enter each field!","Thank You", JOptionPane.ERROR_MESSAGE);
+		            		  }
+		          		  }
+		          		});
+        Cancel.addActionListener(new ActionListener() {
+      	  public void actionPerformed(ActionEvent actionEvent) {
+    		frame.setVisible(false);
+    		
+  		  }
+  		});
+        frame.add(main);
+        frame.setSize(200, 200);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+	}
+	public void savetown(String text, String text2, String text3) {
+		// TODO Auto-generated method stub
+		
 	}
 	public void actionPerformed(ActionEvent e) {
 			 //This will deal with the handling the to and from button pushes
@@ -233,7 +310,24 @@ public class Startscreen implements ActionListener {
 		 }
 	public String[] getcordsoftown(String intown) {
 			//Returns the cords of the town 
-			System.out.println(intown);
+			ArrayList<String> towncords = new ArrayList<String>();
+			towncords.add("erg,egr,erg");
+			for(int i = 0; i < towncords.size(); i++)
+			{
+				if(towncords.get(i).contains(intown))
+				{
+					String[] arrayparts = towncords.get(i).split("|");
+					String[] address = new String[2];
+					address[0]= arrayparts[1];
+					address[1]= arrayparts[2];
+					return address;
+				}
+			}
+			/*String[] address1 = new String[2];
+			address1[0]= "";
+			address1[1]= "";
+			return address1;*/
+			
 			if(intown.equalsIgnoreCase("Elgin"))
 			{
 				//Lat Long

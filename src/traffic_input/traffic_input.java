@@ -38,7 +38,8 @@ public class traffic_input {
 					String[] cords = gettextvalue(el,"georss:point").split(" ");
 					double lat = Double.parseDouble(cords[0]);
 					double longitude = Double.parseDouble(cords[1]);
-					Incident temp = new Incident(gettextvalue(el,"title"),gettextvalue(el,"description"),lat,longitude,"Incident"); 
+					
+					Incident temp = new Incident(gettextvalue(el,"title"),gettextvalue(el,"description"),lat,longitude,"Incident",getdirectioncode(gettextvalue(el,"title")+gettextvalue(el,"description"))); 
 					allincidents.add(temp);
 				}
 						
@@ -53,7 +54,7 @@ public class traffic_input {
 					String[] cords = gettextvalue(el,"georss:point").split(" ");
 					double lat = Double.parseDouble(cords[0]);
 					double longitude = Double.parseDouble(cords[1]);
-					Incident temp = new Incident(gettextvalue(el,"title"),gettextvalue(el,"description"),lat,longitude,"Roadworks");
+					Incident temp = new Incident(gettextvalue(el,"title"),gettextvalue(el,"description"),lat,longitude,"Roadworks",getdirectioncode(gettextvalue(el,"title")+gettextvalue(el,"description"))); 
 					allroadworks.add(temp);
 				}
 				
@@ -67,7 +68,7 @@ public class traffic_input {
 					//Gets title
 					double lat = Double.parseDouble(gettextvalue(el,"latitude"));
 					double longitude = Double.parseDouble(gettextvalue(el,"longitude"));
-					Incident temp = new Incident(gettextvalue(el,"title"),gettextvalue(el,"description"),lat,longitude,"Incident");
+					Incident temp = new Incident(gettextvalue(el,"title"),gettextvalue(el,"description"),lat,longitude,"Incident",getdirectioncode(gettextvalue(el,"title")+gettextvalue(el,"description"))); 
 					allincidents.add(temp);
 				}
 				
@@ -91,7 +92,27 @@ public class traffic_input {
 			return allincidents;
 		}
 	 }
-	 public static String gettextvalue(Element el , String tag)
+	 private static int getdirectioncode(String text) {
+		//This will return the code for the direction the incident is. 
+		 if(text.toLowerCase().contains("northbound"))
+		 {
+			 return 1;
+		 }else if(text.toLowerCase().contains("eastbound"))
+		 {
+			 return 2;
+		 }else if(text.toLowerCase().contains("southbound"))
+		 {
+			 return 3;
+		 }else if(text.toLowerCase().contains("westbound"))
+		 {
+			 return 4;
+		 }else
+		 {
+			 return 0; 
+		 }
+		
+	}
+	public static String gettextvalue(Element el , String tag)
 	 {
 
 		NodeList n = el.getElementsByTagName(tag);
