@@ -31,45 +31,43 @@ public class Journey_input {
 		NodeList journeytimeloc_to_desc = journeytimeloc_all.getElementsByTagName("descriptor");
 		
 		
-		int count = 0;
-		for (int i = 0; i < journeytimeloc_nl.getLength();i++)
+		int count = -1;	
+		int idcount = 0;
+		for (int i = 1; i < journeytimeloc_nl.getLength();i++)
 		{
-			count = count + 1;
-			if(count == 1)
-			{
-				//Header
-				Element el = (Element)journeytimeloc_nl.item(i);
+				int itempos = i + count;
+				//Header gets the string
+				Element el = (Element)journeytimeloc_nl.item(idcount);
+				if(el.hasAttribute("id"))
+				{
+					idcount = idcount + 2;
 				String section = el.getAttribute("id").substring(7);
 				System.out.println(section);
-				
-			}else
-			{
-				//Body
-				count = 0;
-				Element el = (Element)journeytimeloc_nl.item(i);
-				String direction = gettextvalue(el,"tpegDirection");
-				System.out.println(direction);
-				
-				Element pointsto = (Element) journeytimeloc_to.item(i/2);
+				}
+		
+				Element pointsto = (Element) journeytimeloc_to.item(i);
+				System.out.println("To Info");
 				System.out.println(gettextvalue(pointsto,"latitude"));
 				System.out.println(gettextvalue(pointsto,"longitude"));
-				for(int i2 = 0; i2 < pointsto.getChildNodes().getLength(); i2++)
-				{
-					 System.out.println(pointsto.getChildNodes().item(i2));
-				}
-				
-			
-				
-				Element juction_el_to_1 = (Element) journeytimeloc_to_desc.item(i/2);
-				System.out.println(gettextvalue(juction_el_to_1,"value"));
-				
-				
-				Element pointsfrom = (Element) journeytimeloc_from.item(i/2);
+				Element juctionto = (Element) journeytimeloc_to_desc.item(itempos);
+				System.out.println(gettextvalue(juctionto,"value"));
+				Element roadonto = (Element) journeytimeloc_to_desc.item(itempos+1);
+				System.out.println(gettextvalue(roadonto,"value"));
+				Element roadcomingto = (Element) journeytimeloc_to_desc.item(itempos+2);
+				System.out.println(gettextvalue(roadcomingto,"value"));
+				Element pointsfrom = (Element) journeytimeloc_from.item(i);
+				System.out.println("From Info");
 				System.out.println(gettextvalue(pointsfrom,"latitude"));
 				System.out.println(gettextvalue(pointsfrom,"longitude"));
-				
-				
-			}
+				Element juctionfrom = (Element) journeytimeloc_to_desc.item(itempos+3);
+				System.out.println(gettextvalue(juctionfrom,"value"));
+				Element roadonfrom = (Element) journeytimeloc_to_desc.item(itempos+4);
+				System.out.println(gettextvalue(roadonfrom,"value"));
+				Element roadcomingfrom = (Element) journeytimeloc_to_desc.item(itempos+5);
+				System.out.println(gettextvalue(roadcomingfrom,"value"));
+				count = count + 5;
+				System.out.println("");
+			
 			
 			//Gets title
 			//String[] cords = gettextvalue(el,"georss:point").split(" ");
@@ -101,12 +99,17 @@ public class Journey_input {
 	}
 	 public static String gettextvalue(Element el , String tag)
 	 {
-
+		 try{
 		NodeList n = el.getElementsByTagName(tag);
 		Element temp = (Element)n.item(0);
 		return temp.getFirstChild().getNodeValue();
-		 
+		 }
+		 catch(Exception e)
+		 {
+			 return "error";
+		 }
 	 }
+	 
 	 
 	 public static Document readdata(String filepath) throws ParserConfigurationException, SAXException, IOException
 	 {

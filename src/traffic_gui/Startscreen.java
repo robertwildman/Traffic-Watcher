@@ -184,6 +184,7 @@ public class Startscreen implements ActionListener {
 			 //This will deal with the handling the to and from button pushes
 			if(Toaddress == true)
 			{
+				output.setText(" ");
 				output.append("Journey to " + e.getActionCommand());
 				//This will add the cords to the to address
 				String[] address = getcordsoftown(e.getActionCommand());

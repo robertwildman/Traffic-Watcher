@@ -41,13 +41,17 @@ public class Incident {
 			lowlong = inlong;
 		}
 		//Will now check to see if its inrange
-		if(lat <= highlat && lat >= lowlat && longa <= highlong && longa >= lowlong)
+		if(lat <= highlat && lat >= lowlat)
 		{
-			//In range!
+			//In range on lat!
+			return true;
+		}else if(longa <= highlong && longa >= lowlong)
+		{
+			//In range on long!
 			return true;
 		}else
 		{
-			//Out of range!
+			//Out of range on both
 			return false;
 		}
 				
