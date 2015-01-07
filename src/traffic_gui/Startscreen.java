@@ -73,7 +73,8 @@ public class Startscreen implements ActionListener {
         mainpanel.add(testfeature);
         frame.add(mainpanel, BorderLayout.CENTER);
         //Sets the size of the Frame
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        frame.setSize(200, 150);
+        frame.setLocationRelativeTo(null);
         //Shows the frame
         frame.setVisible(true);
 	}
@@ -150,6 +151,7 @@ public class Startscreen implements ActionListener {
 				townnames.add(parts[0]);
 				nextline = in.readLine();
 			}
+			in.close();
 			return townnames;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

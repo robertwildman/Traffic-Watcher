@@ -18,6 +18,8 @@ import traffic_analyze.Journeytime;
 
 public class Journey_input {
 	public static ArrayList<Journeytime> allJourneytime;
+	public static double tolong,tolat,fromlat,fromlong;
+	public static String toroadname,fromroadname,toroadjuction,fromroadjuction,sectionid,direction;
 	public static void getJourneys(boolean test){
 	//This creates an array of objects that use the roadworks class
 	 allJourneytime = new ArrayList<Journeytime>();
@@ -30,17 +32,68 @@ public class Journey_input {
 		//Working with a new input system
 		for(int i = 0; i < journeytimeloc_nl.getLength(); i = i + 2 )
 		{
+			
 			Element idel = (Element)journeytimeloc_nl.item(i);
-			System.out.println("This is Section: " + idel.getAttribute("id"));
+			sectionid = idel.getAttribute("id").substring(7);
+			System.out.println("This is " + idel.getAttribute("id").substring(7));
 			Element Direction = (Element)journeytimeloc_nl.item(i+1).getFirstChild();
-			System.out.println(gettextvalue(Direction,"tpegDirection"));
+			direction = gettextvalue(Direction,"tpegDirection");
 			Node to = journeytimeloc_nl.item(i+1).getFirstChild().getChildNodes().item(2);
 			Element toel = (Element) to;
 			System.out.println(toel.getAttribute("xsi:type"));
+			if(toel.getAttribute("xsi:type").equalsIgnoreCase("TPEGJunction"))
+			{
+				//
+				Node points = to.getChildNodes().item(0);
+				Element pointsto = (Element)points;
+				tolat = Double.parseDouble(gettextvalue(pointsto,"latitude"));
+				tolong = Double.parseDouble(gettextvalue(pointsto,"longitude"));
+				Node Juction = to.getChildNodes().item(1).getChildNodes().item(0);
+				Element Juctionto = (Element)Juction;
+				toroadjuction = gettextvalue(Juctionto,"value");
+				Node Road = to.getChildNodes().item(2).getChildNodes().item(0);
+				Element Roadto = (Element)Road;		
+				toroadname = gettextvalue(Roadto,"value");
+				Node from = journeytimeloc_nl.item(i+1).getFirstChild().getChildNodes().item(3);
+				Element fromel = (Element) from;
+				if(fromel.getAttribute("xsi:type").equalsIgnoreCase("TPEGJunction"))
+				{
+					Node fpoints = from.getChildNodes().item(0);
+					Element pointsfrom = (Element)fpoints;
+					fromlat = Double.parseDouble(gettextvalue(pointsfrom,"latitude"));
+					fromlong = Double.parseDouble(gettextvalue(pointsfrom,"longitude"));
+					Node fJuction = from.getChildNodes().item(1).getChildNodes().item(0);
+					Element Juctionfrom = (Element)fJuction;
+					fromroadjuction = gettextvalue(Juctionfrom,"value");
+					Node fRoad = from.getChildNodes().item(2).getChildNodes().item(0);
+					Element Roadfrom = (Element)fRoad;		
+					fromroadjuction = gettextvalue(Roadfrom,"value");
+				}
+			}else
+			{
+				Node from = journeytimeloc_nl.item(i+1).getFirstChild().getChildNodes().item(3);
+				Element fromel = (Element) from;
+				if(fromel.getAttribute("xsi:type").equalsIgnoreCase("TPEGJunction"))
+				{
+					Node fpoints = from.getChildNodes().item(0);
+					Element pointsfrom = (Element)fpoints;
+					fromlat = Double.parseDouble(gettextvalue(pointsfrom,"latitude"));
+					fromlong = Double.parseDouble(gettextvalue(pointsfrom,"longitude"));
+					Node fJuction = from.getChildNodes().item(1).getChildNodes().item(0);
+					Element Juctionfrom = (Element)fJuction;
+					fromroadjuction = gettextvalue(Juctionfrom,"value");
+					Node fRoad = from.getChildNodes().item(2).getChildNodes().item(0);
+					Element Roadfrom = (Element)fRoad;		
+					fromroadjuction = gettextvalue(Roadfrom,"value");
+				}
+			}
 			
+			//This saves the journey info as a journey object then adds to the array 
+			Journeytime temp = new Journeytime(tolat,fromlat,tolong,tolat,toroadname,toroadjuction,fromroadname,fromroadjuction,direction);
+			allJourneytime.add(temp);
 		}
 		
-		
+		System.out.println(allJourneytime.size());
 		
 		
 		

@@ -5,17 +5,18 @@ public class Journeytime {
 	double fromlat;
 	double tolong;
 	double fromlong;
+	double travelTime;
+	double freeFlowTravelTime;
+	double normallyExpectedTravelTime;
 	String toroadmain;
-	String toroadin;
 	String tojunction;
 	String fromroadmain;
-	String fromroadin;
 	String fromjunction;
 	String direction;
 
 	public Journeytime(double tolat, double fromlat, double tolong,
-			double fromlong, String toroadmain, String toroadin,
-			String tojunction, String fromroadmain, String fromroadin,
+			double fromlong, String toroadmain,
+			String tojunction, String fromroadmain,
 			String fromjunction, String direction) {
 
 		this.tolong = tolong;
@@ -23,12 +24,14 @@ public class Journeytime {
 		this.fromlat = fromlat;
 		this.fromlong = fromlong;
 		this.toroadmain = toroadmain;
-		this.toroadin = toroadin;
 		this.tojunction = tojunction;
 		this.fromjunction = fromjunction;
-		this.fromroadin = fromroadin;
 		this.fromroadmain =fromroadmain;
 		this.direction = direction;
+	}
+	public void setalltime(double travelTime, double freeFlowTravelTime,double normallyExpectedTravelTime )
+	{
+		
 	}
 	public Boolean inrange(double inlong,double inlong2,double inlat,double inlat2)
 	{
