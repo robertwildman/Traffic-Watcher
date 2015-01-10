@@ -8,6 +8,8 @@ public class Journeytime {
 	double travelTime;
 	double freeFlowTravelTime;
 	double normallyExpectedTravelTime;
+	boolean gottime;
+	String sectionid;
 	String toroadmain;
 	String tojunction;
 	String fromroadmain;
@@ -17,8 +19,9 @@ public class Journeytime {
 	public Journeytime(double tolat, double fromlat, double tolong,
 			double fromlong, String toroadmain,
 			String tojunction, String fromroadmain,
-			String fromjunction, String direction) {
+			String fromjunction, String direction,String sectionid) {
 
+		this.sectionid = sectionid;
 		this.tolong = tolong;
 		this.tolat = tolat;
 		this.fromlat = fromlat;
@@ -28,10 +31,41 @@ public class Journeytime {
 		this.fromjunction = fromjunction;
 		this.fromroadmain =fromroadmain;
 		this.direction = direction;
+		this.gottime = false;
 	}
 	public void setalltime(double travelTime, double freeFlowTravelTime,double normallyExpectedTravelTime )
 	{
+		//Used to set the time aspect to each 
+		this.travelTime = travelTime;
+		this.freeFlowTravelTime = freeFlowTravelTime;
+		this.normallyExpectedTravelTime = normallyExpectedTravelTime;
+		this.gottime = true;
 		
+	}
+	public Boolean gottime()
+	{
+		return this.gottime;
+	}
+	public String getid()
+	{
+		return sectionid;
+	}
+	public Boolean delayed()
+	{
+		if(travelTime > normallyExpectedTravelTime)
+		{
+			//This means that the journey is taking longer then it would be 
+			return true;
+			
+		}else
+		{
+			//This means it will be ontime or below the normal time 
+			return false;
+		}
+	}
+	public String getroad()
+	{
+		return toroadmain;
 	}
 	public Boolean inrange(double inlong,double inlong2,double inlat,double inlat2)
 	{

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import traffic_analyze.Incident;
+import traffic_input.JourneyTime_input;
 import traffic_input.Journey_input;
 import traffic_input.Postcodeinput;
 import traffic_input.traffic_input;
@@ -65,7 +66,7 @@ public class Startscreen implements ActionListener {
         testfeature.addActionListener(new ActionListener() {
         	  public void actionPerformed(ActionEvent actionEvent) {
         		 //Input test function and call methords 
-        		  Journey_input.getJourneys(true);
+        		  JourneyTime_input.getJourneys(false);
       		  }
       		});
         mainpanel.add(bOnline);
