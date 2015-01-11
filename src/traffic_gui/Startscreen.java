@@ -15,60 +15,62 @@ import javax.swing.*;
 
 import traffic_analyze.Incident;
 import traffic_input.JourneyTime_input;
-import traffic_input.Journey_input;
 import traffic_input.Postcodeinput;
 import traffic_input.traffic_input;
 
 
 public class Startscreen implements ActionListener {
 
-	public static JPanel postcodepanel,setcordpanel,main;
-	public static JTextField tfpostcode1 , tfpostcode2, townname,townlat,townlong;
-	public static JTextArea output;
-	public static JFrame frame;
-	public static JScrollPane sp;
-	public static ArrayList<String> Towninfo;
-	public static Boolean Toaddress;
-	public static Double tolat,fromlat,tolong,fromlong;
-	public static JLabel lpostcode1,lpostcode2,info;
+	public JPanel postcodepanel,setcordpanel,main;
+	public JTextField tfpostcode1 , tfpostcode2, townname,townlat,townlong;
+	public JTextArea output;
+	public  JFrame frame;
+	public  JScrollPane sp;
+	public  ArrayList<String> Towninfo;
+	public  Boolean Toaddress;
+	public  Double tolat,fromlat,tolong,fromlong;
+	public JLabel lpostcode1,lpostcode2,info;
 	public static void main(String[] args) {
 		//This will display the starting screen for the program with input of postcodes.
-		Toaddress = true;
 		Startscreen screen = new Startscreen();
-		
-      
 	}
 	public Startscreen()
 	{
 		super();
+		//Will open the start screen 
+		Toaddress = true;
 		startlayout();
-		//layout();
 	}
 	public void startlayout()
 	{
-		//This will display the starting screen for the program with input of postcodes.
+		//This will display the starting screen and ask the user to pick what mode they would like.
 		JFrame frame = new JFrame("Pick Mode");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel mainpanel = new JPanel();
+        //Setting up buttons and there listner 
         JButton bOnline = new JButton("Online Mode");
         JButton bOffline = new JButton("Offline Mode");
+        JButton testfeature = new JButton("Test Feature");
         bOnline.addActionListener(new ActionListener() {
-      	  public void actionPerformed(ActionEvent actionEvent) {
+      	  @Override
+		public void actionPerformed(ActionEvent actionEvent) {
       		  	onlinelayout();
     		  }
     		});
         bOffline.addActionListener(new ActionListener() {
-        	  public void actionPerformed(ActionEvent actionEvent) {
+        	  @Override
+			public void actionPerformed(ActionEvent actionEvent) {
         		  offlinelayout();
       		  }
       		});
-        JButton testfeature = new JButton("Test Feature");
         testfeature.addActionListener(new ActionListener() {
-        	  public void actionPerformed(ActionEvent actionEvent) {
+        	  @Override
+			public void actionPerformed(ActionEvent actionEvent) {
         		 //Input test function and call methords 
         		  JourneyTime_input.getJourneys(false);
       		  }
       		});
+        //Adding Buttons to panel then adding panel to frame
         mainpanel.add(bOnline);
         mainpanel.add(bOffline);
         mainpanel.add(testfeature);
@@ -81,8 +83,8 @@ public class Startscreen implements ActionListener {
 	}
 	public void onlinelayout()
 	{
+		//This will display the online part of the program. 
 		JFrame frame = new JFrame("Online Mode");
-		
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel mainpanel = new JPanel();
         //Setting up the postcode panel
@@ -103,10 +105,9 @@ public class Startscreen implements ActionListener {
         postcodepanel.add(tfpostcode2);
         //Setting it to the top
         frame.add(postcodepanel, BorderLayout.PAGE_START);
-        JLabel info = new JLabel("This would be the online section");
         frame.add(mainpanel, BorderLayout.CENTER);
         //Sets the size of the Frame
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        frame.setExtendedState(Frame.MAXIMIZED_BOTH); 
         //Shows the frame
         frame.setVisible(true);
 	}
@@ -141,11 +142,14 @@ public class Startscreen implements ActionListener {
 			//This class will read the file then will return 2 arrays one with towname|lat|long and one with just townname
 			ArrayList<String> townnames = new ArrayList<String>();
 			Towninfo = new ArrayList<String>();
+			//Setting up the files and the readers.
 			File townfile = new File("Offlinetowns.txt");
 			BufferedReader in = new BufferedReader(new FileReader(townfile));
 			String nextline = in.readLine();
+			//Will keep reading the next line till there is no more lines to read
 			while(nextline != null)
 			{
+				//Each time it reads a new line it splits the line and then adds to the array. 
 				Towninfo.add(nextline);
 				String[] parts = nextline.split(",");
 				System.out.println(parts[0] + ","+parts[1]);
@@ -155,10 +159,8 @@ public class Startscreen implements ActionListener {
 			in.close();
 			return townnames;
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -183,7 +185,8 @@ public class Startscreen implements ActionListener {
 		        	//Allows user to add towns due to no towns.  
 		        	JButton addtown = new JButton("Add New Town");
 		        	addtown.addActionListener(new ActionListener() {
-		            	  public void actionPerformed(ActionEvent actionEvent) {
+		            	  @Override
+						public void actionPerformed(ActionEvent actionEvent) {
 		            		  	addtown();
 		          		  }
 		          		});
@@ -192,7 +195,8 @@ public class Startscreen implements ActionListener {
 		        {
 		        	 JButton addtown = new JButton("Add New Town");
 			        	addtown.addActionListener(new ActionListener() {
-			            	  public void actionPerformed(ActionEvent actionEvent) {
+			            	  @Override
+							public void actionPerformed(ActionEvent actionEvent) {
 			            		  	addtown();
 			          		  }
 			          		});
@@ -211,7 +215,7 @@ public class Startscreen implements ActionListener {
 		        frame.add(setcordpanel, BorderLayout.EAST);
 		        //Sets the size of the Frame
 		        //ONLINE AT http://stackoverflow.com/questions/11570356/jframe-in-full-screen-java
-		        frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		        frame.setExtendedState(Frame.MAXIMIZED_BOTH); 
 		        //Shows the frame
 		        frame.setVisible(true);
 	}
@@ -232,7 +236,8 @@ public class Startscreen implements ActionListener {
         JButton ok = new JButton("Create Town");
         JButton Cancel = new JButton("Cancel");
         ok.addActionListener(new ActionListener() {
-		            	  public void actionPerformed(ActionEvent actionEvent) {
+		            	  @Override
+						public void actionPerformed(ActionEvent actionEvent) {
 		            		  if(townname.getText().length() > 0 && townlat.getText().length() > 0 && townlong.getText().length() > 0 )
 		            		  {
 		            		  	savetown(townname.getText(),townlat.getText(),townlong.getText());
@@ -244,7 +249,8 @@ public class Startscreen implements ActionListener {
 		          		  }
 		          		});
         Cancel.addActionListener(new ActionListener() {
-      	  public void actionPerformed(ActionEvent actionEvent) {
+      	  @Override
+		public void actionPerformed(ActionEvent actionEvent) {
     		frame.setVisible(false);
     		
   		  }
@@ -269,6 +275,7 @@ public class Startscreen implements ActionListener {
 		}
 		
 	}
+	@Override
 	public void actionPerformed(ActionEvent e) {
 			 //This will deal with the handling the to and from button pushes
 			if(Toaddress == true)
