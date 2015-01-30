@@ -143,6 +143,21 @@ public class Incident {
 	{
 		return desc;
 	}
+	public String getsmalltitle()
+	{
+		if(title.contains("|"))
+		{
+			 return title.split("|")[0];
+		}else if(title.contains("-"))
+		{
+			 return title.split("-")[0];
+		}
+		else
+		{
+			return title;
+		}
+		
+	}
 	public String getdirection()
 	{
 		return String.valueOf(directioncode);

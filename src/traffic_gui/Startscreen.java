@@ -21,15 +21,16 @@ import traffic_input.traffic_input;
 
 public class Startscreen implements ActionListener {
 
-	public JPanel postcodepanel,setcordpanel,main;
+	public JPanel postcodepanel,setcordpanel,main,sp;
 	public JTextField tfpostcode1 , tfpostcode2, townname,townlat,townlong;
 	public JTextArea output;
 	public  JFrame frame;
-	public  JScrollPane sp;
-	public  ArrayList<String> Towninfo;
+	public  JScrollPane Scrollpane;
+	public JComboBox<String> trafficlist;
+	public  ArrayList<String> Towninfo,smalltitle,fulltitle,fulldesc;
 	public  Boolean Toaddress;
 	public  Double tolat,fromlat,tolong,fromlong;
-	public JLabel lpostcode1,lpostcode2,info;
+	public JLabel lpostcode1,lpostcode2,info,JLTitle,JLDesc;
 	public static void main(String[] args) {
 		//This will display the starting screen for the program with input of postcodes.
 		Startscreen screen = new Startscreen();
@@ -173,9 +174,23 @@ public class Startscreen implements ActionListener {
 		        //Setting up the panel of set cords for offline testing
 		        setcordpanel = new JPanel();
 		        output = new JTextArea();
-		        sp = new JScrollPane(output);
+		        
+		        //This is a Scrollpane for the output of the data 
+		        String[] liststartdata = {"Please pick a town"};
+ 		        trafficlist = new JComboBox<String>(liststartdata);
+ 		        Scrollpane = new JScrollPane(output);
+		        sp = new JPanel();
+		        JLTitle = new JLabel();
+		        JLTitle.setVisible(false);
+		        JLDesc = new JLabel();
+		        JLDesc.setVisible(false);
+		        sp.add(trafficlist);
+		        sp.add(JLTitle);
+		        sp.add(JLDesc);
+		     // sp.add(Scrollpane);
 		        output.setEditable(false);
-		        BoxLayout layout = new BoxLayout(postcodepanel, BoxLayout.X_AXIS);
+		        BoxLayout splayout = new BoxLayout(sp,BoxLayout.X_AXIS);
+		        sp.setLayout(splayout);
 		        BoxLayout setcordlayout = new BoxLayout(setcordpanel, BoxLayout.Y_AXIS);
 		        setcordpanel.setLayout(setcordlayout);
 		        info = new JLabel("     To:");
@@ -304,10 +319,14 @@ public class Startscreen implements ActionListener {
 		  		info.setText("     To:");
 				traffic_input.gettraffic(true);
        		 	ArrayList<Incident> incidentlist = traffic_input.allincidents;
+       		 	smalltitle = new ArrayList<String>();
+       		 	fulltitle = new ArrayList<String>();
+       		 	fulldesc = new ArrayList<String>();
        		    for(int i = 0; i < incidentlist.size(); i++)
        		    {
        		    	
-       		    	//REMEMBER TO CHANGE THIS TO VARS
+       		    	//This will use the function inrange and if true will add the titles to a JList 
+       		    	//Then set full titles and descrtion in an other array
        		    	if(incidentlist.get(i).inrange(tolong,fromlong,tolat, fromlat) == true)
        		    	{
        		    		output.append("Title: " + incidentlist.get(i).gettitle());
@@ -316,6 +335,9 @@ public class Startscreen implements ActionListener {
        		    		output.append("\n");
        		    		output.append(" ");
        		    		output.append("\n");
+       		    		smalltitle.add(incidentlist.get(i).getsmalltitle());
+       		    		fulltitle.add(incidentlist.get(i).gettitle());
+       		    		fulldesc.add(incidentlist.get(i).getdesc());
        		    	}else
        		    	{
 
@@ -324,6 +346,25 @@ public class Startscreen implements ActionListener {
        		    	
        		    	
        		    }
+       		    String[] smalltitlelist = new String[smalltitle.size()];
+       		    smalltitlelist = smalltitle.toArray(smalltitlelist);
+       		    DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) trafficlist.getModel();
+       		    model.removeAllElements();
+       		    for(String item: smalltitle)
+       		    {
+       		    	model.addElement(item);
+       		    }
+       		    trafficlist.setModel(model);
+       		    trafficlist.addActionListener(new ActionListener() {
+	            	  @Override
+					public void actionPerformed(ActionEvent actionEvent) {
+	            		JComboBox<String> traffic = (JComboBox<String>) actionEvent.getSource();
+						JLTitle.setVisible(true);
+						JLTitle.setText(fulltitle.get(traffic.getSelectedIndex()));
+						JLDesc.setVisible(true);
+						JLDesc.setText(fulldesc.get(traffic.getSelectedIndex()));
+	            	  }
+	          		});
        		  }
        	
 		 }
