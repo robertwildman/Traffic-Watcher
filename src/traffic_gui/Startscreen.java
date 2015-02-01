@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import traffic_analyze.Incident;
+import traffic_analyze.Journeytime;
 import traffic_input.JourneyTime_input;
 import traffic_input.Postcodeinput;
 import traffic_input.traffic_input;
@@ -25,8 +26,9 @@ public class Startscreen implements ActionListener {
 	public JTextField tfpostcode1 , tfpostcode2, townname,townlat,townlong;
 	public JTextArea output;
 	public  JFrame frame;
+	public JPanel combopanel;
 	public  JScrollPane Scrollpane;
-	public JComboBox<String> trafficlist;
+	public JComboBox trafficlist;
 	public  ArrayList<String> Towninfo,smalltitle,fulltitle,fulldesc;
 	public  Boolean Toaddress;
 	public  Double tolat,fromlat,tolong,fromlong;
@@ -173,22 +175,17 @@ public class Startscreen implements ActionListener {
 		        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		        //Setting up the panel of set cords for offline testing
 		        setcordpanel = new JPanel();
-		        output = new JTextArea();
 		        
 		        //This is a Scrollpane for the output of the data 
 		        String[] liststartdata = {"Please pick a town"};
- 		        trafficlist = new JComboBox<String>(liststartdata);
- 		        Scrollpane = new JScrollPane(output);
+ 		        trafficlist = new JComboBox(liststartdata);
 		        sp = new JPanel();
-		        JLTitle = new JLabel();
-		        JLTitle.setVisible(false);
-		        JLDesc = new JLabel();
-		        JLDesc.setVisible(false);
-		        sp.add(trafficlist);
-		        sp.add(JLTitle);
-		        sp.add(JLDesc);
+		        combopanel = new JPanel();
+		        output = new JTextArea();
+		        output.setVisible(false);
+		        combopanel.add(trafficlist);
+		        sp.add(output);
 		     // sp.add(Scrollpane);
-		        output.setEditable(false);
 		        BoxLayout splayout = new BoxLayout(sp,BoxLayout.X_AXIS);
 		        sp.setLayout(splayout);
 		        BoxLayout setcordlayout = new BoxLayout(setcordpanel, BoxLayout.Y_AXIS);
@@ -226,6 +223,7 @@ public class Startscreen implements ActionListener {
 		        	setcordpanel.add(addtown);
 			        
 		        }
+		        frame.add(combopanel, BorderLayout.PAGE_START);
 		        frame.add(sp, BorderLayout.CENTER);
 		        frame.add(setcordpanel, BorderLayout.EAST);
 		        //Sets the size of the Frame
@@ -295,8 +293,6 @@ public class Startscreen implements ActionListener {
 			 //This will deal with the handling the to and from button pushes
 			if(Toaddress == true)
 			{
-				output.setText(" ");
-				output.append("Journey to " + e.getActionCommand());
 				//This will add the cords to the to address
 				String[] address = getcordsoftown(e.getActionCommand());
 				tolat = Double.valueOf(address[0]);
@@ -308,7 +304,6 @@ public class Startscreen implements ActionListener {
 				
 			}else
 			{
-				output.append(" from "+ e.getActionCommand() + "\n");
 				//This means that it wants to get the from address and has the to address
 				String[] address = getcordsoftown(e.getActionCommand());
 				fromlat = Double.valueOf(address[0]);
@@ -318,7 +313,7 @@ public class Startscreen implements ActionListener {
 		  		//Then will set the From: to To:
 		  		info.setText("     To:");
 				traffic_input.gettraffic(true);
-       		 	ArrayList<Incident> incidentlist = traffic_input.allincidents;
+       		 	final ArrayList<Incident> incidentlist = traffic_input.allincidents;
        		 	smalltitle = new ArrayList<String>();
        		 	fulltitle = new ArrayList<String>();
        		 	fulldesc = new ArrayList<String>();
@@ -329,12 +324,6 @@ public class Startscreen implements ActionListener {
        		    	//Then set full titles and descrtion in an other array
        		    	if(incidentlist.get(i).inrange(tolong,fromlong,tolat, fromlat) == true)
        		    	{
-       		    		output.append("Title: " + incidentlist.get(i).gettitle());
-       		    		output.append("\n");
-       		    		output.append("Desc: " + incidentlist.get(i).getdesc());
-       		    		output.append("\n");
-       		    		output.append(" ");
-       		    		output.append("\n");
        		    		smalltitle.add(incidentlist.get(i).getsmalltitle());
        		    		fulltitle.add(incidentlist.get(i).gettitle());
        		    		fulldesc.add(incidentlist.get(i).getdesc());
@@ -348,9 +337,9 @@ public class Startscreen implements ActionListener {
        		    }
        		    String[] smalltitlelist = new String[smalltitle.size()];
        		    smalltitlelist = smalltitle.toArray(smalltitlelist);
-       		    DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) trafficlist.getModel();
+       		    final DefaultComboBoxModel model = (DefaultComboBoxModel) trafficlist.getModel();
        		    model.removeAllElements();
-       		    for(String item: smalltitle)
+       		    for(String item: getroads(incidentlist))
        		    {
        		    	model.addElement(item);
        		    }
@@ -358,11 +347,13 @@ public class Startscreen implements ActionListener {
        		    trafficlist.addActionListener(new ActionListener() {
 	            	  @Override
 					public void actionPerformed(ActionEvent actionEvent) {
-	            		JComboBox<String> traffic = (JComboBox<String>) actionEvent.getSource();
-						JLTitle.setVisible(true);
-						JLTitle.setText(fulltitle.get(traffic.getSelectedIndex()));
-						JLDesc.setVisible(true);
-						JLDesc.setText(fulldesc.get(traffic.getSelectedIndex()));
+	            		JComboBox traffic = (JComboBox) actionEvent.getSource();
+	            		ArrayList<String> allroadincidents = roadbyname(incidentlist,model.getElementAt(traffic.getSelectedIndex()).toString());
+	            		output.setVisible(true);
+	            		for(String item: allroadincidents)	
+	            		{
+	            			output.append(item);
+	            		}
 	            	  }
 	          		});
        		  }
@@ -385,5 +376,56 @@ public class Startscreen implements ActionListener {
 			return null;
 		}
 
-	 }
+	 
+public static ArrayList<String> getroads(ArrayList<Incident> Journeys)
+{
+	//This will collect the journey times on the spades.
+	ArrayList<String> roads = new ArrayList<String>();
+	for(int i = 0; i < Journeys.size(); i++)
+	{
+		for(int i2 = i+1;  i2 < Journeys.size(); i2++)
+		{
+			if(Journeys.get(i).getroad().equals(Journeys.get(i2).getroad()) & i != i2)
+			{
+				
+				
+				if(checkifroadadded(roads,Journeys.get(i).getroad()) == false)
+				{
+					//Adding Road 
+					roads.add(Journeys.get(i).getroad());
+					System.out.println("Road Added:" + Journeys.get(i).getroad());
+				}
+				
+			}
+		}
+	}
+	return roads;
+	
+}
+public static ArrayList<String> roadbyname(ArrayList<Incident> Journeys,String name)
+{
+	ArrayList<String> roadinfo = new ArrayList<String>();
+	for(int i = 0; i < Journeys.size(); i++)
+	{
+		if(Journeys.get(i).getroad().equalsIgnoreCase(name))
+		{
+			roadinfo.add(Journeys.get(i).gettitle()+" # " +Journeys.get(i).getdesc());
+		}
+	}
+	return roadinfo;
+}
+public static boolean checkifroadadded(ArrayList<String>Road, String Roadname)
+{
+	for(int i = 0; i < Road.size(); i++)
+	{
+		if(Road.get(i).equalsIgnoreCase(Roadname))
+		{
+			return true;
+		}
+	}
+	return false;
+	
+}
+}
+
 

@@ -4,19 +4,25 @@ public class Incident {
 
 	String title; 
 	String desc;
+	String road;
 	double lat;
 	double longa;
 	int directioncode;
 	String type;
 	
-	public Incident(String intitle,String indesc,double inlat,double inlonga,String type,int directioncode)
+	public Incident(String intitle,String indesc,double inlat,double inlonga,String type,int directioncode,String road)
 	{
 		title = intitle;
 		desc = indesc;
 		lat = inlat;
+		this.road = road;
 		longa = inlonga;
 		this.type = type;
 		this.directioncode = directioncode;
+	}
+	public String getroad()
+	{
+		return road;
 	}
 	public Boolean inrange(double inlong,double inlong2,double inlat,double inlat2)
 	{

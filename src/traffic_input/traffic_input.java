@@ -39,7 +39,7 @@ public class traffic_input {
 					double lat = Double.parseDouble(cords[0]);
 					double longitude = Double.parseDouble(cords[1]);
 					
-					Incident temp = new Incident(gettextvalue(el,"title"),gettextvalue(el,"description"),lat,longitude,"Incident",getdirectioncode(gettextvalue(el,"title")+gettextvalue(el,"description"))); 
+					Incident temp = new Incident(gettextvalue(el,"title"),gettextvalue(el,"description"),lat,longitude,"Incident",getdirectioncode(gettextvalue(el,"title")+gettextvalue(el,"description")),gettextvalue(el,"title")); 
 					allincidents.add(temp);
 				}
 						
@@ -54,7 +54,7 @@ public class traffic_input {
 					String[] cords = gettextvalue(el,"georss:point").split(" ");
 					double lat = Double.parseDouble(cords[0]);
 					double longitude = Double.parseDouble(cords[1]);
-					Incident temp = new Incident(gettextvalue(el,"title"),gettextvalue(el,"description"),lat,longitude,"Roadworks",getdirectioncode(gettextvalue(el,"title")+gettextvalue(el,"description"))); 
+					Incident temp = new Incident(gettextvalue(el,"title"),gettextvalue(el,"description"),lat,longitude,"Roadworks",getdirectioncode(gettextvalue(el,"title")+gettextvalue(el,"description")),gettextvalue(el,"title")); 
 					allroadworks.add(temp);
 				}
 				
@@ -65,10 +65,13 @@ public class traffic_input {
 				for (int i = 0; i < roadworks_elg_nl.getLength();i++)
 				{
 					Element el = (Element)roadworks_elg_nl.item(i);
+					//Getting the road
+					String roadname = gettextvalue(el,"road");
 					//Gets title
 					double lat = Double.parseDouble(gettextvalue(el,"latitude"));
 					double longitude = Double.parseDouble(gettextvalue(el,"longitude"));
-					Incident temp = new Incident(gettextvalue(el,"title"),gettextvalue(el,"description"),lat,longitude,"Incident",getdirectioncode(gettextvalue(el,"title")+gettextvalue(el,"description"))); 
+					
+					Incident temp = new Incident(gettextvalue(el,"title"),gettextvalue(el,"description"),lat,longitude,"Incident",getdirectioncode(gettextvalue(el,"title")+gettextvalue(el,"description")),roadname); 
 					allincidents.add(temp);
 				}
 				
@@ -115,9 +118,15 @@ public class traffic_input {
 	public static String gettextvalue(Element el , String tag)
 	 {
 
-		NodeList n = el.getElementsByTagName(tag);
-		Element temp = (Element)n.item(0);
-		return temp.getFirstChild().getNodeValue();
+		try{
+			NodeList n = el.getElementsByTagName(tag);
+			Element temp = (Element)n.item(0);
+			return temp.getFirstChild().getNodeValue();
+			 }
+			 catch(Exception e)
+			 {
+				 return "error";
+			 }
 		 
 	 }
 	 
