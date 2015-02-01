@@ -33,6 +33,8 @@ public class Startscreen implements ActionListener {
 	public  Boolean Toaddress;
 	public  Double tolat,fromlat,tolong,fromlong;
 	public JLabel lpostcode1,lpostcode2,info,JLTitle,JLDesc;
+	
+
 	public static void main(String[] args) {
 		//This will display the starting screen for the program with input of postcodes.
 		Startscreen screen = new Startscreen();
@@ -153,6 +155,42 @@ public class Startscreen implements ActionListener {
 			while(nextline != null)
 			{
 				//Each time it reads a new line it splits the line and then adds to the array. 
+				try
+				{
+				Towninfo.add(nextline);
+				String[] parts = nextline.split(",");
+				System.out.println(parts[0] + ","+parts[1]);
+				townnames.add(parts[0]);
+				nextline = in.readLine();
+			
+				}catch (Exception e) {
+					nextline = null;
+				}
+				
+			}
+			in.close();
+			return townnames;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public ArrayList<String> readalltowninfo()
+	{
+		try {
+			//This class will read the file then will return 2 arrays one with towname|lat|long and one with just townname
+			ArrayList<String> townnames = new ArrayList<String>();
+			Towninfo = new ArrayList<String>();
+			//Setting up the files and the readers.
+			File townfile = new File("Offlinetowns.txt");
+			BufferedReader in = new BufferedReader(new FileReader(townfile));
+			String nextline = in.readLine();
+			//Will keep reading the next line till there is no more lines to read
+			while(nextline != null)
+			{
+				//Each time it reads a new line it splits the line and then adds to the array. 
 				Towninfo.add(nextline);
 				String[] parts = nextline.split(",");
 				System.out.println(parts[0] + ","+parts[1]);
@@ -160,7 +198,7 @@ public class Startscreen implements ActionListener {
 				nextline = in.readLine();
 			}
 			in.close();
-			return townnames;
+			return Towninfo;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -179,15 +217,12 @@ public class Startscreen implements ActionListener {
 		        //This is a Scrollpane for the output of the data 
 		        String[] liststartdata = {"Please pick a town"};
  		        trafficlist = new JComboBox(liststartdata);
-		        sp = new JPanel();
+ 		        
 		        combopanel = new JPanel();
 		        output = new JTextArea();
 		        output.setVisible(false);
+		        Scrollpane = new JScrollPane(output);
 		        combopanel.add(trafficlist);
-		        sp.add(output);
-		     // sp.add(Scrollpane);
-		        BoxLayout splayout = new BoxLayout(sp,BoxLayout.X_AXIS);
-		        sp.setLayout(splayout);
 		        BoxLayout setcordlayout = new BoxLayout(setcordpanel, BoxLayout.Y_AXIS);
 		        setcordpanel.setLayout(setcordlayout);
 		        info = new JLabel("     To:");
@@ -224,7 +259,7 @@ public class Startscreen implements ActionListener {
 			        
 		        }
 		        frame.add(combopanel, BorderLayout.PAGE_START);
-		        frame.add(sp, BorderLayout.CENTER);
+		        frame.add(Scrollpane, BorderLayout.CENTER);
 		        frame.add(setcordpanel, BorderLayout.EAST);
 		        //Sets the size of the Frame
 		        //ONLINE AT http://stackoverflow.com/questions/11570356/jframe-in-full-screen-java
@@ -255,6 +290,7 @@ public class Startscreen implements ActionListener {
 		            		  {
 		            		  	savetown(townname.getText(),townlat.getText(),townlong.getText());
 		            		  	frame.setVisible(false);
+		            		  	offlinelayout();
 		            		  }else
 		            		  {
 		            			  JOptionPane.showMessageDialog(frame, "Please enter each field!","Thank You", JOptionPane.ERROR_MESSAGE);
@@ -279,8 +315,13 @@ public class Startscreen implements ActionListener {
 		//This will add to the file which holds all of the saved town data 
 		try {
 			File townfile = new File("Offlinetowns.txt");
-			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(townfile)),true);
-			out.append(Townname +"," + TownLat +","+TownLong+",\n");
+			ArrayList<String> Towns = readalltowninfo();
+			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(townfile)));
+			for(String towninfo : Towns)
+			{
+				out.append(towninfo+"\n");
+			}
+			out.append(Townname +"," + TownLat +","+TownLong);
 			out.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -341,6 +382,7 @@ public class Startscreen implements ActionListener {
        		    model.removeAllElements();
        		    for(String item: getroads(incidentlist))
        		    {
+       		    	
        		    	model.addElement(item);
        		    }
        		    trafficlist.setModel(model);
@@ -350,9 +392,14 @@ public class Startscreen implements ActionListener {
 	            		JComboBox traffic = (JComboBox) actionEvent.getSource();
 	            		ArrayList<String> allroadincidents = roadbyname(incidentlist,model.getElementAt(traffic.getSelectedIndex()).toString());
 	            		output.setVisible(true);
+	            		output.setText(" ");
 	            		for(String item: allroadincidents)	
 	            		{
-	            			output.append(item);
+	            			String[] items = new String[2];
+	           		    	items = item.split("#");
+	            			output.append(items[0] +"\n");
+	            			output.append("                 "+items[1] +"\n");
+	            			output.append("    \n");
 	            		}
 	            	  }
 	          		});
