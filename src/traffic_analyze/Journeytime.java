@@ -50,6 +50,14 @@ public class Journeytime {
 	{
 		return sectionid;
 	}
+	public double getnormaltime()
+	{
+		return normallyExpectedTravelTime;
+	}
+	public double getcurrenttime()
+	{
+		return travelTime;
+	}
 	public Boolean delayed()
 	{
 		if(travelTime > normallyExpectedTravelTime)
@@ -66,6 +74,22 @@ public class Journeytime {
 	public String getroad()
 	{
 		return toroadmain;
+	}
+	public String gettoroad()
+	{
+		return toroadmain;
+	}
+	public String getfromroad()
+	{
+		return fromroadmain;
+	}
+	public String gettojuction()
+	{
+		return tojunction;
+	}
+	public String getfromjuction()
+	{
+		return fromjunction;
 	}
 	public Boolean inrange(double inlong,double inlong2,double inlat,double inlat2)
 	{

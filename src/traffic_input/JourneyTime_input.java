@@ -22,7 +22,7 @@ public class JourneyTime_input {
 	//The data from online without needing to download a new Journey input
 	public static ArrayList<Journeytime> allJourneytime;
 	public static double travelTime,freeFlowTravelTime,normallyExpectedTravelTime;
-	public static void getJourneys(boolean online) {
+	public static ArrayList<Journeytime> getJourneys(boolean online) {
 		//Will call the journey_input to get an array of journey sections
 		//Then will add the information to the journey input 
 		
@@ -48,6 +48,7 @@ public class JourneyTime_input {
 				}
 
 				 getroads(allJourneytime);
+				 return allJourneytime;
 			}else
 			{
 				allJourneytime = Journey_input.getJourneys(false);
@@ -74,29 +75,8 @@ public class JourneyTime_input {
 					
 				}
 				
-				
+				return allJourneytime;
 			}
-			int count = 0;
-			for(int i2 = 0; i2 < allJourneytime.size(); i2++ )
-			{
-				if(allJourneytime.get(i2).gottime() == false)
-				{
-					System.out.println(allJourneytime.get(i2).getid());
-					
-				}else
-				{
-					if(allJourneytime.get(i2).delayed() == true)
-					{
-						count++;
-						System.out.println(count);
-						System.out.println(allJourneytime.get(i2).getid());
-					}else
-					{
-						
-					}
-				}
-			}
-			getroads(allJourneytime);
 		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -107,12 +87,11 @@ public class JourneyTime_input {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		return null;
 	}
 	public static void getroads(ArrayList<Journeytime> Journeys)
 	{
 		//This will collect the journey times on the spades.
-		int count =0;
 		ArrayList<String> roads = new ArrayList<String>();
 		for(int i = 0; i < Journeys.size(); i++)
 		{
@@ -126,7 +105,7 @@ public class JourneyTime_input {
 					{
 						//Adding Road 
 						roads.add(Journeys.get(i).getroad());
-						 count++;
+
 						System.out.println("Road Added:" + Journeys.get(i).getroad());
 					}
 					
@@ -151,14 +130,14 @@ public class JourneyTime_input {
 	 public static String gettextvalue(Element el , String tag)
 	 {
 		 try{
-		NodeList n = el.getElementsByTagName(tag);
-		Element temp = (Element)n.item(0);
-		return temp.getFirstChild().getNodeValue();
-		 }
-		 catch(Exception e)
-		 {
-			 return "error";
-		 }
+				NodeList n = el.getElementsByTagName(tag);
+				Element temp = (Element)n.item(0);
+				return temp.getFirstChild().getNodeValue();
+				 }
+				 catch(Exception e)
+				 {
+					 return "error";
+				 }
 	 }
 	 public static double phasedouble(String input)
 	 {

@@ -220,6 +220,7 @@ public class Startscreen implements ActionListener {
  		        
 		        combopanel = new JPanel();
 		        output = new JTextArea();
+		        output.setEditable(false);
 		        output.setVisible(false);
 		        Scrollpane = new JScrollPane(output);
 		        combopanel.add(trafficlist);
@@ -382,7 +383,10 @@ public class Startscreen implements ActionListener {
        		    model.removeAllElements();
        		    for(String item: getroads(incidentlist))
        		    {
-       		    	
+       		    	if(item.equalsIgnoreCase("Error"))
+       		    	{
+       		    		item = "Other";
+       		    	}
        		    	model.addElement(item);
        		    }
        		    trafficlist.setModel(model);
@@ -401,7 +405,12 @@ public class Startscreen implements ActionListener {
 	            			output.append("                 "+items[1] +"\n");
 	            			output.append("    \n");
 	            		}
+	            			output.append(getjourneytimedata(model.getElementAt(traffic.getSelectedIndex()).toString()));
+	            		
+	            		
 	            	  }
+
+					
 	          		});
        		  }
        	
@@ -422,7 +431,35 @@ public class Startscreen implements ActionListener {
 			}
 			return null;
 		}
-
+	public String getjourneytimedata(String road) {
+		//This will get a list of all the journey time data and return the data based on the road 
+		ArrayList<Journeytime> alljourneytime = JourneyTime_input.getJourneys(false);
+		String journeyinfo;
+		double normaltime = 0;
+		double currenttime = 0;
+		double deleyedtime = 0;
+		for(int i = 0; i < alljourneytime.size(); i++)
+		{
+			
+			if(alljourneytime.get(i).gettoroad().equalsIgnoreCase(road))
+			{
+				normaltime = normaltime + alljourneytime.get(i).getnormaltime();
+				currenttime = currenttime + alljourneytime.get(i).getcurrenttime();
+				
+				
+			}
+			deleyedtime =  currenttime - normaltime; 
+		}
+		if(deleyedtime > 0)
+		{
+		journeyinfo = "Current deley is: " + String.valueOf(deleyedtime);
+		}
+		else
+		{
+		journeyinfo = "No deley!!";
+		}
+		return journeyinfo;
+	}
 	 
 public static ArrayList<String> getroads(ArrayList<Incident> Journeys)
 {
