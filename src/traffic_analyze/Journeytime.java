@@ -9,6 +9,7 @@ public class Journeytime {
 	double freeFlowTravelTime;
 	double normallyExpectedTravelTime;
 	boolean gottime;
+	int directioncode = 1;
 	String sectionid;
 	String toroadmain;
 	String tojunction;
@@ -93,18 +94,123 @@ public class Journeytime {
 	}
 	public Boolean inrange(double inlong,double inlong2,double inlat,double inlat2)
 	{
-		// 
-		if(tolat <= inlat2 && tolat >= inlat && tolong <= inlong && tolong >= inlong2 && fromlat <= inlat2 && fromlat >= inlat && fromlong <= inlong && fromlong >= inlong2)
+		//This will work out what lat and long is bigger
+		double highlat = 0,lowlat = 0,highlong = 0,lowlong = 0;
+		//This deals with setting the higgest and lowest lat and long. 
+		int tempdirectioncode,rangedirectioncode;
+		if(inlat > inlat2)
 		{
-			System.out.println("In Range");
-			//In range!
-			return true;
+			highlat = inlat;
+			lowlat = inlat2;
+			//Going North
+			tempdirectioncode=0;
 		}else
 		{
-			System.out.println("Out of Range");
-			//Out of range!
+			highlat = inlat2;
+			lowlat = inlat;
+			//Going South
+			tempdirectioncode=1;
+		}
+		
+		if(inlong > inlong2)
+		{
+			highlong = inlong;
+			lowlong = inlong2;
+			//Going East
+			if(tempdirectioncode == 0)
+			{
+				//Going North East
+				rangedirectioncode= 1;
+			}else
+			{
+				//Going South East 
+				rangedirectioncode= 2;
+			}
+		}else
+		{
+			highlong = inlong2;
+			lowlong = inlong;
+			//Going West 
+			if(tempdirectioncode == 0)
+			{
+				//Going North West
+				rangedirectioncode= 4;
+			}else
+			{
+				//Going South West
+				rangedirectioncode= 3;
+			}
+		}
+		if(rangedirectioncode == 1 && (directioncode == 1 || directioncode == 2))
+		{
+			//Will now check to see if its inrange
+			if(tolat <= highlat && tolat >= lowlat)
+			{
+				//In range on lat!
+				return true;
+			}else if(tolong <= highlong && tolong >= lowlong)
+			{
+				//In range on long!
+				return true;
+			}else
+			{
+				//Out of range on both
+				return false;
+			}
+		}else if(rangedirectioncode == 2 && (directioncode == 3 || directioncode == 2))
+		{
+			//Will now check to see if its inrange
+			if(tolat <= highlat && tolat >= lowlat)
+			{
+				//In range on lat!
+				return true;
+			}else if(tolong <= highlong && tolong >= lowlong)
+			{
+				//In range on long!
+				return true;
+			}else
+			{
+				//Out of range on both
+				return false;
+			}
+		} 
+		else if(rangedirectioncode == 3 && (directioncode == 3 || directioncode == 4))
+		{
+			//Will now check to see if its inrange
+			if(tolat <= highlat && tolat >= lowlat)
+			{
+				//In range on lat!
+				return true;
+			}else if(tolong <= highlong && tolong >= lowlong)
+			{
+				//In range on long!
+				return true;
+			}else
+			{
+				//Out of range on both
+				return false;
+			}
+		}else if(rangedirectioncode == 4 && (directioncode == 1 || directioncode == 4))
+		{
+			//Will now check to see if its inrange
+			if(tolat <= highlat && tolat >= lowlat)
+			{
+				//In range on lat!
+				return true;
+			}else if(tolong <= highlong && tolong >= lowlong)
+			{
+				//In range on long!
+				return true;
+			}else
+			{
+				//Out of range on both
+				return false;
+			}
+		}else
+		{
 			return false;
 		}
+		
 				
 	}
 
