@@ -405,9 +405,17 @@ public class Startscreen implements ActionListener {
 	            			output.append("                 "+items[1] +"\n");
 	            			output.append("    \n");
 	            		}
-	            			output.append(getjourneytimedata(model.getElementAt(traffic.getSelectedIndex()).toString()));
-	            		
-	            		
+	            			ArrayList<Journeytime> alljourneytime = JourneyTime_input.getJourneys(false);
+	            			output.append(getjourneytimedata(alljourneytime,model.getElementAt(traffic.getSelectedIndex()).toString()));
+	            			ArrayList<String> affectedroads = getdelayedjuctions(alljourneytime,model.getElementAt(traffic.getSelectedIndex()).toString());
+	            			if(affectedroads.size() > 0 )
+	            			{
+	            				output.append("However there is minor issues at: \n");
+	            			}
+	            			for(String roadinfo: affectedroads)
+	            			{
+	            				output.append(roadinfo);
+	            			}
 	            	  }
 
 					
@@ -431,9 +439,9 @@ public class Startscreen implements ActionListener {
 			}
 			return null;
 		}
-	public String getjourneytimedata(String road) {
+	public String getjourneytimedata(ArrayList<Journeytime> alljourneytime,String road) {
 		//This will get a list of all the journey time data and return the data based on the road 
-		ArrayList<Journeytime> alljourneytime = JourneyTime_input.getJourneys(false);
+		
 		String journeyinfo;
 		double normaltime = 0;
 		double currenttime = 0;
@@ -452,16 +460,70 @@ public class Startscreen implements ActionListener {
 		}
 		if(deleyedtime > 0)
 		{
-		journeyinfo = "Current deley is: " + String.valueOf(deleyedtime);
+		journeyinfo = "Current delay is: " + String.valueOf(deleyedtime);
 		}
 		else
 		{
-		journeyinfo = "No deley!!";
+			//Delay
+		journeyinfo = "No Major delay!! \n";
 		}
 		return journeyinfo;
 	}
 	 
-public static ArrayList<String> getroads(ArrayList<Incident> Journeys)
+public ArrayList<String> getdelayedjuctions(ArrayList<Journeytime> alljourneytime,String road) {
+		//This function will return the infomation on affect juctions
+	ArrayList<String> roadinfo = new ArrayList<String>();
+	for(int i = 0; i < alljourneytime.size(); i++)
+	{
+		
+		if(alljourneytime.get(i).delayed() == true && alljourneytime.get(i).getroad().equalsIgnoreCase(road) == true )
+		{
+			roadinfo.add("There is a delay between: " + correctjuction(alljourneytime.get(i),false) + " - " + correctjuction(alljourneytime.get(i),true) + " \n");
+			roadinfo.add("This delay is about: " + getcorrectdelay(alljourneytime.get(i))+ " Minutes  \n");
+		}
+	}
+		return roadinfo;
+	
+	}
+
+public String getcorrectdelay(Journeytime journeytime) {
+	//This will return the correct amount of time the delay 
+	if(journeytime.delayed())
+	{
+		double delayedtime = journeytime.getcurrenttime() - journeytime.getnormaltime();
+		
+		return String.valueOf(delayedtime / 60);
+	}
+	return null;
+}
+public String correctjuction(Journeytime journey,Boolean direction)
+{
+	if(direction == true)
+	{
+		//This means that it is a to junction
+		if(journey.gettojuction().equalsIgnoreCase("Error"))
+		{
+			return "The " + journey.gettoroad();
+		}
+		else
+		{
+			return "Junction " + journey.gettojuction();
+		}
+	}else
+	{
+		//This means that the junction is a from junction 
+		if(journey.getfromjuction().equalsIgnoreCase("Error"))
+		{
+			return "The " + journey.getfromroad();
+		}
+		else
+		{
+			return "Junction " + journey.getfromjuction();
+		}
+	}
+	
+}
+public ArrayList<String> getroads(ArrayList<Incident> Journeys)
 {
 	//This will collect the journey times on the spades.
 	ArrayList<String> roads = new ArrayList<String>();

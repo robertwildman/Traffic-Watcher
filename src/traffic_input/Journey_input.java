@@ -67,7 +67,7 @@ public class Journey_input {
 					fromroadjuction = gettextvalue(Juctionfrom,"value");
 					Node fRoad = from.getChildNodes().item(2).getChildNodes().item(0);
 					Element Roadfrom = (Element)fRoad;		
-					fromroadjuction = gettextvalue(Roadfrom,"value");
+					fromroadname = gettextvalue(Roadfrom,"value");
 				}
 			}else
 			{
@@ -82,9 +82,10 @@ public class Journey_input {
 					Node fJuction = from.getChildNodes().item(1).getChildNodes().item(0);
 					Element Juctionfrom = (Element)fJuction;
 					fromroadjuction = gettextvalue(Juctionfrom,"value");
+					System.out.println(fromroadjuction);
 					Node fRoad = from.getChildNodes().item(2).getChildNodes().item(0);
 					Element Roadfrom = (Element)fRoad;		
-					fromroadjuction = gettextvalue(Roadfrom,"value");
+					fromroadname = gettextvalue(Roadfrom,"value");
 				}
 			}
 			
