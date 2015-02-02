@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.*;
 
@@ -399,10 +400,16 @@ public class Startscreen implements ActionListener {
 				}
 				model.addElement(item);
 			}
+			if(model.getSize() == 0)
+			{
+				model.addElement("No roads affected!");
+			}
+			
 			trafficlist.setModel(model);
 			trafficlist.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent actionEvent) {
+					//Happens when the user clicks on the combo box
 					JComboBox traffic = (JComboBox) actionEvent.getSource();
 					ArrayList<String> allroadincidents = roadbyname(
 							affectedIncidents,
@@ -462,21 +469,21 @@ public class Startscreen implements ActionListener {
 		// based on the road
 
 		String journeyinfo;
-		double normaltime = 0;
-		double currenttime = 0;
-		double deleyedtime = 0;
+		long normaltime = 0;
+		long currenttime = 0;
+		long delayedtime = 0;
 		for (int i = 0; i < alljourneytime.size(); i++) {
 
 			if (alljourneytime.get(i).gettoroad().equalsIgnoreCase(road)) {
-				normaltime = normaltime + alljourneytime.get(i).getnormaltime();
-				currenttime = currenttime
-						+ alljourneytime.get(i).getcurrenttime();
+				normaltime = (long) (normaltime + alljourneytime.get(i).getnormaltime());
+				currenttime = (long) (currenttime
+						+ alljourneytime.get(i).getcurrenttime());
 
 			}
-			deleyedtime = currenttime - normaltime;
+			delayedtime = currenttime - normaltime;
 		}
-		if (deleyedtime > 0) {
-			journeyinfo = "Current delay is: " + String.valueOf(deleyedtime);
+		if (delayedtime > 0) {
+			journeyinfo = "Current delay is: " + String.valueOf(TimeUnit.SECONDS.toMinutes(delayedtime));
 		} else {
 			// Delay
 			journeyinfo = "No Major delay!! \n";
@@ -507,10 +514,10 @@ public class Startscreen implements ActionListener {
 	public String getcorrectdelay(Journeytime journeytime) {
 		// This will return the correct amount of time the delay
 		if (journeytime.delayed()) {
-			double delayedtime = journeytime.getcurrenttime()
-					- journeytime.getnormaltime();
+			long delayedtime = (long) (journeytime.getcurrenttime()
+					- journeytime.getnormaltime());
 
-			return String.valueOf(delayedtime / 60);
+			return String.valueOf(TimeUnit.SECONDS.toMinutes(delayedtime));
 		}
 		return null;
 	}
