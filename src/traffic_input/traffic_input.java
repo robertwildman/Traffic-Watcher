@@ -23,7 +23,6 @@ public class traffic_input {
 				//This will read all the traffic xml files
 				
 				//This creates an array of objects that use the roadwork class
-				ArrayList<Incident> allroadworks = new ArrayList<Incident>();
 				allincidents= new ArrayList<Incident>();
 				
 				//Scotland Current Incidents
@@ -55,7 +54,7 @@ public class traffic_input {
 					double lat = Double.parseDouble(cords[0]);
 					double longitude = Double.parseDouble(cords[1]);
 					Incident temp = new Incident(gettextvalue(el,"title"),gettextvalue(el,"description"),lat,longitude,"Roadworks",getdirectioncode(gettextvalue(el,"title")+gettextvalue(el,"description")),gettextvalue(el,"title")); 
-					allroadworks.add(temp);
+					allincidents.add(temp);
 				}
 				
 				//England current Incident
@@ -92,7 +91,7 @@ public class traffic_input {
 		}else
 		{
 			//Will work with the online data.
-			return allincidents;
+			return null;
 		}
 	 }
 	 private static int getdirectioncode(String text) {

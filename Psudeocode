@@ -189,10 +189,126 @@ Journeytime.java:
 	End Method
 	Method inrange is the same as inrange for Incident
 	End Method
+Postcode_processing.java:
+	Method create_area has inputs of postcode1 and postcode 2 and will return a String array
+		Creates a String array called areacords and has the size of 2
+		Create a temp string and send the first postcode to the getcords method in postcodeinput
+		Sets the first item in the array to the temp string
+		Repeat the last two steps for adding the second array
+		return array
+	End Method
+Road.java
+	Setting up the variables to use
+	Class road has input name
+		set internal name to input
+	End Class
+	Method getroadname will return string
+		return roadname
+	End Method
+	Method setroadname will take the input of a string
+		set internal name to input
+	End Method
+	Method getlat will return double
+		return roadlat
+	End Method
+	Method setroadlat will take the input of a double
+		set internal lat to input
+	End Method
+	Method getlong will return double
+		return roadlong
+	End Method
+	Method setroadlong will take the input of a double
+		set internal long to input
+	End Method
+traffic_input.java
+	Method gettraffic takes one input of a boolean and will return an array of Incidents
+		if true is set to true then
+			try
+				Creates an array of the Incident class called allincidents
+				Uses the readdata method to create a document and save it under the title currentincidents_sco_doc
+				Gets the first heading of the document and saves as element
+				Gets all the nodes in the element with the tag item
+				for int i  = 0 to size of the nodelist and setp is 1
+					gets the element at point i in the nodelist
+					Creates a string array from the string which is collect from the method called gettextvaule with the input of the lement and the tag then its spilts the string into a string array
+					Creates a double called lat and phase the string which is the first item in the string array above to double
+					Creates a double called longitude and phase the string which is the second item in the string array above to double
+					Creates a temp instances of the Incident class and uses a few gettextvaule methods to fill out the data needed to create an instance
+					saves the temp to the array of Incidents
+				next
 
+				Uses the readdata method to create a document and save it under the title roadworks_sco_doc
+				Gets the first heading of the document and saves as element
+				Gets all the nodes in the element with the tag item
+				for int i  = 0 to size of the nodelist and setp is 1
+					gets the element at point i in the nodelist
+					Creates a string array from the string which is collect from the method called gettextvaule with the input of the lement and the tag then its spilts the string into a string array
+					Creates a double called lat and phase the string which is the first item in the string array above to double
+					Creates a double called longitude and phase the string which is the second item in the string array above to double
+					Creates a temp instances of the Incident class and uses a few gettextvaule methods to fill out the data needed to create an instance
+					saves the temp to the array of Incidents
+				next
 
-
-
-
+				Uses the readdata method to create a document and save it under the title currentincidents_elg_doc
+				Gets the first heading of the document and saves as element
+				Gets all the nodes in the element with the tag item
+				for int i  = 0 to size of the nodelist and setp is 1
+					gets the element at point i in the nodelist
+					Creates string with the method of gettextvaule inputs of element and road as string
+					Creates a double called lat and phase the string which is collected from the gettextvaule with inputs of element and latitude
+					Creates a double called longitude and phase the string which is is collected from the gettextvaule with inputs of element and longitude
+					Creates a temp instances of the Incident class and uses a few gettextvaule methods to fill out the data needed to create an instance
+					saves the temp to the array of Incidents
+				next
+			catches any issues in the phasing
+			catches any issues in the SAX
+			catches any issues caused by Input of data
+			return allincidents
+		else
+			return nothing
+		end if
+	End Method
+	Method getdirectioncode returns a int and takes a string input called text
+		if text to lower case has in the string the word northbound then
+			return 1
+		else if text to lower case has in the string the word eastbound then
+			return 2
+		else if text to lower case has in the string the word southbound then
+			return 3
+		else if text to lower case has in the string the word westbound then
+			return 4
+		else
+			return 0
+		end if
+	End Method
+	Method gettextvaule returns a string and has 2 inputs one for an element and one for a string
+		try
+			Makes a nodelist of all elements in the element passed in which include the tag which is the inputed string
+			Create a temp element that holds the first item in the nodelist
+			returns the node vaule of the child of the temp element
+		catch any issues
+			return error
+	End Method
+	Method readdata returns A document and takes the input of filepath which is a string it also throws some Exception just incase there is any issues
+		Sets up a file that will localed the file based on the filepath
+		Starts a DocumentBuilderFactory and the builder
+		return the file that has been parse by the Document factory and builder
+	End Method
+	b
+Journey_input.java
+	Setup the variables
+	Creates an array of Journeytime called allJourneytime
+	try
+		Uses the readdata method to create a document and save it under the title journeytimeloc_doc
+		Gets the first heading of the document and saves as element
+		Gets all the nodes in the element with the tag item
+		for int i = 0 to size of the node list with the step being 2
+			Creates an element which is at i in the nodelist create above
+			sets sectionid to the attribute id of the element and then remove the first 7 charaters
+			Create an element which is at the postion of i add 1 in the nodelist and its the first child of that element
+			Sets the direction to the return of the function gettextvaule with the lemewnt abovew as one input and tag as another
+			Creates a node that is deeper then the element above going into the 2 child node
+			Create an element of the node above
+			if element attribute of xsi:trype is equal ignoring the case to TPEFJuction then
 
 
