@@ -28,9 +28,10 @@ public class Startscreen implements ActionListener {
 	public JPanel postcodepanel, setcordpanel, main, sp;
 	public JTextField tfpostcode1, tfpostcode2, townname, townlat, townlong;
 	public JTextArea output;
-	public JFrame frame;
+	public String totown,fromtown;
+	public JFrame frame,offlineframe;
 	public DefaultComboBoxModel model;
-	public JPanel combopanel;
+	public JPanel combopanel,roadpanel;
 	public JScrollPane Scrollpane;
 	public JComboBox trafficlist;
 	public ArrayList<String> Towninfo, smalltitle, fulltitle, fulldesc;
@@ -221,22 +222,25 @@ public class Startscreen implements ActionListener {
 	public void offlinelayout() {
 		// This will display the starting screen for the program with input of
 		// postcodes.
-		JFrame frame = new JFrame("Offline Mode");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		offlineframe = new JFrame("Offline Mode");
+		offlineframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// Setting up the panel of set cords for offline testing
 		setcordpanel = new JPanel();
 
 		// This is a Scrollpane for the output of the data
 		String[] liststartdata = { "Please pick a town" };
 		trafficlist = new JComboBox(liststartdata);
-
+		
 		combopanel = new JPanel();
+		roadpanel = new JPanel();
 		output = new JTextArea();
 		output.setEditable(false);
 		output.setVisible(false);
 		Scrollpane = new JScrollPane(output);
 		combopanel.add(trafficlist);
 		BoxLayout setcordlayout = new BoxLayout(setcordpanel, BoxLayout.Y_AXIS);
+		BoxLayout roadlayout = new BoxLayout(roadpanel, BoxLayout.Y_AXIS);
+		roadpanel.setLayout(roadlayout);
 		setcordpanel.setLayout(setcordlayout);
 		info = new JLabel("     To:");
 		ArrayList<String> Towns = readtowns();
@@ -268,15 +272,16 @@ public class Startscreen implements ActionListener {
 			setcordpanel.add(addtown);
 
 		}
-		frame.add(combopanel, BorderLayout.PAGE_START);
-		frame.add(Scrollpane, BorderLayout.CENTER);
-		frame.add(setcordpanel, BorderLayout.EAST);
+		offlineframe.add(combopanel, BorderLayout.PAGE_START);
+		offlineframe.add(Scrollpane, BorderLayout.CENTER);
+		offlineframe.add(setcordpanel, BorderLayout.EAST);
+		offlineframe.add(roadpanel, BorderLayout.WEST);
 		// Sets the size of the Frame
 		// ONLINE AT
 		// http://stackoverflow.com/questions/11570356/jframe-in-full-screen-java
-		frame.setExtendedState(Frame.MAXIMIZED_BOTH);
+		offlineframe.setExtendedState(Frame.MAXIMIZED_BOTH);
 		// Shows the frame
-		frame.setVisible(true);
+		offlineframe.setVisible(true);
 	}
 
 	public void addtown() {
@@ -358,7 +363,9 @@ public class Startscreen implements ActionListener {
 			Toaddress = false;
 			// Then will set the to: to from:
 			info.setText("     From:");
-
+			//Sets the to town 
+			totown = e.getActionCommand();
+			
 		} else {
 			// This means that it wants to get the from address and has the to
 			// address
@@ -369,6 +376,7 @@ public class Startscreen implements ActionListener {
 			Toaddress = true;
 			// Then will set the From: to To:
 			info.setText("     To:");
+			fromtown = e.getActionCommand();
 			traffic_input.gettraffic(true);
 			final ArrayList<Incident> incidentlist = traffic_input.allincidents;
 			affectedIncidents = new ArrayList<Incident>();
@@ -397,13 +405,20 @@ public class Startscreen implements ActionListener {
 					.getModel();
 			model.removeAllElements();
 			model.addElement("Test");
+			roadpanel.removeAll();
+			JLabel fromtownlabel = new JLabel(fromtown);
+			JLabel totownlabel = new JLabel(totown);
+			roadpanel.add(fromtownlabel);
 			for (String item : getroads(affectedIncidents)) {
 				if (item.equalsIgnoreCase("Error")) {
 					item = "Other";
 				}
 				model.addElement(item);
+				JButton tempbutton = new JButton(item);
+				roadpanel.add(tempbutton);
 			}
-			
+			roadpanel.add(totownlabel);
+			roadpanel.revalidate();
 			if(model.getSize() == 0)
 			{
 				model.addElement("No roads affected!");
@@ -455,6 +470,10 @@ public class Startscreen implements ActionListener {
 					for (String roadinfo : affectedroads) {
 						output.append(roadinfo);
 					}
+					
+					
+					
+					
 				}
 
 				
