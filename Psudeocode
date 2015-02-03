@@ -1,0 +1,198 @@
+Psudeocode:
+Incident.java:
+	Setup the variables in class
+	Creating class with the inputs of Title,desc,lat,long,type of Incident, direction code and road
+		Sets the inputs to the variables held in class
+	End Class
+	Method to get road return string
+		return the Road Variable
+	End Method
+	Method to check if in range returns boolean with inputs of 2 different longs and lats
+		Setup internal variables
+		if inlat is greater then inlat2 then
+			Set highlat to inlat
+			Set lowlat to inlat2
+			Set tempdirectioncode to 0
+		else
+			Set highlat to inlat2
+			Set lowlat to inlat
+			Set tempdirectioncode to 1
+		end if
+
+		if inlong is greater then inlong2 then
+			Set highlat to inlong
+			Set lowlat to inlong2
+			if tempdirectioncode equals 0 then
+				Set rangedirectioncode to 1
+			else
+				Set rangedirectioncode to 2
+			end if
+		else
+			Set highlat to inlong2
+			Set lowlat to inlong
+			if tempdirectioncode equals 0 then
+				Set rangedirectioncode to 4
+			else
+				Set rangedirectioncode to 3
+			end if
+		end if
+
+		if rangedirectioncode equals 1 and directioncode equals 1 or 2 then
+			if internal lat is between the range of highlat and lowlat then
+				return true
+			else
+				return false
+			end if
+		else if  rangedirectioncode equals 2 and directioncode equals 3 or 2 then
+			if internal lat is between the range of highlat and lowlat then
+				return true
+			else
+				return false
+			end if
+		else if  rangedirectioncode equals 3 and directioncode equals 3 or 4 then
+			if internal lat is between the range of highlat and lowlat then
+				return true
+			else
+				return false
+			end if
+		else if  rangedirectioncode equals 4 and directioncode equals 1 or 4 then
+			if internal lat is between the range of highlat and lowlat then
+				return true
+			else
+				return false
+			end if
+		else
+			return false
+		end
+	end Method
+	Method to get direction return string
+		return the String of directioncode
+	End Method
+	Method to get title return string
+		return the title
+	End Method
+	Method to printdata return string
+		Sets the output string up
+		return the output string
+	End Method
+	Method to get lat returns double
+		returns lat
+	End Method
+	Method to set lat takes input of lat
+		set class lat to input lat
+	End Method
+	Method to get long returns double
+		returns the class long
+	End Method
+	Method to set long takes input of long
+		set class long to input long
+	End Method
+Directions.java:
+	Sets a method thats orders an array of the list of instances of the class road and takes the input of an unorder list and lats and longs for to and from and will return the sorted list
+		Will setup the disbetweenlat varible and then will set it to the postive number of the sum tolat - fromlat.
+		Will setup the disbetweenlong varible and then will set it to the postive number of the sum tolong - fromlong.
+		if the disatance between lat is greater then between long then
+			for int i equals 0 to the size of the roads array take away 1 and then add one each time then
+				for int i1 equal 0 for the size of roads array minius i minius 1 and step 1 then
+					if the instances at i1 in the road array and gets it longuitude is greater then the next one along in the array
+						Temp instances of the road class that takes the vaule of roads(i1)
+						Set the instances at the index of i2 to whats in the array at i2 + 1
+						Set the instances at i2+1 to the temp instances
+					end if
+				next
+			next
+		else
+			for int i equals 0 to the size of the roads array take away 1 and then add one each time then
+				for int i1 equal 0 for the size of roads array minius i minius 1 and step 1 then
+					if the instances at i1 in the road array and gets it latuitude is greater then the next one along in the array
+						Temp instances of the road class that takes the vaule of roads(i1)
+						Set the instances at the index of i2 to whats in the array at i2 + 1
+						Set the instances at i2+1 to the temp instances
+					end if
+				next
+			next
+		end if
+		return the roads array
+Postcodeinput.java:
+	Method getcords that takes the inputs of a String for postcode and will return a String
+		Will replace any spaces with a %20 allowing it to be used in an array
+		Will make a String called url with a predefined start and the end being the Postcode url
+		Will call the readdata and readwebsite methods with the inputs of the url
+		Will set data to the inner result sections of the json file
+		Will create and set a string called cords that will take the string vaule of the the lat and long of the postcode and this infomation is recived from the JSON file and will add " , " between the vaules so they can be spilt.
+		return cords
+	End Method
+	Method readwebsite will take the input of the url and will return a string
+		try
+			Will start an inputstream to get the data from the URL that has been passed thought
+			Will then create a reader so this data can be read
+			Will create a Stringbuilder allowing us to add many strings together
+			Creates a holder to hold the temp vaules
+			while holder equal bufferedreader reading the next line is not equaling to null so there something there
+				Add holder to stringbuilder
+			next
+			return the String of Stringbuilder
+		catch An issue with the url
+		catch an issue will the readers and streaming in data
+	End Method
+	Method readdata takes the string data and will turn it into a JSONObject
+		Makes a JSONObject out of the String data
+		returns this data
+	End Method
+Journeytime.java:
+	Setup the variables in class
+	Class Journeytime takes the inputs of to and from lats,long,roadmain,juction,direction,sectionid
+		Sets the internal variables to the input variables
+	End Class setup
+	Method getlat returns double
+		returns tolat
+	End Method
+	Method getlong returns double
+		return tolong
+	End Method
+	Method setalltime gets the input of currenttime, freeflowtime,normaltime
+		Sets the internal variables to the input variables
+	End Method
+	Method gottime returns the boolean
+		return internal gottime
+	End Method
+	Method getid returns String
+		returns id
+	End Method
+	Method gotnormaltime returns double
+		returns normaltime
+	End Method
+	Method getcurrenttime returns String
+		returns traveltime
+	End Method
+	Method deyaled will return a Boolean
+		if traveltime is greater then the normally time then
+			return true
+		else
+			return false
+		End if
+	End Method
+	Method getroad returns a string
+		return toroad
+	End Method
+	Method getroroad returns a string
+		returns toroad
+	End Method
+	Method getfromroad returns a string
+		return fromroad
+	End Method
+	Method gettojuction returns a string
+		return tojuction
+	End Method
+	Method getfromjuction returns a string
+		return fromjuction
+	End Method
+	Method inrange is the same as inrange for Incident
+	End Method
+
+
+
+
+
+
+
