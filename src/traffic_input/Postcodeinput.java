@@ -21,17 +21,14 @@ public class Postcodeinput {
 		
 		String url = "http://api.postcodes.io/postcodes/"+Postcode;
 		JSONObject data = readdata(readwebsite(url));
-		System.out.println(data);
 		data = data.getJSONObject("result");
-		System.out.println(data);
 		String cords = String.valueOf(data.getDouble("latitude")) +"," + String.valueOf(data.getDouble("longitude"));  
-		System.out.println(cords);
 		return cords;
 		
 	}
 	public static String readwebsite(String url)
 	{
-		//This will read the website and read turn in text form the json.
+		//This will read the website and read turn in text for the json.
 		try {
 			InputStream websitein = new URL(url).openStream();
 			BufferedReader rd = new BufferedReader(new InputStreamReader(websitein));

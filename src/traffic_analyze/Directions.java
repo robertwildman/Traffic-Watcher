@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Directions {
 
 	//This class will deal with sorting the data and giving the user directions
-	
 	public static ArrayList<Road> orderlist(ArrayList<Road> roads,double tolat , double tolong,double fromlat , double fromlong)
 	{
 		//This will order a list based on what road the user will meet next so they can plan there journeys better
