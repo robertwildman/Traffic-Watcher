@@ -34,6 +34,14 @@ public class Journeytime {
 		this.direction = direction;
 		this.gottime = false;
 	}
+	public double getlat()
+	{
+		return tolat;
+	}
+	public double getlong()
+	{
+		return tolong;
+	}
 	public void setalltime(double travelTime, double freeFlowTravelTime,double normallyExpectedTravelTime )
 	{
 		//Used to set the time aspect to each 
@@ -148,10 +156,6 @@ public class Journeytime {
 			{
 				//In range on lat!
 				return true;
-			}else if(tolong <= highlong && tolong >= lowlong)
-			{
-				//In range on long!
-				return true;
 			}else
 			{
 				//Out of range on both
@@ -163,10 +167,6 @@ public class Journeytime {
 			if(tolat <= highlat && tolat >= lowlat)
 			{
 				//In range on lat!
-				return true;
-			}else if(tolong <= highlong && tolong >= lowlong)
-			{
-				//In range on long!
 				return true;
 			}else
 			{
@@ -181,10 +181,6 @@ public class Journeytime {
 			{
 				//In range on lat!
 				return true;
-			}else if(tolong <= highlong && tolong >= lowlong)
-			{
-				//In range on long!
-				return true;
 			}else
 			{
 				//Out of range on both
@@ -196,10 +192,6 @@ public class Journeytime {
 			if(tolat <= highlat && tolat >= lowlat)
 			{
 				//In range on lat!
-				return true;
-			}else if(tolong <= highlong && tolong >= lowlong)
-			{
-				//In range on long!
 				return true;
 			}else
 			{

@@ -35,12 +35,10 @@ public class Journey_input {
 			
 			Element idel = (Element)journeytimeloc_nl.item(i);
 			sectionid = idel.getAttribute("id").substring(7);
-			System.out.println("This is " + idel.getAttribute("id").substring(7));
 			Element Direction = (Element)journeytimeloc_nl.item(i+1).getFirstChild();
 			direction = gettextvalue(Direction,"tpegDirection");
 			Node to = journeytimeloc_nl.item(i+1).getFirstChild().getChildNodes().item(2);
 			Element toel = (Element) to;
-			System.out.println(toel.getAttribute("xsi:type"));
 			if(toel.getAttribute("xsi:type").equalsIgnoreCase("TPEGJunction"))
 			{
 				//
@@ -82,7 +80,6 @@ public class Journey_input {
 					Node fJuction = from.getChildNodes().item(1).getChildNodes().item(0);
 					Element Juctionfrom = (Element)fJuction;
 					fromroadjuction = gettextvalue(Juctionfrom,"value");
-					System.out.println(fromroadjuction);
 					Node fRoad = from.getChildNodes().item(2).getChildNodes().item(0);
 					Element Roadfrom = (Element)fRoad;		
 					fromroadname = gettextvalue(Roadfrom,"value");
@@ -93,8 +90,7 @@ public class Journey_input {
 			Journeytime temp = new Journeytime(tolat,fromlat,tolong,tolat,toroadname,toroadjuction,fromroadname,fromroadjuction,direction,sectionid);
 			allJourneytime.add(temp);
 		}
-		
-		System.out.println(allJourneytime.size());
+	
 		return allJourneytime;
 	 } catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block

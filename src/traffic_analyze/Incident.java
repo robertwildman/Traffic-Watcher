@@ -80,10 +80,6 @@ public class Incident {
 			{
 				//In range on lat!
 				return true;
-			}else if(longa <= highlong && longa >= lowlong)
-			{
-				//In range on long!
-				return true;
 			}else
 			{
 				//Out of range on both
@@ -95,10 +91,6 @@ public class Incident {
 			if(lat <= highlat && lat >= lowlat)
 			{
 				//In range on lat!
-				return true;
-			}else if(longa <= highlong && longa >= lowlong)
-			{
-				//In range on long!
 				return true;
 			}else
 			{
@@ -113,10 +105,6 @@ public class Incident {
 			{
 				//In range on lat!
 				return true;
-			}else if(longa <= highlong && longa >= lowlong)
-			{
-				//In range on long!
-				return true;
 			}else
 			{
 				//Out of range on both
@@ -129,16 +117,14 @@ public class Incident {
 			{
 				//In range on lat!
 				return true;
-			}else if(longa <= highlong && longa >= lowlong)
-			{
-				//In range on long!
-				return true;
+			
 			}else
 			{
 				//Out of range on both
 				return false;
 			}
-		}else
+		}
+		else
 		{
 			return false;
 		}

@@ -41,10 +41,6 @@ public class JourneyTime_input {
 					System.out.println(idel.getAttribute("id").substring(13));
 					Node alldata = idel.getChildNodes().item(1);
 					Element alldatael = (Element) alldata;
-					System.out.println("Travel time: " + gettextvalue(alldatael,"travelTime"));
-					System.out.println("Freeflow time: " + gettextvalue(alldatael,"freeFlowTravelTime"));
-					System.out.println("Normally Travel Time: " + gettextvalue(alldatael,"normallyExpectedTravelTime"));
-					System.out.println("   ");
 				}
 
 				 getroads(allJourneytime);

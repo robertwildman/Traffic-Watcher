@@ -15,8 +15,10 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.*;
 
+import traffic_analyze.Directions;
 import traffic_analyze.Incident;
 import traffic_analyze.Journeytime;
+import traffic_analyze.Road;
 import traffic_input.JourneyTime_input;
 import traffic_input.Postcodeinput;
 import traffic_input.traffic_input;
@@ -394,12 +396,14 @@ public class Startscreen implements ActionListener {
 			model = (DefaultComboBoxModel) trafficlist
 					.getModel();
 			model.removeAllElements();
+			model.addElement("Test");
 			for (String item : getroads(affectedIncidents)) {
 				if (item.equalsIgnoreCase("Error")) {
 					item = "Other";
 				}
 				model.addElement(item);
 			}
+			
 			if(model.getSize() == 0)
 			{
 				model.addElement("No roads affected!");
@@ -411,6 +415,12 @@ public class Startscreen implements ActionListener {
 				public void actionPerformed(ActionEvent actionEvent) {
 					//Happens when the user clicks on the combo box
 					JComboBox traffic = (JComboBox) actionEvent.getSource();
+					if(model.getElementAt(traffic.getSelectedIndex())
+									.toString().equalsIgnoreCase("test"))
+					{
+						test(affectedIncidents);
+					}
+					//Gets any issues on the road that the user has picked
 					ArrayList<String> allroadincidents = roadbyname(
 							affectedIncidents,
 							model.getElementAt(traffic.getSelectedIndex())
@@ -424,17 +434,21 @@ public class Startscreen implements ActionListener {
 						output.append("                 " + items[1] + "\n");
 						output.append("    \n");
 					}
-					
+					//Will get a list of affected jounreytimes
 					ArrayList<Journeytime> alljourneytime = getinrangejourneytime(JourneyTime_input
 							.getJourneys(false),tolong, fromlong, tolat,
 							fromlat);
+					//This will work out if there is a delay and then display message to user. 
 					output.append(getjourneytimedata(alljourneytime, model
 							.getElementAt(traffic.getSelectedIndex())
 							.toString()));
+					
+					//This will get any delays on the road and return a String array which then will be print onto the screen;
 					ArrayList<String> affectedroads = getdelayedjuctions(
 							alljourneytime,
 							model.getElementAt(traffic.getSelectedIndex())
 									.toString());
+					
 					if (affectedroads.size() > 0) {
 						output.append("However there is minor issues at: \n");
 					}
@@ -443,11 +457,27 @@ public class Startscreen implements ActionListener {
 					}
 				}
 
+				
+
 			});
 		}
 
 	}
 
+	public void test(ArrayList<Incident> incidents) {
+		// TODO Auto-generated method stub
+		for(Road item: getroadsasclass(incidents))
+		{
+			System.out.println(item.getRoadname() + " lat: " + item.getlat()+ " long: " + item.getlong());
+		}
+		System.out.println("STARTING SORT");
+		ArrayList<Road> allroadssorted = Directions.orderlist(getroadsasclass(incidents), tolat ,  tolong, fromlat ,  fromlong);
+		for(Road item: allroadssorted)
+		{
+			System.out.println(item.getRoadname()+ " lat: " + item.getlat()+ " long: " + item.getlong());
+		}
+	}
+	
 	public String[] getcordsoftown(String intown) {
 		// Returns the cords of the town
 
@@ -486,7 +516,7 @@ public class Startscreen implements ActionListener {
 			journeyinfo = "Current delay is: " + String.valueOf(TimeUnit.SECONDS.toMinutes(delayedtime));
 		} else {
 			// Delay
-			journeyinfo = "No Major delay!! \n";
+			journeyinfo = "No Major delay! \n";
 		}
 		return journeyinfo;
 	}
@@ -544,6 +574,7 @@ public class Startscreen implements ActionListener {
 	public ArrayList<String> getroads(ArrayList<Incident> Journeys) {
 		// This will collect the journey times on the spades.
 		ArrayList<String> roads = new ArrayList<String>();
+		ArrayList<Road> allroads = new ArrayList<Road>();
 		for (int i = 0; i < Journeys.size(); i++) {
 			for (int i2 = i + 1; i2 < Journeys.size(); i2++) {
 				if (Journeys.get(i).getroad()
@@ -552,9 +583,11 @@ public class Startscreen implements ActionListener {
 
 					if (checkifroadadded(roads, Journeys.get(i).getroad()) == false) {
 						// Adding Road
+						Road Temp = new Road(Journeys.get(i).getroad());
+						Temp.setRoadlat(Journeys.get(i).getLat());
+						Temp.setRoadlong(Journeys.get(i).getLonga());
+						allroads.add(Temp);
 						roads.add(Journeys.get(i).getroad());
-						System.out.println("Road Added:"
-								+ Journeys.get(i).getroad());
 					}
 
 				}
@@ -562,6 +595,32 @@ public class Startscreen implements ActionListener {
 		}
 		return roads;
 
+	}
+	
+	public ArrayList<Road>getroadsasclass(ArrayList<Incident> Journeys)
+	{
+		// This will collect the journey times on the spades.
+		ArrayList<String> roads = new ArrayList<String>();
+		ArrayList<Road> allroads = new ArrayList<Road>();
+		for (int i = 0; i < Journeys.size(); i++) {
+			for (int i2 = i + 1; i2 < Journeys.size(); i2++) {
+				if (Journeys.get(i).getroad()
+						.equals(Journeys.get(i2).getroad())
+						& i != i2) {
+
+					if (checkifroadadded(roads, Journeys.get(i).getroad()) == false) {
+						// Adding Road
+						Road Temp = new Road(Journeys.get(i).getroad());
+						Temp.setRoadlat(Journeys.get(i).getLat());
+						Temp.setRoadlong(Journeys.get(i).getLonga());
+						allroads.add(Temp);
+						roads.add(Journeys.get(i).getroad());
+					}
+
+				}
+			}
+		}
+		return allroads;
 	}
 
 	public ArrayList<Journeytime> getinrangejourneytime(ArrayList<Journeytime> all,double tolong, double fromlong, double tolat, double fromlat)
