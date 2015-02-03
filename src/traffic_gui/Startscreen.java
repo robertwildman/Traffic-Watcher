@@ -31,6 +31,7 @@ public class Startscreen implements ActionListener {
 	public String totown,fromtown;
 	public JFrame frame,offlineframe;
 	public DefaultComboBoxModel model;
+	public JMenuBar menu;
 	public JPanel combopanel,roadpanel;
 	public JScrollPane Scrollpane;
 	public JComboBox trafficlist;
@@ -99,6 +100,8 @@ public class Startscreen implements ActionListener {
 		JFrame frame = new JFrame("Online Mode");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel mainpanel = new JPanel();
+
+		
 		// Setting up the postcode panel
 		postcodepanel = new JPanel();
 		BoxLayout layout = new BoxLayout(postcodepanel, BoxLayout.X_AXIS);
@@ -226,7 +229,33 @@ public class Startscreen implements ActionListener {
 		offlineframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// Setting up the panel of set cords for offline testing
 		setcordpanel = new JPanel();
+		// Setting up a menu bar
+		menu = new JMenuBar();
+		offlineframe.setJMenuBar(menu);
+		JMenu add = new JMenu("Add");
+		menu.add(add);
+		add.add(new JMenuItem("New Town with Lat and Long"));
+		add.add(new JMenuItem("New Town with Postcode"));
+		JMenu Route = new JMenu("Route");
+		menu.add(Route);
+		JMenuItem newroute = new JMenuItem("Start new route");
+		newroute.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				newroute();
+			}
 
+			
+		});
+		Route.add(newroute);
+		Route.add(new JMenuItem("Save route"));
+		Route.add(new JMenuItem("Load route"));
+		JMenu View = new JMenu("View");
+		menu.add(View);
+		View.add(new JMenuItem("Show Map"));
+		View.add(new JMenuItem("Clear Screen"));
+		
+		
 		// This is a Scrollpane for the output of the data
 		String[] liststartdata = { "Please pick a town" };
 		trafficlist = new JComboBox(liststartdata);
@@ -287,7 +316,6 @@ public class Startscreen implements ActionListener {
 	public void addtown() {
 		// Custom view allowing to enter Town Name and lat and long;
 		frame = new JFrame("Add New Town");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		main = new JPanel();
 		main.add(new JLabel("Enter Town Name: "));
 		townname = new JTextField(15);
@@ -483,6 +511,31 @@ public class Startscreen implements ActionListener {
 
 	}
 
+	public void newroute() {
+		//This will display the route finding items 
+		JFrame newrouteframe = new JFrame("Starting new route");
+		JPanel mainpanel = new JPanel();
+		String[] alltowns = {"Coming SOOON"};
+		JLabel tocombolabel = new JLabel("Traveling to: ");
+		JComboBox Tocombo = new JComboBox(alltowns);
+		JLabel fromcombolabel = new JLabel("Traveling from: ");
+		JComboBox Fromcombo = new JComboBox(alltowns);
+		JButton Findroutes = new JButton("Find Traffic");
+		tocombolabel.setLabelFor(Tocombo);
+		fromcombolabel.setLabelFor(Fromcombo);
+		mainpanel.add(tocombolabel);
+		mainpanel.add(Tocombo);
+		mainpanel.add(fromcombolabel);
+		mainpanel.add(Fromcombo);
+		mainpanel.add(Findroutes);
+		newrouteframe.add(mainpanel);
+		newrouteframe.setSize(240, 200);
+		newrouteframe.setLocationRelativeTo(null);
+		newrouteframe.setVisible(true);
+		
+		
+	}
+	
 	public void test(ArrayList<Incident> incidents) {
 		// TODO Auto-generated method stub
 		for(Road item: getroadsasclass(incidents))
