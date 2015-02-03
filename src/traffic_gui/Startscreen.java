@@ -15,6 +15,8 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.*;
 
+import org.openstreetmap.gui.jmapviewer.JMapViewer;
+
 import traffic_analyze.Directions;
 import traffic_analyze.Incident;
 import traffic_analyze.Journeytime;
@@ -80,7 +82,12 @@ public class Startscreen implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				// Input test function and call methords
-				JourneyTime_input.getJourneys(false);
+				JFrame temp = new JFrame();
+				JMapViewer map = new JMapViewer();
+				map.setVisible(true);
+				temp.add(map);
+				temp.setSize(600,600);
+				temp.setVisible(true);
 			}
 		});
 		// Adding Buttons to panel then adding panel to frame

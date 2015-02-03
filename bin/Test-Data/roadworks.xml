@@ -1,0 +1,1080 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<channel>
+    <title>Traffic Scotland - Roadworks</title>
+    <description>Roadworks currently being undertaken on the road network.</description>
+    <link>http://trafficscotland.org/roadworks/</link>
+    <language />
+    <copyright />
+    <managingEditor />
+    <webMaster />
+    <lastBuildDate>Wed, 22 Oct 2014 00:00:00 GMT</lastBuildDate>
+    <docs>http://trafficscotland.org/rss/</docs>
+    <rating />
+    <generator>Traffic Scotland | www.trafficscotland.org</generator>
+    <ttl>5</ttl>
+    <item>
+      <title>A830 Glenfinnan - Lochailort</title>
+      <description>Start Date: Monday, 07 July 2014 - 00:00  End Date: Wednesday, 07 January 2015 - 00:00</description>
+      <link>http://tscot.org/03c532417</link>
+      <georss:point>56.8787388711227 -5.55975874086366</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 07 Jul 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A82 Ardlui - Tarbet</title>
+      <description>Start Date: Tuesday, 28 May 2013 - 00:00  End Date: Sunday, 30 November 2014 - 00:00  Delay Information: Northbound - No reported delay.
+Southbound - No reported delay.</description>
+      <link>http://tscot.org/03c532469</link>
+      <georss:point>56.29333814537 -4.71383499007891</georss:point>
+      <author />
+      <comments />
+      <pubDate>Tue, 28 May 2013 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A75 Newton Stewart - Glenluce (A747)</title>
+      <description>Start Date: Monday, 18 August 2014 - 00:00  End Date: Friday, 28 November 2014 - 00:00</description>
+      <link>http://tscot.org/03c538244</link>
+      <georss:point>54.9244621832336 -4.63795951925194</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 18 Aug 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A75 Dumfries A76 - A780</title>
+      <description>Start Date: Monday, 18 August 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c539529</link>
+      <georss:point>55.0723528533468 -3.63969255909476</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 18 Aug 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A68 B6358 Jedburgh - B6357 Hundalee</title>
+      <description>Start Date: Thursday, 21 August 2014 - 00:00  End Date: Tuesday, 30 June 2015 - 00:00</description>
+      <link>http://tscot.org/03c545771</link>
+      <georss:point>55.4663068256278 -2.55227634698126</georss:point>
+      <author />
+      <comments />
+      <pubDate>Thu, 21 Aug 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A96 Kintore - Aberdeen (A90)</title>
+      <description>Start Date: Monday, 13 January 2014 - 00:00  End Date: Friday, 31 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c547676</link>
+      <georss:point>57.1965432792492 -2.26477337806524</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 13 Jan 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A95 Craigellachie - Keith</title>
+      <description>Start Date: Monday, 13 January 2014 - 00:00  End Date: Friday, 31 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c547683</link>
+      <georss:point>57.5359322246428 -3.0947507195114</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 13 Jan 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A90 A981 F'burgh(S) -A98 Fraserburgh</title>
+      <description>Start Date: Monday, 13 January 2014 - 00:00  End Date: Saturday, 01 November 2014 - 00:00</description>
+      <link>http://tscot.org/03c547999</link>
+      <georss:point>57.6887720419549 -2.00654434784961</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 13 Jan 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A96 Kintore - Aberdeen (A90)</title>
+      <description>Start Date: Monday, 13 January 2014 - 00:00  End Date: Saturday, 01 November 2014 - 00:00</description>
+      <link>http://tscot.org/03c548006</link>
+      <georss:point>57.1965432792492 -2.26477337806524</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 13 Jan 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A96 Huntly - Inverurie</title>
+      <description>Start Date: Tuesday, 14 October 2014 - 00:00  End Date: Monday, 03 November 2014 - 00:00</description>
+      <link>http://tscot.org/03c548068</link>
+      <georss:point>57.3519465452098 -2.56061896815431</georss:point>
+      <author />
+      <comments />
+      <pubDate>Tue, 14 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A701 Parkgate - St Ann's</title>
+      <description>Start Date: Thursday, 09 October 2014 - 00:00  End Date: Wednesday, 22 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c548485</link>
+      <georss:point>55.1946038603668 -3.50465444020926</georss:point>
+      <author />
+      <comments />
+      <pubDate>Thu, 09 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A9 Dunkeld - Inveralmond</title>
+      <description>Start Date: Wednesday, 01 October 2014 - 00:00  End Date: Saturday, 15 November 2014 - 00:00  Delay Information: Northbound: No reported delay
+Southbound: No reported delay</description>
+      <link>http://tscot.org/03c548666</link>
+      <georss:point>56.508634461565 -3.51268651361573</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 01 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A83 A82 Tarbet - A814 Arrochar</title>
+      <description>Start Date: Monday, 23 June 2014 - 00:00  End Date: Friday, 28 November 2014 - 00:00</description>
+      <link>http://tscot.org/03c548683</link>
+      <georss:point>56.2014541705064 -4.72639694647529</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 23 Jun 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A82 Fort William - Corran Ferry</title>
+      <description>Start Date: Monday, 01 September 2014 - 00:00  End Date: Friday, 19 December 2014 - 00:00</description>
+      <link>http://tscot.org/03c549013</link>
+      <georss:point>56.772944442105 -5.16835487197436</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 01 Sep 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A82 Renton - Milton</title>
+      <description>Start Date: Sunday, 12 October 2014 - 00:00  End Date: Sunday, 02 November 2014 - 00:00  Delay Information: A82 Southbound - 20 Minute delay
+A82 Northbound - Currently no delay</description>
+      <link>http://tscot.org/03c549485</link>
+      <georss:point>55.9442128044287 -4.54422397110601</georss:point>
+      <author />
+      <comments />
+      <pubDate>Sun, 12 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A9 Loch Faskally - River Tummel Br</title>
+      <description>Start Date: Monday, 29 September 2014 - 00:00  End Date: Sunday, 26 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c549555</link>
+      <georss:point>56.6952758314868 -3.73817718372243</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 29 Sep 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A8 Langbank Rbt - Woodhall Rbt</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Sunday, 02 November 2014 - 00:00</description>
+      <link>http://tscot.org/03c549886</link>
+      <georss:point>55.9295110857233 -4.61402565195436</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A90 Stonehaven - B979 Garron Point</title>
+      <description>Start Date: Monday, 06 October 2014 - 00:00  End Date: Saturday, 25 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c549922</link>
+      <georss:point>56.9752642066453 -2.23181297489492</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 06 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A96 Nairn - Forres</title>
+      <description>Start Date: Monday, 13 January 2014 - 00:00  End Date: Friday, 31 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c549961</link>
+      <georss:point>57.5868446041405 -3.732504282687</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 13 Jan 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A76 B741 New Cumnock - A70 Cumnock</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c550006</link>
+      <georss:point>55.4224009659597 -4.22586578767296</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A87 A851 - A863 Sligachan</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Friday, 31 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c550013</link>
+      <georss:point>57.2856467355479 -6.02385506836409</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A75 A762 West - A755</title>
+      <description>Start Date: Wednesday, 22 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c550035</link>
+      <georss:point>54.8638864203816 -4.10336422366888</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A75 Annan (B722) - Dumfries East</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Wednesday, 22 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c550036</link>
+      <georss:point>55.0327840324869 -3.40845791058505</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A830 Lochailort - Arisaig</title>
+      <description>Start Date: Monday, 06 October 2014 - 00:00  End Date: Friday, 31 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c550392</link>
+      <georss:point>56.8972636631099 -5.75413996575346</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 06 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A9 Greenloaning - QV School</title>
+      <description>Start Date: Tuesday, 30 September 2014 - 00:00  End Date: Friday, 07 November 2014 - 00:00</description>
+      <link>http://tscot.org/03c550517</link>
+      <georss:point>56.2222997305031 -3.92042883395211</georss:point>
+      <author />
+      <comments />
+      <pubDate>Tue, 30 Sep 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A985 B9037 - Cairneyhill</title>
+      <description>Start Date: Sunday, 12 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c550520</link>
+      <georss:point>56.0641068430263 -3.58069559030628</georss:point>
+      <author />
+      <comments />
+      <pubDate>Sun, 12 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A77 B730 Symington - A78 Monkton</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c550550</link>
+      <georss:point>55.5410960275648 -4.56492203023567</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A830 Fort William - Corpach</title>
+      <description>Start Date: Friday, 10 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c550611</link>
+      <georss:point>56.8432577064098 -5.13772188482036</georss:point>
+      <author />
+      <comments />
+      <pubDate>Fri, 10 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A9 Gleneagles - Blackford</title>
+      <description>Start Date: Monday, 13 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c550642</link>
+      <georss:point>56.2642808059458 -3.76366197215504</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 13 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A835 A832 - Ullapool</title>
+      <description>Start Date: Monday, 06 October 2014 - 00:00  End Date: Friday, 31 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c550775</link>
+      <georss:point>57.8307541866839 -5.06319226680279</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 06 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A1 A1107 C'spath - A6112 G'stown</title>
+      <description>Start Date: Thursday, 16 October 2014 - 00:00  End Date: Saturday, 25 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c550940</link>
+      <georss:point>55.9018839551604 -2.32667948453583</georss:point>
+      <author />
+      <comments />
+      <pubDate>Thu, 16 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A9 Broxden - Cairnie Brae</title>
+      <description>Start Date: Wednesday, 08 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551097</link>
+      <georss:point>56.3723655909641 -3.53956802809219</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 08 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A9 Cairnie Brae - River Earn</title>
+      <description>Start Date: Monday, 06 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551103</link>
+      <georss:point>56.3424418828953 -3.59165615765403</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 06 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A82 Tyndrum - Crianlarich</title>
+      <description>Start Date: Monday, 23 September 2013 - 00:00  End Date: Friday, 31 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551130</link>
+      <georss:point>56.413547598855 -4.66437952683057</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 23 Sep 2013 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A835 A834 - Gorstan</title>
+      <description>Start Date: Monday, 13 October 2014 - 00:00  End Date: Friday, 19 December 2014 - 00:00</description>
+      <link>http://tscot.org/03c551208</link>
+      <georss:point>57.5891116868926 -4.62247090109395</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 13 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A725 M74 J5 (Raith) - A724 Blantyre</title>
+      <description>Start Date: Wednesday, 15 October 2014 - 00:00  End Date: Tuesday, 28 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551419</link>
+      <georss:point>55.7940958634536 -4.06422503137844</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 15 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A87 A851 - A863 Sligachan</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551524</link>
+      <georss:point>57.2856467355479 -6.02385506836409</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A82 Invermoriston - Invergarry</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551526</link>
+      <georss:point>57.1350689205532 -4.69250208440978</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A87 A851 - A863 Sligachan</title>
+      <description>Start Date: Wednesday, 22 October 2014 - 00:00  End Date: Wednesday, 22 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551529</link>
+      <georss:point>57.2856467355479 -6.02385506836409</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A82 Ardlui - Tarbet</title>
+      <description>Start Date: Wednesday, 15 October 2014 - 00:00  End Date: Friday, 19 December 2014 - 00:00</description>
+      <link>http://tscot.org/03c551560</link>
+      <georss:point>56.2455060348792 -4.71616265224896</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 15 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A726 The Murray - Righead</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Wednesday, 22 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551600</link>
+      <georss:point>55.7590575110442 -4.17958425654223</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A83 Lochgilphead - B8024</title>
+      <description>Start Date: Thursday, 16 October 2014 - 00:00  End Date: Wednesday, 22 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551628</link>
+      <georss:point>56.0064353099989 -5.45233645652982</georss:point>
+      <author />
+      <comments />
+      <pubDate>Thu, 16 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A95 Cromdale - Mains of Dalvey</title>
+      <description>Start Date: Wednesday, 22 October 2014 - 00:00  End Date: Thursday, 23 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551653</link>
+      <georss:point>57.3640504887438 -3.51319264615765</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A95 Speybridge - Cromdale</title>
+      <description>Start Date: Wednesday, 22 October 2014 - 00:00  End Date: Thursday, 23 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551654</link>
+      <georss:point>57.3254885589871 -3.55319507481551</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A87 A887 - Shiel Bridge</title>
+      <description>Start Date: Monday, 13 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551659</link>
+      <georss:point>57.1534294889005 -5.19824880749551</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 13 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A85 B845 Taynuilt - A828 Connel</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551664</link>
+      <georss:point>56.4434670294215 -5.31534596845499</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A82 Spean Bridge - A830</title>
+      <description>Start Date: Tuesday, 21 October 2014 - 00:00  End Date: Wednesday, 22 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551668</link>
+      <georss:point>56.8665339808704 -5.00460342987066</georss:point>
+      <author />
+      <comments />
+      <pubDate>Tue, 21 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A83 A815 - Inveraray</title>
+      <description>Start Date: Monday, 15 September 2014 - 00:00  End Date: Friday, 28 November 2014 - 00:00</description>
+      <link>http://tscot.org/03c551694</link>
+      <georss:point>56.2482887482932 -4.98348988247295</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 15 Sep 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>M8 Harthill Services - J4a Heartlands</title>
+      <description>Start Date: Wednesday, 15 October 2014 - 00:00  End Date: Wednesday, 22 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551708</link>
+      <georss:point>55.8682918299712 -3.73356908922902</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 15 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A99 Mid Clyth - Thrumster</title>
+      <description>Start Date: Tuesday, 21 October 2014 - 00:00  End Date: Wednesday, 22 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551709</link>
+      <georss:point>58.3538124060111 -3.15725751349942</georss:point>
+      <author />
+      <comments />
+      <pubDate>Tue, 21 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A99 Mid Clyth - Thrumster</title>
+      <description>Start Date: Wednesday, 22 October 2014 - 00:00  End Date: Thursday, 23 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551715</link>
+      <georss:point>58.3538124060111 -3.15725751349942</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A83 Inveraray - Furnace</title>
+      <description>Start Date: Monday, 29 September 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551721</link>
+      <georss:point>56.1997360387863 -5.12329665349408</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 29 Sep 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A83 Kennacraig - B8001</title>
+      <description>Start Date: Monday, 13 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551723</link>
+      <georss:point>55.8033190558323 -5.47730776807425</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 13 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A83 A815 - Inveraray</title>
+      <description>Start Date: Monday, 13 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551725</link>
+      <georss:point>56.2482887482932 -4.98348988247295</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 13 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A92 A914 - B946 Newport-On-Tay</title>
+      <description>Start Date: Friday, 10 October 2014 - 00:00  End Date: Monday, 27 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551731</link>
+      <georss:point>56.4382573600374 -2.93351854709999</georss:point>
+      <author />
+      <comments />
+      <pubDate>Fri, 10 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A9 A86 Overpass - Raliabeag</title>
+      <description>Start Date: Wednesday, 22 October 2014 - 00:00  End Date: Wednesday, 22 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551738</link>
+      <georss:point>57.0557463308944 -4.08065790808389</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A85 Crieff - B827 Comrie</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Thursday, 23 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551741</link>
+      <georss:point>56.3801626041485 -3.92083578797372</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A82 A830 - Fort William</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551755</link>
+      <georss:point>56.828102726287 -5.08474279854251</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A9 Inveralmond - A85</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551780</link>
+      <georss:point>56.4147478212162 -3.4761495970518</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A9 Kessock Br South - A96 Raigmore</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551790</link>
+      <georss:point>57.4895004608594 -4.20038615979068</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A9 A862 - Dalmore</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551792</link>
+      <georss:point>57.6661730352365 -4.32120744186497</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A9 A95 North Aviemore - Lynwilg</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551794</link>
+      <georss:point>57.2034084634511 -3.83069656936047</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>M80 J3 (Hornshill) - between slips</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551801</link>
+      <georss:point>55.9017565813778 -4.13869635248063</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A830 A861 Kinlocheil - Glenfinnan</title>
+      <description>Start Date: Wednesday, 22 October 2014 - 00:00  End Date: Friday, 31 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551871</link>
+      <georss:point>56.857744666111 -5.41215005174251</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A96 Fochabers - Keith</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Saturday, 14 March 2015 - 00:00</description>
+      <link>http://tscot.org/03c551875</link>
+      <georss:point>57.5751915327742 -3.02590189885381</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A9 Aberuthven - Gleneagles</title>
+      <description>Start Date: Tuesday, 14 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551901</link>
+      <georss:point>56.2958111172783 -3.69097287387456</georss:point>
+      <author />
+      <comments />
+      <pubDate>Tue, 14 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A82 Ardlui - Tarbet</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Friday, 31 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551918</link>
+      <georss:point>56.2455060348792 -4.71616265224896</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A82 Crianlarich - Ardlui</title>
+      <description>Start Date: Monday, 13 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551920</link>
+      <georss:point>56.3557596401655 -4.68707367689853</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 13 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A82 Invergarry - Spean Bridge</title>
+      <description>Start Date: Tuesday, 21 October 2014 - 00:00  End Date: Thursday, 30 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551921</link>
+      <georss:point>56.9863075191674 -4.87092036891591</georss:point>
+      <author />
+      <comments />
+      <pubDate>Tue, 21 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A86 Drumgask - Spean Bridge</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551924</link>
+      <georss:point>56.9186598170511 -4.56243991915765</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A87 B883 - A855 Portree</title>
+      <description>Start Date: Monday, 13 October 2014 - 00:00  End Date: Sunday, 02 November 2014 - 00:00</description>
+      <link>http://tscot.org/03c551926</link>
+      <georss:point>57.3513029717129 -6.19446099987161</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 13 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A85 A9 Perth - Methven</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Saturday, 25 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551936</link>
+      <georss:point>56.4084305415656 -3.53249948351314</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A985 B9037 - Cairneyhill</title>
+      <description>Start Date: Tuesday, 14 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551938</link>
+      <georss:point>56.0641068430263 -3.58069559030628</georss:point>
+      <author />
+      <comments />
+      <pubDate>Tue, 14 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A83 A82 Tarbet - A814 Arrochar</title>
+      <description>Start Date: Sunday, 12 October 2014 - 00:00  End Date: Friday, 31 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551948</link>
+      <georss:point>56.2014541705064 -4.72639694647529</georss:point>
+      <author />
+      <comments />
+      <pubDate>Sun, 12 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A75 A762 West - A755</title>
+      <description>Start Date: Wednesday, 22 October 2014 - 00:00  End Date: Thursday, 23 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551952</link>
+      <georss:point>54.8638864203816 -4.10336422366888</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A86 Drumgask - Spean Bridge</title>
+      <description>Start Date: Tuesday, 07 October 2014 - 00:00  End Date: Saturday, 25 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551967</link>
+      <georss:point>56.9186598170511 -4.56243991915765</georss:point>
+      <author />
+      <comments />
+      <pubDate>Tue, 07 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A9 B870 Mybster - A882</title>
+      <description>Start Date: Tuesday, 21 October 2014 - 00:00  End Date: Friday, 31 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551992</link>
+      <georss:point>58.4788912378206 -3.44468447877757</georss:point>
+      <author />
+      <comments />
+      <pubDate>Tue, 21 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A8 EuroCentral - M8 J6</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c551994</link>
+      <georss:point>55.8346814564024 -3.94628889935843</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A75 Glenluce (A747) - Inchpark (A751)</title>
+      <description>Start Date: Tuesday, 21 October 2014 - 00:00  End Date: Saturday, 25 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c552009</link>
+      <georss:point>54.8795176294203 -4.89236164153319</georss:point>
+      <author />
+      <comments />
+      <pubDate>Tue, 21 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>M74 J3a (Daldowie) - J4 slip (Jct with M73)</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Saturday, 25 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c552010</link>
+      <georss:point>55.8351352603186 -4.10951709472231</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A9 Dunkeld - Inveralmond</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c552015</link>
+      <georss:point>56.508634461565 -3.51268651361573</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A9 Ballinluig - Dunkeld</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c552016</link>
+      <georss:point>56.6042694958958 -3.62402792267821</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A9 Loch Faskally - River Tummel Br</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c552017</link>
+      <georss:point>56.6952758314868 -3.73817718372243</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A9 Blair Atholl - K'crankie</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c552022</link>
+      <georss:point>56.7491572348599 -3.80106184397014</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A83 Lochgilphead - B8024</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Monday, 27 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c552033</link>
+      <georss:point>56.0064353099989 -5.45233645652982</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A83 Kennacraig - B8001</title>
+      <description>Start Date: Wednesday, 01 October 2014 - 00:00  End Date: Tuesday, 28 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c552041</link>
+      <georss:point>55.8033190558323 -5.47730776807425</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 01 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A77 B7044 Ballantrae - Cairnryan</title>
+      <description>Start Date: Friday, 17 October 2014 - 00:00  End Date: Friday, 21 November 2014 - 00:00</description>
+      <link>http://tscot.org/03c552066</link>
+      <georss:point>55.0341342276875 -5.00198443870768</georss:point>
+      <author />
+      <comments />
+      <pubDate>Fri, 17 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A76 Kirkconnel - B741 New Cumnock</title>
+      <description>Start Date: Wednesday, 22 October 2014 - 00:00  End Date: Thursday, 23 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c552073</link>
+      <georss:point>55.3927927130638 -4.09896428529415</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A92 A923 Hilltown - A930 Craigie</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c552077</link>
+      <georss:point>56.4658363476706 -2.94583223677408</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A95 Craigellachie - Keith</title>
+      <description>Start Date: Monday, 08 September 2014 - 00:00  End Date: Friday, 28 November 2014 - 00:00</description>
+      <link>http://tscot.org/03c552267</link>
+      <georss:point>57.5359322246428 -3.0947507195114</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 08 Sep 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A82 B863 - Ballachulish</title>
+      <description>Start Date: Monday, 29 September 2014 - 00:00  End Date: Sunday, 30 November 2014 - 00:00</description>
+      <link>http://tscot.org/03c552277</link>
+      <georss:point>56.6919536835034 -5.18206035564499</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 29 Sep 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A830 Morar - Mallaig</title>
+      <description>Start Date: Wednesday, 22 October 2014 - 00:00  End Date: Monday, 03 November 2014 - 00:00</description>
+      <link>http://tscot.org/03c552298</link>
+      <georss:point>56.982633450392 -5.82796905367468</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A702 A72 South of Biggar - Coulter</title>
+      <description>Start Date: Tuesday, 21 October 2014 - 00:00  End Date: Wednesday, 22 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c552350</link>
+      <georss:point>55.6025574416821 -3.54480781455374</georss:point>
+      <author />
+      <comments />
+      <pubDate>Tue, 21 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A90 A952 Bogbrae - A975 Longhaven</title>
+      <description>Start Date: Tuesday, 21 October 2014 - 00:00  End Date: Wednesday, 22 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c552352</link>
+      <georss:point>57.4254332135436 -1.89173350911349</georss:point>
+      <author />
+      <comments />
+      <pubDate>Tue, 21 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A84 Callander - A821</title>
+      <description>Start Date: Tuesday, 21 October 2014 - 00:00  End Date: Wednesday, 22 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c552373</link>
+      <georss:point>56.2455215448258 -4.23146222893313</georss:point>
+      <author />
+      <comments />
+      <pubDate>Tue, 21 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>M74 J6 (Hamilton) - J7 (Larkhall)</title>
+      <description>Start Date: Sunday, 19 October 2014 - 00:00  End Date: Saturday, 25 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c552392</link>
+      <georss:point>55.7673652020221 -3.99697329476704</georss:point>
+      <author />
+      <comments />
+      <pubDate>Sun, 19 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A84 Callander - A821</title>
+      <description>Start Date: Wednesday, 22 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c552406</link>
+      <georss:point>56.2455215448258 -4.23146222893313</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A90 B977 Balmedie - A975 Foveran</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Wednesday, 22 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c552423</link>
+      <georss:point>57.2746031400802 -2.05373027580506</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A96 Huntly - Inverurie</title>
+      <description>Start Date: Tuesday, 21 October 2014 - 00:00  End Date: Sunday, 30 November 2014 - 00:00</description>
+      <link>http://tscot.org/03c552424</link>
+      <georss:point>57.3519465452098 -2.56061896815431</georss:point>
+      <author />
+      <comments />
+      <pubDate>Tue, 21 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A82 Tyndrum - Crianlarich</title>
+      <description>Start Date: Wednesday, 22 October 2014 - 00:00  End Date: Wednesday, 22 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c552446</link>
+      <georss:point>56.413547598855 -4.66437952683057</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A85 St Fillans - Lochearnhead</title>
+      <description>Start Date: Wednesday, 22 October 2014 - 00:00  End Date: Wednesday, 22 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c552447</link>
+      <georss:point>56.3931542447105 -4.19336482393411</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A85 St Fillans - Lochearnhead</title>
+      <description>Start Date: Wednesday, 22 October 2014 - 00:00  End Date: Wednesday, 22 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c552448</link>
+      <georss:point>56.3931542447105 -4.19336482393411</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A9 Aberuthven - Gleneagles</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c552479</link>
+      <georss:point>56.2958111172783 -3.69097287387456</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A9 Greenloaning - QV School</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c552480</link>
+      <georss:point>56.2222997305031 -3.92042883395211</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A9 Greenloaning - QV School</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c552484</link>
+      <georss:point>56.2222997305031 -3.92042883395211</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A82 Tarbet - Inverbeg</title>
+      <description>Start Date: Wednesday, 22 October 2014 - 00:00  End Date: Thursday, 23 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c552485</link>
+      <georss:point>56.1819606239584 -4.69146019191555</georss:point>
+      <author />
+      <comments />
+      <pubDate>Wed, 22 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A77 A79 - B7034 Dalrymple</title>
+      <description>Start Date: Tuesday, 21 October 2014 - 00:00  End Date: Wednesday, 22 October 2014 - 00:00</description>
+      <link>http://tscot.org/03c552508</link>
+      <georss:point>55.4416939259582 -4.60051086713174</georss:point>
+      <author />
+      <comments />
+      <pubDate>Tue, 21 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A19(A1) -A19(A189)</title>
+      <description>Start Date: Monday, 02 June 2014 - 00:00  End Date: Friday, 30 January 2015 - 00:00</description>
+      <link>http://tscot.org/03h1405290191</link>
+      <georss:point>55.0649817288875 -1.6340839152746</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 02 Jun 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A19(A1171) -A19(A1)</title>
+      <description>Start Date: Monday, 02 June 2014 - 00:00  End Date: Friday, 30 January 2015 - 00:00</description>
+      <link>http://tscot.org/03h1405290192</link>
+      <georss:point>55.0668999442271 -1.6178756415463</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 02 Jun 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A1(A1056) -A1(A19)</title>
+      <description>Start Date: Monday, 02 June 2014 - 00:00  End Date: Friday, 30 January 2015 - 00:00</description>
+      <link>http://tscot.org/03h1405290193</link>
+      <georss:point>55.0509508960875 -1.63292829017293</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 02 Jun 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A1(A19) -A1(A1056)</title>
+      <description>Start Date: Monday, 02 June 2014 - 00:00  End Date: Friday, 30 January 2015 - 00:00</description>
+      <link>http://tscot.org/03h1405290194</link>
+      <georss:point>55.0509503300926 -1.63274046928219</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 02 Jun 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>M6 J41(B5305) -M6 J42(A6)</title>
+      <description>Start Date: Saturday, 30 August 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03h1408310013</link>
+      <georss:point>54.7491675301055 -2.81523161846169</georss:point>
+      <author />
+      <comments />
+      <pubDate>Sat, 30 Aug 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A1(A697) -A1(A1068)</title>
+      <description>Start Date: Monday, 15 September 2014 - 00:00  End Date: Wednesday, 19 November 2014 - 00:00</description>
+      <link>http://tscot.org/03h1409120264</link>
+      <georss:point>55.3527924527473 -1.72741870201257</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 15 Sep 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A1(A167) -A1(A694)</title>
+      <description>Start Date: Sunday, 21 September 2014 - 00:00  End Date: Sunday, 14 February 2016 - 00:00</description>
+      <link>http://tscot.org/03h1410010248</link>
+      <georss:point>54.9254018042987 -1.62625407906842</georss:point>
+      <author />
+      <comments />
+      <pubDate>Sun, 21 Sep 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A1(A694) -A1(A167)</title>
+      <description>Start Date: Sunday, 21 September 2014 - 00:00  End Date: Sunday, 14 February 2016 - 00:00</description>
+      <link>http://tscot.org/03h1410010249</link>
+      <georss:point>54.9532666272326 -1.6625641512947</georss:point>
+      <author />
+      <comments />
+      <pubDate>Sun, 21 Sep 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A19(A1290) -A19(A19)</title>
+      <description>Start Date: Monday, 20 October 2014 - 00:00  End Date: Friday, 19 December 2014 - 00:00</description>
+      <link>http://tscot.org/03h1410140316</link>
+      <georss:point>54.931873114971 -1.46737228584453</georss:point>
+      <author />
+      <comments />
+      <pubDate>Mon, 20 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A1(A1167) -A1(A1068)</title>
+      <description>Start Date: Tuesday, 21 October 2014 - 00:00  End Date: Friday, 24 October 2014 - 00:00</description>
+      <link>http://tscot.org/03h1410210158</link>
+      <georss:point>55.6240766029251 -1.84968838184504</georss:point>
+      <author />
+      <comments />
+      <pubDate>Tue, 21 Oct 2014 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A74(M)/M74 between Junction 22 (Gretna) and Junction 12 (Millbank)</title>
+      <description>Start Date: Saturday, 30 June 2012 - 00:00  End Date: Friday, 30 June 2017 - 00:00</description>
+      <link>http://tscot.org/03s2144</link>
+      <georss:point>55.5255925311655 -3.76400967836141</georss:point>
+      <author />
+      <comments />
+      <pubDate>Sat, 30 Jun 2012 00:00:00 GMT</pubDate>
+    </item>
+</channel>
