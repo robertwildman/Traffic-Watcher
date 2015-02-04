@@ -294,7 +294,6 @@ traffic_input.java
 		Starts a DocumentBuilderFactory and the builder
 		return the file that has been parse by the Document factory and builder
 	End Method
-	b
 Journey_input.java
 	Setup the variables
 	Creates an array of Journeytime called allJourneytime
