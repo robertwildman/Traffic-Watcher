@@ -20,6 +20,7 @@ import traffic_analyze.Incident;
 import traffic_analyze.Journeytime;
 import traffic_analyze.Postcode_Processing;
 import traffic_analyze.Road;
+import traffic_input.JourneyTime_input;
 import traffic_input.Postcodeinput;
 import traffic_input.traffic_input;
 
@@ -497,18 +498,15 @@ public class Startscreen implements ActionListener {
 				public void actionPerformed(ActionEvent actionEvent) {
 					//Happens when the user clicks on the combo box
 					JComboBox traffic = (JComboBox) actionEvent.getSource();
-<<<<<<< Updated upstream
 					if(model.getElementAt(traffic.getSelectedIndex())
 									.toString().equalsIgnoreCase("test"))
 					{
 						test(affectedIncidents);
 					}
-=======
 					//Gets any issues on the road that the user has picked
 					ArrayList<String> allroadincidents = roadbyname(
 							affectedIncidents,
-							model.getElementAt(traffic.getSelectedIndex())
-							6		.toString());
+							model.getElementAt(traffic.getSelectedIndex()).toString());
 					output.setVisible(true);
 					output.setText(" ");
 					for (String item : allroadincidents) {
@@ -526,11 +524,6 @@ public class Startscreen implements ActionListener {
 					output.append(getjourneytimedata(alljourneytime, model
 							.getElementAt(traffic.getSelectedIndex())
 							.toString()));
->>>>>>> Stashed changes
-					
-					
-					
-					
 					
 				}
 
@@ -545,13 +538,9 @@ public class Startscreen implements ActionListener {
 		//This will display the route finding items 
 		JFrame newrouteframe = new JFrame("Starting new route");
 		JPanel mainpanel = new JPanel();
-<<<<<<< Updated upstream
 		final ArrayList<String> temptownarray = readtowns();
 		String[] alltowns = new String[temptownarray.size()];
 		alltowns = temptownarray.toArray(alltowns);
-=======
-		String[] alltowns = {"Coming SOON"};
->>>>>>> Stashed changes
 		JLabel tocombolabel = new JLabel("Traveling to: ");
 		final JComboBox Tocombo = new JComboBox(alltowns);
 		JLabel fromcombolabel = new JLabel("Traveling from: ");
