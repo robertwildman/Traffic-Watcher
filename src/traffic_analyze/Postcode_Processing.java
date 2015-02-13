@@ -16,4 +16,9 @@ public class Postcode_Processing {
 		return Areacords;
 		
 	}
+	public static Boolean checkifonline()
+	{
+		
+		return false;
+	}
 }
