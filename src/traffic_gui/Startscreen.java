@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 
 import traffic_analyze.Directions;
 import traffic_analyze.Incident;
@@ -26,15 +27,15 @@ import traffic_input.traffic_input;
 
 public class Startscreen implements ActionListener {
 
-	public JPanel postcodepanel, setcordpanel, main, sp;
+	public JPanel postcodepanel, setcordpanel, main, sp,mainRoadpanel;
 	public JTextField tfpostcode1, tfpostcode2, townname, townlat, townlong,townpostcode;
 	public JTextArea output;
 	public JTabbedPane tabs;
 	public String totown,fromtown;
-	public JFrame frame,offlineframe,postcodeframe;
+	public JFrame frame,offlineframe,postcodeframe,newrouteframe;
 	public DefaultComboBoxModel model;
 	public JMenuBar menu;
-	public JPanel combopanel,roadpanel;
+	public JPanel combopanel,roadpanel,Overviewpanel,Overviewinnerpanel1,Overviewinnerpanel2;
 	public JScrollPane Scrollpane;
 	public JComboBox trafficlist;
 	public ArrayList<String> Towninfo, smalltitle, fulltitle, fulldesc;
@@ -186,7 +187,7 @@ public class Startscreen implements ActionListener {
 	public void offlinelayout() {
 		// This will display the starting screen for the program with input of
 		// postcodes.
-		offlineframe = new JFrame("Offline Mode");
+		offlineframe = new JFrame("Traffic Watcher");
 		offlineframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// Setting up the panel of set cords for offline testing
 		setcordpanel = new JPanel();
@@ -248,6 +249,7 @@ public class Startscreen implements ActionListener {
 
 			
 		});
+		
 		JMenu View = new JMenu("View");
 		menu.add(View);
 		JMenuItem showmap = new JMenuItem("Show Map");
@@ -278,9 +280,48 @@ public class Startscreen implements ActionListener {
 
 			
 		});
+
+		//Will setup the pnaels for the tabs 
+		Overviewpanel = new JPanel();
+		Overviewpanel.setLayout(new BorderLayout());
+		Box sidebox = Box.createVerticalBox();
+	
+		Overviewinnerpanel1 = new JPanel();
+		Overviewinnerpanel2 = new JPanel();
+		BoxLayout innerlayout1 = new BoxLayout(Overviewinnerpanel1, BoxLayout.Y_AXIS);
+		BoxLayout innerlayout2 = new BoxLayout(Overviewinnerpanel2, BoxLayout.Y_AXIS);
+		Overviewinnerpanel1.setLayout(innerlayout1);
+		Overviewinnerpanel2.setLayout(innerlayout2); 
+		Overviewinnerpanel1.setAlignmentX(Component.CENTER_ALIGNMENT);
+		Overviewinnerpanel1.setPreferredSize(new Dimension(300, 300));
+		Overviewinnerpanel1.setMaximumSize(new Dimension(300, 300)); 
+		Overviewinnerpanel2.setAlignmentX(Component.CENTER_ALIGNMENT);
+		Overviewinnerpanel2.setPreferredSize(new Dimension(300, 300));
+		Overviewinnerpanel2.setMaximumSize(new Dimension(300, 300)); 
+		Overviewinnerpanel1.add(new JLabel("                                                            "));
+		Overviewinnerpanel2.add(new JLabel("                                                            "));
+		Border innerborder1 = BorderFactory.createTitledBorder("Journey Info");
+		Border innerborder2 = BorderFactory.createTitledBorder("Worst Road");
+		Overviewinnerpanel1.setBorder(innerborder1);
+		Overviewinnerpanel2.setBorder(innerborder2);
+		sidebox.add(Box.createVerticalStrut(30));
+		sidebox.add(Overviewinnerpanel1);
+		sidebox.add(Box.createRigidArea(new Dimension(20,40)));
+		sidebox.add(Overviewinnerpanel2);
+		Overviewpanel.add(sidebox,BorderLayout.WEST);
+
+		
+		//Setting up road layout
+		mainRoadpanel = new JPanel();
+		GridLayout experimentLayout = new GridLayout(0,8,5,5);
+		mainRoadpanel.setLayout(experimentLayout);
+		mainRoadpanel.setPreferredSize(new Dimension(1000,1500));
+		mainRoadpanel.setMaximumSize(new Dimension(1000, 1500)); 
+		JScrollPane roadscroll = new JScrollPane(mainRoadpanel,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		roadscroll.getVerticalScrollBar().setUnitIncrement(16);
 		tabs = new JTabbedPane();
-		tabs.addTab("Overview", new JLabel("Overview"));
-		tabs.addTab("Roads", new JLabel("Roads"));
+		tabs.addTab("Overview", Overviewpanel);
+		tabs.addTab("Roads", roadscroll);
 		tabs.addTab("Map", new JLabel("Map"));
 		offlineframe.add(tabs);
 		tabs.setVisible(false);
@@ -288,21 +329,7 @@ public class Startscreen implements ActionListener {
 		output = new JTextArea();
 		output.setEditable(false);
 		output.setVisible(false);
-		Scrollpane = new JScrollPane(output);
 		info = new JLabel("     To:");
-		ArrayList<String> Towns = readtowns();
-		if (Towns == null) {
-			// Allows user to add towns due to no towns.
-		} else {
-			setcordpanel.add(info);
-			for (int i = 0; i < Towns.size(); i++) {
-				JButton temp = new JButton(Towns.get(i).toString());
-				temp.addActionListener(this);
-				setcordpanel.add(temp);
-			}
-
-
-		}
 		//offlineframe.add(Scrollpane, BorderLayout.CENTER);
 		// Sets the size of the Frame
 		// ONLINE AT
@@ -310,6 +337,11 @@ public class Startscreen implements ActionListener {
 		offlineframe.setExtendedState(Frame.MAXIMIZED_BOTH);
 		// Shows the frame
 		offlineframe.setVisible(true);
+	}
+
+	public String currentdistance(String totown2, String fromtown2) {
+		// TODO Auto-generated method stub
+		return "1000";
 	}
 
 	public void addtownwithpostcode() {
@@ -536,7 +568,7 @@ public class Startscreen implements ActionListener {
 
 	public void newroute() {
 		//This will display the route finding items 
-		JFrame newrouteframe = new JFrame("Starting new route");
+		newrouteframe = new JFrame("Starting new route");
 		JPanel mainpanel = new JPanel();
 		final ArrayList<String> temptownarray = readtowns();
 		String[] alltowns = new String[temptownarray.size()];
@@ -550,9 +582,10 @@ public class Startscreen implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				//This will input the 2 towns into the function 
-				String totown = temptownarray.get(Tocombo.getSelectedIndex()); 
-				String fromtown =  temptownarray.get(Fromcombo.getSelectedIndex()); 
+				totown = temptownarray.get(Tocombo.getSelectedIndex()); 
+				fromtown =  temptownarray.get(Fromcombo.getSelectedIndex()); 
 				displaytraffic(totown,fromtown);
+				newrouteframe.setVisible(false);
 			}
 
 			
@@ -566,7 +599,7 @@ public class Startscreen implements ActionListener {
 		mainpanel.add(Fromcombo);
 		mainpanel.add(Findroutes);
 		newrouteframe.add(mainpanel);
-		newrouteframe.setSize(230, 200);
+		newrouteframe.setSize(220, 200);
 		newrouteframe.setLocationRelativeTo(null);
 		newrouteframe.setVisible(true);
 		
@@ -575,13 +608,86 @@ public class Startscreen implements ActionListener {
 	
 	public void displaytraffic(String totown, String fromtown)
 	{
+		//Removes old infomation 
+		Overviewinnerpanel1.removeAll();
+		Overviewinnerpanel2.removeAll();
+		mainRoadpanel.removeAll();
+		//Gets the lat and long of the town 
 		String[] address = getcordsoftown(totown);
 		tolat = Double.valueOf(address[0]);
 		tolong = Double.valueOf(address[1]);
 		address = getcordsoftown(fromtown);
 		fromlat = Double.valueOf(address[0]);
 		fromlong = Double.valueOf(address[1]);
+		
+		//Getting data used to display 
+		ArrayList<Journeytime> inrangedjounreytime = getinrangejourneytime(JourneyTime_input.getJourneys(false),tolong,fromlong,tolat,fromlat);
+		ArrayList<Incident> inrangedincidents = getinranged(traffic_input.gettraffic(true),tolong,fromlong,tolat,fromlat);
+		ArrayList<String>inrangedroads = getroads(inrangedincidents);
+		ArrayList<Road> inrangedsortedroads = Directions.orderlist(getroadsasclass(inrangedincidents), tolat ,  tolong, fromlat ,  fromlong);
+		setroadswithdata(inrangedjounreytime,inrangedincidents,inrangedsortedroads);
+		//Shows the tabs
 		tabs.setVisible(true);
+		
+		//Deaing with first tab
+		//Setting up the overview class 
+		Overviewinnerpanel1.add(new JLabel("Traveling to: " + totown));
+		Overviewinnerpanel1.add(new JLabel("Traveling from: "+ fromtown));
+		Overviewinnerpanel1.add(new JLabel("Distance:  "+ currentdistance(totown,fromtown)));
+		Overviewinnerpanel1.add(new JLabel("Time on English main roads:  "+ currenttime(totown,fromtown)));
+		Overviewinnerpanel1.revalidate();
+		//Gets worst roads and all the infomation based on it 
+		ArrayList<String> worstroad = worstroad();
+		Overviewinnerpanel2.add(new JLabel("Road Name: " + worstroad.get(0)));
+		Overviewinnerpanel2.add(new JLabel("Current Time: "+ worstroad.get(1)));
+		Overviewinnerpanel2.add(new JLabel("Delayed by:  "+ worstroad.get(2)));
+		Overviewinnerpanel2.add(new JLabel("Incidents:  "+ worstroad.get(3)));
+		
+		if(inrangedroads.size() < 30)
+		{
+			mainRoadpanel.setPreferredSize(new Dimension(1000,800));
+			mainRoadpanel.setMaximumSize(new Dimension(1000, 800)); 
+		}else if(inrangedroads.size() < 50)
+		{
+			mainRoadpanel.setPreferredSize(new Dimension(1000,1200));
+			mainRoadpanel.setMaximumSize(new Dimension(1000, 1200)); 
+		}
+		//Setting up the roads infomation 
+		for(int i = 0; i < inrangedroads.size(); i++)
+		{
+			//This is where the grid layout will be made and enter in based on how many roads there is 
+			JPanel temproadpanel = new JPanel();
+			BoxLayout templayout = new BoxLayout(temproadpanel, BoxLayout.Y_AXIS);
+			temproadpanel.setLayout(templayout);
+			Border tempborder = BorderFactory.createTitledBorder(inrangedsortedroads.get(i).getRoadname());
+			temproadpanel.setBorder(tempborder);
+			temproadpanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+			temproadpanel.setPreferredSize(new Dimension(100, 100));
+			temproadpanel.setMaximumSize(new Dimension(100, 100)); 
+			temproadpanel.add(Box.createRigidArea(new Dimension(0, 5)));
+			if(inrangedsortedroads.get(i).getdelay() != null)
+			{
+				int delay =inrangedsortedroads.get(i).getintdelay();
+			if( delay > 0)
+			{
+			temproadpanel.add(new JLabel("Delay: " + inrangedsortedroads.get(i).getdelay()+" minutes"));
+			}
+			} 	
+			temproadpanel.add(Box.createRigidArea(new Dimension(0, 10)));
+			temproadpanel.add(new JLabel("Number of Incidents: " + inrangedsortedroads.get(i).incidentsize()));
+			temproadpanel.add(Box.createRigidArea(new Dimension(0, 10)));
+			JButton tempbutton = new JButton("View Incidents");
+			temproadpanel.add(tempbutton);
+			System.out.println(i);
+			mainRoadpanel.add(temproadpanel);
+			
+		}
+		mainRoadpanel.revalidate();
+		
+		
+		
+		//This will add a new panel to the grid for each road 
+		
 	/*	//Gets any issues on the road that the user has picked
 		
 		ArrayList<String> allroadincidents = roadbyname(
@@ -619,7 +725,60 @@ public class Startscreen implements ActionListener {
 			output.append(roadinfo);
 		}*/
 	}
-	
+	public void setroadswithdata(ArrayList<Journeytime> inrangedjounreytime,ArrayList<Incident> inrangedincidents ,ArrayList<Road> inrangedsortedroads) {
+		for(Road road : inrangedsortedroads){
+			for(Journeytime item : inrangedjounreytime)
+			{
+				if(item.gettoroad().equalsIgnoreCase(road.getRoadname()) || item.getfromroad().equalsIgnoreCase(road.getRoadname()))
+				{
+					road.setNormallyExpectedTravelTime(road.getNormallyExpectedTravelTime() + item.getnormaltime());
+					road.setTravelTime(road.getTravelTime() + item.getcurrenttime());
+				}
+			}
+			for(Incident currentincident : inrangedincidents)
+			{
+				if(currentincident.getroad().equalsIgnoreCase(road.getRoadname()))
+				{
+					ArrayList<Incident> temp = road.getRoadincidents();
+					temp.add(currentincident);
+					road.setRoadincidents(temp);
+				}
+			}
+		}		
+	}
+
+	public ArrayList<Incident> getinranged(ArrayList<Incident> allincidents, double tolong, double fromlong, double tolat, double fromlat)
+	{
+		ArrayList<Incident> inrangedincident = new ArrayList<Incident>();
+		for(int i = 0; i < allincidents.size(); i++)
+		{
+			if(allincidents.get(i).inrange(tolong, fromlong, tolat, fromlat))
+			{
+				inrangedincident.add(allincidents.get(i));
+			}
+		}
+			return inrangedincident;
+		
+	}
+	public ArrayList<String> worstroad() {
+		// TODO Auto-generated method stub
+		ArrayList<String> worstroad = new ArrayList<String>();
+		worstroad.add("f");
+		worstroad.add("f");
+		worstroad.add("f");
+		worstroad.add("f");
+		worstroad.add("f");
+		worstroad.add("f");
+		worstroad.add("f");
+		worstroad.add("f");
+		return worstroad;
+	}
+
+	public String currenttime(String totown2, String fromtown2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	public void test(ArrayList<Incident> incidents) {
 		// TODO Auto-generated method stub
 		for(Road item: getroadsasclass(incidents))
@@ -793,6 +952,7 @@ public class Startscreen implements ActionListener {
 		
 		return inrangejourneys;
 	}
+	
 	public static ArrayList<String> roadbyname(ArrayList<Incident> Journeys,
 			String name) {
 		ArrayList<String> roadinfo = new ArrayList<String>();
