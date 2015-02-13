@@ -472,7 +472,6 @@ public class Startscreen implements ActionListener {
 			model = (DefaultComboBoxModel) trafficlist
 					.getModel();
 			model.removeAllElements();
-			model.addElement("Test");
 			roadpanel.removeAll();
 			JLabel fromtownlabel = new JLabel(fromtown);
 			JLabel totownlabel = new JLabel(totown);
@@ -498,11 +497,36 @@ public class Startscreen implements ActionListener {
 				public void actionPerformed(ActionEvent actionEvent) {
 					//Happens when the user clicks on the combo box
 					JComboBox traffic = (JComboBox) actionEvent.getSource();
+<<<<<<< Updated upstream
 					if(model.getElementAt(traffic.getSelectedIndex())
 									.toString().equalsIgnoreCase("test"))
 					{
 						test(affectedIncidents);
 					}
+=======
+					//Gets any issues on the road that the user has picked
+					ArrayList<String> allroadincidents = roadbyname(
+							affectedIncidents,
+							model.getElementAt(traffic.getSelectedIndex())
+							6		.toString());
+					output.setVisible(true);
+					output.setText(" ");
+					for (String item : allroadincidents) {
+						String[] items = new String[2];
+						items = item.split("#");
+						output.append(items[0] + "\n");
+						output.append("                 " + items[1] + "\n");
+						output.append("    \n");
+					}
+					//Will get a list of affected jounreytimes
+					ArrayList<Journeytime> alljourneytime = getinrangejourneytime(JourneyTime_input
+							.getJourneys(false),tolong, fromlong, tolat,
+							fromlat);
+					//This will work out if there is a delay and then display message to user. 
+					output.append(getjourneytimedata(alljourneytime, model
+							.getElementAt(traffic.getSelectedIndex())
+							.toString()));
+>>>>>>> Stashed changes
 					
 					
 					
@@ -521,9 +545,13 @@ public class Startscreen implements ActionListener {
 		//This will display the route finding items 
 		JFrame newrouteframe = new JFrame("Starting new route");
 		JPanel mainpanel = new JPanel();
+<<<<<<< Updated upstream
 		final ArrayList<String> temptownarray = readtowns();
 		String[] alltowns = new String[temptownarray.size()];
 		alltowns = temptownarray.toArray(alltowns);
+=======
+		String[] alltowns = {"Coming SOON"};
+>>>>>>> Stashed changes
 		JLabel tocombolabel = new JLabel("Traveling to: ");
 		final JComboBox Tocombo = new JComboBox(alltowns);
 		JLabel fromcombolabel = new JLabel("Traveling from: ");
