@@ -747,34 +747,6 @@ public class Startscreen implements ActionListener {
 			}
 
 		});
-
-		JMenu View = new JMenu("View");
-		menu.add(View);
-		JMenuItem showmap = new JMenuItem("Show Map");
-		JMenuItem clearscreen = new JMenuItem("Reset");
-		View.add(showmap);
-		View.add(clearscreen);
-		showmap.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent actionEvent) {
-				if (Postcode_Processing.checkifonline() == true) {
-
-				} else {
-					JOptionPane.showMessageDialog(frame,
-							"Not Conntected to the internet!", "Error",
-							JOptionPane.ERROR_MESSAGE);
-				}
-			}
-
-		});
-		clearscreen.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent actionEvent) {
-				// TODO
-			}
-
-		});
-
 		// Will setup the main panels
 		Overviewpanel = new JPanel();
 		Overviewpanel.setLayout(new BorderLayout());
