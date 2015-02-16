@@ -1,0 +1,313 @@
+Psudeocode:
+Incident.java:
+	Setup the variables in class
+	Creating class with the inputs of Title,desc,lat,long,type of Incident, direction code and road
+		Sets the inputs to the variables held in class
+	End Class
+	Method to get road return string
+		return the Road Variable
+	End Method
+	Method to check if in range returns boolean with inputs of 2 different longs and lats
+		Setup internal variables
+		if inlat is greater then inlat2 then
+			Set highlat to inlat
+			Set lowlat to inlat2
+			Set tempdirectioncode to 0
+		else
+			Set highlat to inlat2
+			Set lowlat to inlat
+			Set tempdirectioncode to 1
+		end if
+
+		if inlong is greater then inlong2 then
+			Set highlat to inlong
+			Set lowlat to inlong2
+			if tempdirectioncode equals 0 then
+				Set rangedirectioncode to 1
+			else
+				Set rangedirectioncode to 2
+			end if
+		else
+			Set highlat to inlong2
+			Set lowlat to inlong
+			if tempdirectioncode equals 0 then
+				Set rangedirectioncode to 4
+			else
+				Set rangedirectioncode to 3
+			end if
+		end if
+
+		if rangedirectioncode equals 1 and directioncode equals 1 or 2 then
+			if internal lat is between the range of highlat and lowlat then
+				return true
+			else
+				return false
+			end if
+		else if  rangedirectioncode equals 2 and directioncode equals 3 or 2 then
+			if internal lat is between the range of highlat and lowlat then
+				return true
+			else
+				return false
+			end if
+		else if  rangedirectioncode equals 3 and directioncode equals 3 or 4 then
+			if internal lat is between the range of highlat and lowlat then
+				return true
+			else
+				return false
+			end if
+		else if  rangedirectioncode equals 4 and directioncode equals 1 or 4 then
+			if internal lat is between the range of highlat and lowlat then
+				return true
+			else
+				return false
+			end if
+		else
+			return false
+		end
+	end Method
+	Method to get direction return string
+		return the String of directioncode
+	End Method
+	Method to get title return string
+		return the title
+	End Method
+	Method to printdata return string
+		Sets the output string up
+		return the output string
+	End Method
+	Method to get lat returns double
+		returns lat
+	End Method
+	Method to set lat takes input of lat
+		set class lat to input lat
+	End Method
+	Method to get long returns double
+		returns the class long
+	End Method
+	Method to set long takes input of long
+		set class long to input long
+	End Method
+Directions.java:
+	Sets a method thats orders an array of the list of instances of the class road and takes the input of an unorder list and lats and longs for to and from and will return the sorted list
+		Will setup the disbetweenlat varible and then will set it to the postive number of the sum tolat - fromlat.
+		Will setup the disbetweenlong varible and then will set it to the postive number of the sum tolong - fromlong.
+		if the disatance between lat is greater then between long then
+			for int i equals 0 to the size of the roads array take away 1 and then add one each time then
+				for int i1 equal 0 for the size of roads array minius i minius 1 and step 1 then
+					if the instances at i1 in the road array and gets it longuitude is greater then the next one along in the array
+						Temp instances of the road class that takes the vaule of roads(i1)
+						Set the instances at the index of i2 to whats in the array at i2 + 1
+						Set the instances at i2+1 to the temp instances
+					end if
+				next
+			next
+		else
+			for int i equals 0 to the size of the roads array take away 1 and then add one each time then
+				for int i1 equal 0 for the size of roads array minius i minius 1 and step 1 then
+					if the instances at i1 in the road array and gets it latuitude is greater then the next one along in the array
+						Temp instances of the road class that takes the vaule of roads(i1)
+						Set the instances at the index of i2 to whats in the array at i2 + 1
+						Set the instances at i2+1 to the temp instances
+					end if
+				next
+			next
+		end if
+		return the roads array
+Postcodeinput.java:
+	Method getcords that takes the inputs of a String for postcode and will return a String
+		Will replace any spaces with a %20 allowing it to be used in an array
+		Will make a String called url with a predefined start and the end being the Postcode url
+		Will call the readdata and readwebsite methods with the inputs of the url
+		Will set data to the inner result sections of the json file
+		Will create and set a string called cords that will take the string vaule of the the lat and long of the postcode and this infomation is recived from the JSON file and will add " , " between the vaules so they can be spilt.
+		return cords
+	End Method
+	Method readwebsite will take the input of the url and will return a string
+		try
+			Will start an inputstream to get the data from the URL that has been passed thought
+			Will then create a reader so this data can be read
+			Will create a Stringbuilder allowing us to add many strings together
+			Creates a holder to hold the temp vaules
+			while holder equal bufferedreader reading the next line is not equaling to null so there something there
+				Add holder to stringbuilder
+			next
+			return the String of Stringbuilder
+		catch An issue with the url
+		catch an issue will the readers and streaming in data
+	End Method
+	Method readdata takes the string data and will turn it into a JSONObject
+		Makes a JSONObject out of the String data
+		returns this data
+	End Method
+Journeytime.java:
+	Setup the variables in class
+	Class Journeytime takes the inputs of to and from lats,long,roadmain,juction,direction,sectionid
+		Sets the internal variables to the input variables
+	End Class setup
+	Method getlat returns double
+		returns tolat
+	End Method
+	Method getlong returns double
+		return tolong
+	End Method
+	Method setalltime gets the input of currenttime, freeflowtime,normaltime
+		Sets the internal variables to the input variables
+	End Method
+	Method gottime returns the boolean
+		return internal gottime
+	End Method
+	Method getid returns String
+		returns id
+	End Method
+	Method gotnormaltime returns double
+		returns normaltime
+	End Method
+	Method getcurrenttime returns String
+		returns traveltime
+	End Method
+	Method deyaled will return a Boolean
+		if traveltime is greater then the normally time then
+			return true
+		else
+			return false
+		End if
+	End Method
+	Method getroad returns a string
+		return toroad
+	End Method
+	Method getroroad returns a string
+		returns toroad
+	End Method
+	Method getfromroad returns a string
+		return fromroad
+	End Method
+	Method gettojuction returns a string
+		return tojuction
+	End Method
+	Method getfromjuction returns a string
+		return fromjuction
+	End Method
+	Method inrange is the same as inrange for Incident
+	End Method
+Postcode_processing.java:
+	Method create_area has inputs of postcode1 and postcode 2 and will return a String array
+		Creates a String array called areacords and has the size of 2
+		Create a temp string and send the first postcode to the getcords method in postcodeinput
+		Sets the first item in the array to the temp string
+		Repeat the last two steps for adding the second array
+		return array
+	End Method
+Road.java
+	Setting up the variables to use
+	Class road has input name
+		set internal name to input
+	End Class
+	Method getroadname will return string
+		return roadname
+	End Method
+	Method setroadname will take the input of a string
+		set internal name to input
+	End Method
+	Method getlat will return double
+		return roadlat
+	End Method
+	Method setroadlat will take the input of a double
+		set internal lat to input
+	End Method
+	Method getlong will return double
+		return roadlong
+	End Method
+	Method setroadlong will take the input of a double
+		set internal long to input
+	End Method
+traffic_input.java
+	Method gettraffic takes one input of a boolean and will return an array of Incidents
+		if true is set to true then
+			try
+				Creates an array of the Incident class called allincidents
+				Uses the readdata method to create a document and save it under the title currentincidents_sco_doc
+				Gets the first heading of the document and saves as element
+				Gets all the nodes in the element with the tag item
+				for int i  = 0 to size of the nodelist and setp is 1
+					gets the element at point i in the nodelist
+					Creates a string array from the string which is collect from the method called gettextvaule with the input of the lement and the tag then its spilts the string into a string array
+					Creates a double called lat and phase the string which is the first item in the string array above to double
+					Creates a double called longitude and phase the string which is the second item in the string array above to double
+					Creates a temp instances of the Incident class and uses a few gettextvaule methods to fill out the data needed to create an instance
+					saves the temp to the array of Incidents
+				next
+
+				Uses the readdata method to create a document and save it under the title roadworks_sco_doc
+				Gets the first heading of the document and saves as element
+				Gets all the nodes in the element with the tag item
+				for int i  = 0 to size of the nodelist and setp is 1
+					gets the element at point i in the nodelist
+					Creates a string array from the string which is collect from the method called gettextvaule with the input of the lement and the tag then its spilts the string into a string array
+					Creates a double called lat and phase the string which is the first item in the string array above to double
+					Creates a double called longitude and phase the string which is the second item in the string array above to double
+					Creates a temp instances of the Incident class and uses a few gettextvaule methods to fill out the data needed to create an instance
+					saves the temp to the array of Incidents
+				next
+
+				Uses the readdata method to create a document and save it under the title currentincidents_elg_doc
+				Gets the first heading of the document and saves as element
+				Gets all the nodes in the element with the tag item
+				for int i  = 0 to size of the nodelist and setp is 1
+					gets the element at point i in the nodelist
+					Creates string with the method of gettextvaule inputs of element and road as string
+					Creates a double called lat and phase the string which is collected from the gettextvaule with inputs of element and latitude
+					Creates a double called longitude and phase the string which is is collected from the gettextvaule with inputs of element and longitude
+					Creates a temp instances of the Incident class and uses a few gettextvaule methods to fill out the data needed to create an instance
+					saves the temp to the array of Incidents
+				next
+			catches any issues in the phasing
+			catches any issues in the SAX
+			catches any issues caused by Input of data
+			return allincidents
+		else
+			return nothing
+		end if
+	End Method
+	Method getdirectioncode returns a int and takes a string input called text
+		if text to lower case has in the string the word northbound then
+			return 1
+		else if text to lower case has in the string the word eastbound then
+			return 2
+		else if text to lower case has in the string the word southbound then
+			return 3
+		else if text to lower case has in the string the word westbound then
+			return 4
+		else
+			return 0
+		end if
+	End Method
+	Method gettextvaule returns a string and has 2 inputs one for an element and one for a string
+		try
+			Makes a nodelist of all elements in the element passed in which include the tag which is the inputed string
+			Create a temp element that holds the first item in the nodelist
+			returns the node vaule of the child of the temp element
+		catch any issues
+			return error
+	End Method
+	Method readdata returns A document and takes the input of filepath which is a string it also throws some Exception just incase there is any issues
+		Sets up a file that will localed the file based on the filepath
+		Starts a DocumentBuilderFactory and the builder
+		return the file that has been parse by the Document factory and builder
+	End Method
+Journey_input.java
+	Setup the variables
+	Creates an array of Journeytime called allJourneytime
+	try
+		Uses the readdata method to create a document and save it under the title journeytimeloc_doc
+		Gets the first heading of the document and saves as element
+		Gets all the nodes in the element with the tag item
+		for int i = 0 to size of the node list with the step being 2
+			Creates an element which is at i in the nodelist create above
+			sets sectionid to the attribute id of the element and then remove the first 7 charaters
+			Create an element which is at the postion of i add 1 in the nodelist and its the first child of that element
+			Sets the direction to the return of the function gettextvaule with the lemewnt abovew as one input and tag as another
+			Creates a node that is deeper then the element above going into the 2 child node
+			Create an element of the node above
+			if element attribute of xsi:trype is equal ignoring the case to TPEFJuction then
+
+

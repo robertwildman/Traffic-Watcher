@@ -83,13 +83,11 @@ public class Startscreen implements ActionListener {
 	public JTabbedPane tabs;
 	public String totown, fromtown;
 	public JFrame frame, offlineframe, postcodeframe, newrouteframe;
-	public DefaultComboBoxModel model;
 	public JMenuBar menu;
 	public JPanel combopanel, roadpanel, Overviewpanel, Overviewinnerpanel1,
 			Overviewinnerpanel3, Overviewinnerpanel4, Overviewinnerpanel5,
 			Overviewinnerpanel6;
 	public JScrollPane Scrollpane;
-	public JComboBox trafficlist;
 	public ArrayList<String> Towninfo, smalltitle, fulltitle, fulldesc;
 	public ArrayList<Incident> affectedIncidents;
 
@@ -102,10 +100,9 @@ public class Startscreen implements ActionListener {
 	public Startscreen() {
 		super();
 		// Will open the start screen
-		Toaddress = true;
 		offlinelayout();
 	}
-
+/*
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// This will deal with the handling the to and from button pushes
@@ -215,7 +212,7 @@ public class Startscreen implements ActionListener {
 			});
 		}
 
-	}
+	}*/
 
 	public void addtown() {
 		// Custom view allowing to enter Town Name and lat and long;
@@ -244,7 +241,7 @@ public class Startscreen implements ActionListener {
 					offlinelayout();
 				} else {
 					JOptionPane.showMessageDialog(frame,
-							"Please enter each field!", "Thank You",
+							"Please enter data in each field!", "Thank You",
 							JOptionPane.ERROR_MESSAGE);
 				}
 			}
@@ -354,8 +351,42 @@ public class Startscreen implements ActionListener {
 	}
 
 	public String currentdistance(String totown2, String fromtown2) {
-		// TODO Auto-generated method stub
-		return "1000";
+		//First will get the lat and long of the town 
+		double lat1,lat2,lng1,lng2;
+		String[] cords = getcordsoftown(totown2);
+		lat1 = Double.parseDouble(cords[0]);
+		lng1  = Double.parseDouble(cords[1]);
+		System.out.println(totown + " " + fromtown);
+		String[] cords1 = getcordsoftown(fromtown2);
+		lat2 = Double.parseDouble(cords1[0]);
+		lng2  = Double.parseDouble(cords1[1]);
+		System.out.println(lat1 + " " + lat2 + " " + lng1 + " " + lng2);
+		if(lat2 > lat1)
+		{
+			double temp = lat1;
+			lat1 = lat2;
+			lat2 = temp;
+		}
+		if(lng2 > lng1)
+		{
+			double temp = lng1;
+			lng1 = lng2;
+			lng2 = temp;
+		}
+		System.out.println(lat1 + " " + lat2 + " " + lng1 + " " + lng2);
+		//Now will work out the distances between lat and long  using website formula 
+		double earthRadius = 3958.75;
+	    double dLat = Math.toRadians(lat2-lat1);
+	    double dLng = Math.toRadians(lng2-lng1);
+	    double sindLat = Math.sin(dLat / 2);
+	    double sindLng = Math.sin(dLng / 2);
+	    double a = Math.pow(sindLat, 2) + Math.pow(sindLng, 2)
+	            * Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2));
+	    double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+	    int dist = (int) (earthRadius * c);
+
+	    return String.valueOf(dist + " Miles.");
+
 	}
 
 	public String currenttime(String totown2, String fromtown2) {
@@ -371,6 +402,7 @@ public class Startscreen implements ActionListener {
 		Overviewinnerpanel5.removeAll();
 		Overviewinnerpanel5.removeAll();
 		mainRoadpanel.removeAll();
+		
 		// Gets the lat and long of the town
 		String[] address = getcordsoftown(totown);
 		tolat = Double.valueOf(address[0]);
@@ -392,10 +424,11 @@ public class Startscreen implements ActionListener {
 				fromlong);
 		setroadswithdata(inrangedjounreytime, inrangedincidents,
 				inrangedsortedroads);
+		
 		// Shows the tabs
 		tabs.setVisible(true);
 
-		// Deaing with first tab
+		// Dealing with first tab
 		// Setting up the overview class
 		Overviewinnerpanel1.add(new JLabel("Traveling to: " + totown));
 		Overviewinnerpanel1.add(new JLabel("Traveling from: " + fromtown));
@@ -403,7 +436,8 @@ public class Startscreen implements ActionListener {
 				+ currentdistance(totown, fromtown)));
 		Overviewinnerpanel1.add(new JLabel("Time on English main roads:  "
 				+ currenttime(totown, fromtown)));
-		Overviewinnerpanel1.revalidate();
+		// Getting best road 
+		
 		// Getting worst road
 		ArrayList<String> worstroad = worstroad();
 		Overviewinnerpanel5.add(new JLabel("Road Name: " + worstroad.get(0)));
@@ -423,6 +457,11 @@ public class Startscreen implements ActionListener {
 		Overviewinnerpanel6
 				.add(new JLabel("Incidents:  " + worstjuction.get(4)));
 
+		Overviewinnerpanel1.revalidate();
+		Overviewinnerpanel3.revalidate();
+		Overviewinnerpanel4.revalidate();
+		Overviewinnerpanel5.revalidate();
+		Overviewinnerpanel6.revalidate();
 		if (inrangedroads.size() < 30) {
 			mainRoadpanel.setPreferredSize(new Dimension(1000, 800));
 			mainRoadpanel.setMaximumSize(new Dimension(1000, 800));
@@ -863,38 +902,6 @@ public class Startscreen implements ActionListener {
 		// Shows the frame
 		offlineframe.setVisible(true);
 	}
-
-	public void onlinelayout() {
-		// This will display the online part of the program.
-		JFrame frame = new JFrame("Online Mode");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JPanel mainpanel = new JPanel();
-
-		// Setting up the postcode panel
-		postcodepanel = new JPanel();
-		BoxLayout layout = new BoxLayout(postcodepanel, BoxLayout.X_AXIS);
-		postcodepanel.setLayout(layout);
-		// Adding the Postcode Labels and TextFields
-		lpostcode1 = new JLabel("Postcode of starting point: ");
-		tfpostcode1 = new JTextField();
-		lpostcode2 = new JLabel("Postcode of end point: ");
-		tfpostcode2 = new JTextField();
-		lpostcode1.setLabelFor(tfpostcode1);
-		lpostcode2.setLabelFor(tfpostcode2);
-		// Adding them to the panel
-		postcodepanel.add(lpostcode1);
-		postcodepanel.add(tfpostcode1);
-		postcodepanel.add(lpostcode2);
-		postcodepanel.add(tfpostcode2);
-		// Setting it to the top
-		frame.add(postcodepanel, BorderLayout.PAGE_START);
-		frame.add(mainpanel, BorderLayout.CENTER);
-		// Sets the size of the Frame
-		frame.setExtendedState(Frame.MAXIMIZED_BOTH);
-		// Shows the frame
-		frame.setVisible(true);
-	}
-
 	public ArrayList<String> readalltowninfo() {
 		try {
 			// This class will read the file then will return 2 arrays one with
@@ -1073,6 +1080,12 @@ public class Startscreen implements ActionListener {
 		bestroad.add("f");
 		bestroad.add("f");
 		return bestroad;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+	 
+		
 	}
 
 }
