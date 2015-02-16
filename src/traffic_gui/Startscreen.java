@@ -100,7 +100,7 @@ public class Startscreen implements ActionListener {
 	public Startscreen() {
 		super();
 		// Will open the start screen
-		offlinelayout();
+		layout();
 	}
 /*
 	@Override
@@ -238,7 +238,7 @@ public class Startscreen implements ActionListener {
 					savetown(townname.getText(), townlat.getText(),
 							townlong.getText());
 					frame.setVisible(false);
-					offlinelayout();
+					layout();
 				} else {
 					JOptionPane.showMessageDialog(frame,
 							"Please enter data in each field!", "Thank You",
@@ -282,7 +282,7 @@ public class Startscreen implements ActionListener {
 							townpostcode.getText().toString()).split(",");
 					savetown(townname.getText(), cords[0], cords[1]);
 					frame.setVisible(false);
-					offlinelayout();
+					layout();
 				} else {
 					JOptionPane.showMessageDialog(frame,
 							"Please enter each field!", "Thank You",
@@ -726,7 +726,7 @@ public class Startscreen implements ActionListener {
 
 	}
 
-	public void offlinelayout() {
+	public void layout() {
 		// This will display the starting screen for the program with input of
 		// postcodes.
 		offlineframe = new JFrame("Traffic Watcher");
@@ -1088,4 +1088,49 @@ public class Startscreen implements ActionListener {
 		
 	}
 
+	public void saveroute(String totown, String fromtown)
+	{
+		// This will add to the file which holds all of the user 
+				try {
+					File routefile = new File("Routes.txt");
+					ArrayList<String> Routes = readroutes();
+					PrintWriter out = new PrintWriter(new BufferedWriter(
+							new FileWriter(routefile)));
+					for (String routeinfo : Routes) {
+						out.append(routeinfo + "\n");
+					}
+					out.append(totown + "," + fromtown);
+					out.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	}
+
+	public ArrayList<String> readroutes() {
+		try {
+			// This class will read the file then will return the routes info 
+			//In the format of to town name, from town name 
+			ArrayList<String> Routes = new ArrayList<String>();
+			// Setting up the files and the readers.
+			File routefile = new File("Routes.txt");
+			BufferedReader in = new BufferedReader(new FileReader(routefile));
+			String nextline = in.readLine();
+			// Will keep reading the next line till there is no more lines to
+			// read
+			while (nextline != null) {
+				// Each time it reads a new line it splits the line and then
+				// adds to the array.
+				Routes.add(nextline);
+				nextline = in.readLine();
+			}
+			in.close();
+			return Routes;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
