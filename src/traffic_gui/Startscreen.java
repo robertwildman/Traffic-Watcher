@@ -38,6 +38,9 @@ import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.Border;
 
+import org.openstreetmap.gui.jmapviewer.JMapViewer;
+import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
+
 import traffic_analyze.Directions;
 import traffic_analyze.Incident;
 import traffic_analyze.Journeytime;
@@ -84,7 +87,8 @@ public class Startscreen implements ActionListener {
 	public String totown, fromtown;
 	public JFrame frame, offlineframe, postcodeframe, newrouteframe;
 	public JMenuBar menu;
-	public JPanel combopanel, roadpanel, Overviewpanel, Overviewinnerpanel1,
+	public JMapViewer map;
+	public JPanel combopanel,mainmappanel, roadpanel, Overviewpanel, Overviewinnerpanel1,
 			Overviewinnerpanel3, Overviewinnerpanel4, Overviewinnerpanel5,
 			Overviewinnerpanel6;
 	public JScrollPane Scrollpane;
@@ -439,14 +443,15 @@ public class Startscreen implements ActionListener {
 		// Getting best road 
 		
 		// Getting worst road
-		ArrayList<String> worstroad = worstroad();
+		ArrayList<String> worstroad = worstroad(inrangedsortedroads);
 		Overviewinnerpanel5.add(new JLabel("Road Name: " + worstroad.get(0)));
 		Overviewinnerpanel5
 				.add(new JLabel("Current Time: " + worstroad.get(1)));
 		Overviewinnerpanel5.add(new JLabel("Delayed by:  " + worstroad.get(2)));
 		Overviewinnerpanel5.add(new JLabel("Incidents:  " + worstroad.get(3)));
+		
 		//Getting worst junction 
-		ArrayList<String> worstjuction = worstjuction();
+		ArrayList<String> worstjuction = worstjuction(inrangedjounreytime,"fewef");
 		Overviewinnerpanel6
 				.add(new JLabel("Road Name: " + worstjuction.get(0)));
 		Overviewinnerpanel6.add(new JLabel("Juction: " + worstjuction.get(1)));
@@ -456,6 +461,14 @@ public class Startscreen implements ActionListener {
 				+ worstjuction.get(3)));
 		Overviewinnerpanel6
 				.add(new JLabel("Incidents:  " + worstjuction.get(4)));
+		
+		// Getting worst road
+				ArrayList<String> bestroad = bestroad(inrangedsortedroads);
+				Overviewinnerpanel3.add(new JLabel("Road Name: " + bestroad.get(0)));
+				Overviewinnerpanel3
+						.add(new JLabel("Current Time: " + bestroad.get(1)));
+				Overviewinnerpanel3.add(new JLabel("Delayed by:  " + bestroad.get(2)));
+				Overviewinnerpanel3.add(new JLabel("Incidents:  " + bestroad.get(3)));
 
 		Overviewinnerpanel1.revalidate();
 		Overviewinnerpanel3.revalidate();
@@ -506,6 +519,16 @@ public class Startscreen implements ActionListener {
 		}
 		mainRoadpanel.revalidate();
 
+		//This will add markers to the map based on any incidents 
+		for(int i = 0; i < inrangedincidents.size(); i++)
+		{
+		map.addMapMarker(new MapMarkerDot(inrangedincidents.get(i).getLat(),inrangedincidents.get(i).getLonga()));
+		}
+		
+		
+		
+		
+		
 		// This will add a new panel to the grid for each road
 
 		/*
@@ -883,10 +906,15 @@ public class Startscreen implements ActionListener {
 				ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		roadscroll.getVerticalScrollBar().setUnitIncrement(16);
+		//Setting up the Maps Panel
+		mainmappanel = new JPanel();
+		map = new JMapViewer();
+		mainmappanel.add(map);
+		
 		tabs = new JTabbedPane();
 		tabs.addTab("Overview", Overviewpanel);
 		tabs.addTab("Roads", roadscroll);
-		tabs.addTab("Map", new JLabel("Map"));
+		tabs.addTab("Map", mainmappanel);
 		offlineframe.add(tabs);
 		tabs.setVisible(false);
 		combopanel = new JPanel();
@@ -894,6 +922,8 @@ public class Startscreen implements ActionListener {
 		output.setEditable(false);
 		output.setVisible(false);
 		info = new JLabel("     To:");
+		
+		
 		// offlineframe.add(Scrollpane, BorderLayout.CENTER);
 		// Sets the size of the Frame
 		// ONLINE AT
@@ -1031,32 +1061,37 @@ public class Startscreen implements ActionListener {
 		}
 	}
 
-	public ArrayList<String> worstjuction() {
+	public ArrayList<String> worstjuction(ArrayList<Journeytime> all,String road) {
 		// TODO Auto-generated method stub
-		ArrayList<String> worstjuction = new ArrayList<String>();
-		worstjuction.add("f");
-		worstjuction.add("f");
-		worstjuction.add("f");
-		worstjuction.add("f");
-		worstjuction.add("f");
-		worstjuction.add("f");
-		return worstjuction;
+		
+		ArrayList<String> worstjuctioninfo = new ArrayList<String>();
+		worstjuctioninfo.add("f");
+		worstjuctioninfo.add("f");
+		worstjuctioninfo.add("f");
+		worstjuctioninfo.add("f");
+		worstjuctioninfo.add("f");
+		worstjuctioninfo.add("f");
+		return worstjuctioninfo;
 	}
 
-	public ArrayList<String> worstroad() {
+	public ArrayList<String> worstroad(ArrayList<Road> all) {
 		// TODO Auto-generated method stub
+		Road currentworstroad = all.get(0); 
+		for(int i = 0; i < all.size(); i++)
+		{
+			if(all.get(i).getintdelay() > currentworstroad.getintdelay())
+			{
+				currentworstroad = all.get(i);
+			}
+		}
 		ArrayList<String> worstroad = new ArrayList<String>();
-		worstroad.add("f");
-		worstroad.add("f");
-		worstroad.add("f");
-		worstroad.add("f");
-		worstroad.add("f");
-		worstroad.add("f");
-		worstroad.add("f");
+		worstroad.add(currentworstroad.getRoadname());
+		worstroad.add(String.valueOf(currentworstroad.getTravelTime() + " Miniutes"));
+		worstroad.add(String.valueOf(currentworstroad.getdelay() + " Miniutes"));
 		worstroad.add("f");
 		return worstroad;
 	}
-	public ArrayList<String> bestjuction() {
+	public ArrayList<String> bestjuction(ArrayList<Journeytime> all,String road) {
 		// TODO Auto-generated method stub
 		ArrayList<String> bestjuction = new ArrayList<String>();
 		bestjuction.add("f");
@@ -1068,16 +1103,20 @@ public class Startscreen implements ActionListener {
 		return bestjuction;
 	}
 
-	public ArrayList<String> bestroad() {
-		// TODO Auto-generated method stub
+	public ArrayList<String> bestroad(ArrayList<Road> all) {
+		//Will find the best road best on the amount of delays or lack of delays 
+		Road currentbestroad = all.get(0);
+		for(int i = 0; i < all.size(); i++)
+		{
+			if(all.get(i).getintdelay() < currentbestroad.getintdelay())
+			{
+				currentbestroad = all.get(i);
+			}
+		}
 		ArrayList<String> bestroad = new ArrayList<String>();
-		bestroad.add("f");
-		bestroad.add("f");
-		bestroad.add("f");
-		bestroad.add("f");
-		bestroad.add("f");
-		bestroad.add("f");
-		bestroad.add("f");
+		bestroad.add(currentbestroad.getRoadname());
+		bestroad.add(String.valueOf(currentbestroad.getTravelTime() + " Miniutes"));
+		bestroad.add(String.valueOf(currentbestroad.getdelay() + " Miniutes"));
 		bestroad.add("f");
 		return bestroad;
 	}
