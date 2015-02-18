@@ -10,6 +10,19 @@ public class Road {
 	double travelTime;
 	double normallyExpectedTravelTime;
 	ArrayList<Incident> roadincidents = new ArrayList<Incident>();
+	ArrayList<Journeytime> roadJuctions = new ArrayList<Journeytime>();
+	
+	public ArrayList<Journeytime> getRoadJuctions() {
+		return roadJuctions;
+	}
+	
+	public void setRoadJuctions(ArrayList<Journeytime> roadJuctions) {
+		this.roadJuctions = roadJuctions;
+	}
+	public void addjuctions(Journeytime juction)
+	{
+		roadJuctions.add(juction);	
+	}
 	public Road(String name)
 	{
 		this.Roadname = name;

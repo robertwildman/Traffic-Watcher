@@ -5,8 +5,11 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GridLayout;
+import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -33,6 +36,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
@@ -85,7 +89,7 @@ public class Startscreen implements ActionListener {
 	public JTextArea output;
 	public JTabbedPane tabs;
 	public String totown, fromtown;
-	public JFrame frame, offlineframe, postcodeframe, newrouteframe;
+	public JFrame frame,routesframe,incidentframe, offlineframe, postcodeframe, newrouteframe;
 	public JMenuBar menu;
 	public JMapViewer map;
 	public JPanel combopanel,mainmappanel, roadpanel, Overviewpanel, Overviewinnerpanel1,
@@ -423,7 +427,7 @@ public class Startscreen implements ActionListener {
 				traffic_input.gettraffic(true), tolong, fromlong, tolat,
 				fromlat);
 		ArrayList<String> inrangedroads = getroads(inrangedincidents);
-		ArrayList<Road> inrangedsortedroads = Directions.orderlist(
+		final ArrayList<Road> inrangedsortedroads = Directions.orderlist(
 				getroadsasclass(inrangedincidents), tolat, tolong, fromlat,
 				fromlong);
 		setroadswithdata(inrangedjounreytime, inrangedincidents,
@@ -448,8 +452,14 @@ public class Startscreen implements ActionListener {
 		Overviewinnerpanel5
 				.add(new JLabel("Current Time: " + worstroad.get(1)));
 		Overviewinnerpanel5.add(new JLabel("Delayed by:  " + worstroad.get(2)));
-		Overviewinnerpanel5.add(new JLabel("Incidents:  " + worstroad.get(3)));
-		
+		JTextArea output = new JTextArea();
+		JScrollPane scroll = new JScrollPane(output);
+		String[] allincidents = worstroad.get(3).split("~");
+		for(String temp : allincidents)
+		{
+			output.append("    " + temp + "\n");
+		}
+		Overviewinnerpanel5.add(scroll);
 		//Getting worst junction 
 		ArrayList<String> worstjuction = worstjuction(inrangedjounreytime,"fewef");
 		Overviewinnerpanel6
@@ -512,6 +522,34 @@ public class Startscreen implements ActionListener {
 					+ inrangedsortedroads.get(i).incidentsize()));
 			temproadpanel.add(Box.createRigidArea(new Dimension(0, 10)));
 			JButton tempbutton = new JButton("View Incidents");
+			final ArrayList<Incident> incidents = inrangedsortedroads.get(i).getRoadincidents();
+			tempbutton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent actionEvent) {
+					incidentframe = new JFrame("Add New Town");
+					main = new JPanel();
+					JTextArea taoutput = new JTextArea();
+					for(Incident item: incidents)
+					{
+						taoutput.append(item.getsmalltitle() + "\n");
+					}
+					JScrollPane scrollpane = new JScrollPane(taoutput);
+					
+					JButton ok = new JButton("Ok");
+					ok.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent actionEvent) {
+							incidentframe.setVisible(false);
+						}
+					});
+					main.add(scrollpane);
+					main.add(ok);
+					incidentframe.add(main);
+					incidentframe.setSize(600, 500);
+					incidentframe.setLocationRelativeTo(null);
+					incidentframe.setVisible(true);
+				}
+			});
 			temproadpanel.add(tempbutton);
 			System.out.println(i);
 			mainRoadpanel.add(temproadpanel);
@@ -798,7 +836,23 @@ public class Startscreen implements ActionListener {
 		saveroute.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				// TODO
+				try{
+				if(totown.isEmpty() || fromtown.isEmpty())
+				{
+					JOptionPane.showMessageDialog(frame,
+							"Please start a route to save it.", "Thank You",
+							JOptionPane.ERROR_MESSAGE);
+				}else
+				{
+					saveroute(totown,fromtown);
+				}
+				}
+				catch(Exception a)
+				{
+					JOptionPane.showMessageDialog(frame,
+							"Please start a route to save it.", "Thank You",
+							JOptionPane.ERROR_MESSAGE);
+				}
 			}
 
 		});
@@ -806,6 +860,44 @@ public class Startscreen implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				// TODO
+				ArrayList<String> routes = readroutes();
+				String[][] realroutes = new String[routes.size()][2];
+				for(int i = 0; i < routes.size(); i++)
+				{
+					String[] temparray = routes.get(i).split(",");
+					realroutes[i][0] = temparray[0];
+					realroutes[i][1] = temparray[1];
+				}
+				String[] columns = {"To","From"};
+				JButton ok = new JButton("Ok");
+				
+				routesframe = new JFrame();
+				
+				JPanel routespanel = new JPanel();
+				JTable routestable = new JTable(realroutes,columns);
+				JScrollPane routespane = new JScrollPane(routestable);
+				routestable.addMouseListener(new MouseAdapter()
+						{
+							public void mouseClicked(MouseEvent e)
+							{
+								JTable clickedtable = (JTable) e.getSource();
+								String totown = clickedtable.getValueAt(clickedtable.getSelectedRow(),0).toString(); 
+								String fromtown = clickedtable.getValueAt(clickedtable.getSelectedRow(),1).toString();
+								displaytraffic(totown, fromtown);
+								routesframe.setVisible(false);
+							}
+						});
+				routespanel.add(routestable.getTableHeader());
+				routesframe.add(routespanel);
+				routesframe.add(routespane);
+				ok.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent actionEvent) {
+						routesframe.setVisible(false);
+					}
+				});
+				routesframe.setVisible(true);
+				routesframe.setSize(600, 300);
 			}
 
 		});
@@ -895,7 +987,7 @@ public class Startscreen implements ActionListener {
 		Overviewpanel.add(leftsidebox, BorderLayout.WEST);
 		Overviewpanel.add(middlesidebox, BorderLayout.CENTER);
 		Overviewpanel.add(rightsidebox, BorderLayout.EAST);
-
+ 
 		// Setting up road layout
 		mainRoadpanel = new JPanel();
 		GridLayout experimentLayout = new GridLayout(0, 7);
@@ -1019,7 +1111,7 @@ public class Startscreen implements ActionListener {
 		}
 
 	}
-
+	//This deals with adding to the road classes 
 	public void setroadswithdata(ArrayList<Journeytime> inrangedjounreytime,
 			ArrayList<Incident> inrangedincidents,
 			ArrayList<Road> inrangedsortedroads) {
@@ -1028,11 +1120,14 @@ public class Startscreen implements ActionListener {
 				if (item.gettoroad().equalsIgnoreCase(road.getRoadname())
 						|| item.getfromroad().equalsIgnoreCase(
 								road.getRoadname())) {
+					
 					road.setNormallyExpectedTravelTime(road
 							.getNormallyExpectedTravelTime()
 							+ item.getnormaltime());
+					
 					road.setTravelTime(road.getTravelTime()
 							+ item.getcurrenttime());
+					road.addjuctions(item);
 				}
 			}
 			for (Incident currentincident : inrangedincidents) {
@@ -1076,6 +1171,10 @@ public class Startscreen implements ActionListener {
 
 	public ArrayList<String> worstroad(ArrayList<Road> all) {
 		// TODO Auto-generated method stub
+		if(all.size() < 1)
+		{
+			return null;
+		}
 		Road currentworstroad = all.get(0); 
 		for(int i = 0; i < all.size(); i++)
 		{
@@ -1088,7 +1187,19 @@ public class Startscreen implements ActionListener {
 		worstroad.add(currentworstroad.getRoadname());
 		worstroad.add(String.valueOf(currentworstroad.getTravelTime() + " Miniutes"));
 		worstroad.add(String.valueOf(currentworstroad.getdelay() + " Miniutes"));
-		worstroad.add("f");
+		if(currentworstroad.getRoadincidents().isEmpty())
+		{
+			worstroad.add("No Incidents!");
+		}else
+		{
+			String incidentlist = "Incidents: ";
+			for(Incident incidents : currentworstroad.getRoadincidents())
+			{
+				incidentlist = incidentlist + " ~ " +incidents.getsmalltitle();
+			}
+			worstroad.add(incidentlist);
+		}
+		
 		return worstroad;
 	}
 	public ArrayList<String> bestjuction(ArrayList<Journeytime> all,String road) {
