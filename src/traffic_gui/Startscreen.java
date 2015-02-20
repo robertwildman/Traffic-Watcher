@@ -408,7 +408,8 @@ public class Startscreen implements ActionListener {
 		Overviewinnerpanel3.removeAll();
 		Overviewinnerpanel4.removeAll();
 		Overviewinnerpanel5.removeAll();
-		Overviewinnerpanel5.removeAll();
+		Overviewinnerpanel6.removeAll();
+		map.removeAllMapMarkers();
 		mainRoadpanel.removeAll();
 		
 		// Gets the lat and long of the town
@@ -445,6 +446,19 @@ public class Startscreen implements ActionListener {
 		Overviewinnerpanel1.add(new JLabel("Time on English main roads:  "
 				+ currenttime(totown, fromtown)));
 		// Getting best road 
+		ArrayList<String> bestroad = bestroad(inrangedsortedroads);
+		Overviewinnerpanel3.add(new JLabel("Road Name: " + bestroad.get(0)));
+		Overviewinnerpanel3
+				.add(new JLabel("Current Time: " + bestroad.get(1)));
+		Overviewinnerpanel3.add(new JLabel("Delayed by:  " + bestroad.get(2)));
+		JTextArea output = new JTextArea();
+		JScrollPane scroll = new JScrollPane(output);
+		String[] allincidents = bestroad.get(3).split("~");
+		for(String temp : allincidents)
+		{
+			output.append("    " + temp + "\n");
+		}
+		Overviewinnerpanel3.add(scroll);
 		
 		// Getting worst road
 		ArrayList<String> worstroad = worstroad(inrangedsortedroads);
@@ -452,14 +466,14 @@ public class Startscreen implements ActionListener {
 		Overviewinnerpanel5
 				.add(new JLabel("Current Time: " + worstroad.get(1)));
 		Overviewinnerpanel5.add(new JLabel("Delayed by:  " + worstroad.get(2)));
-		JTextArea output = new JTextArea();
-		JScrollPane scroll = new JScrollPane(output);
-		String[] allincidents = worstroad.get(3).split("~");
-		for(String temp : allincidents)
+		JTextArea output1 = new JTextArea();
+		JScrollPane scroll1 = new JScrollPane(output1);
+		String[] allincidents1 = worstroad.get(3).split("~");
+		for(String temp : allincidents1)
 		{
-			output.append("    " + temp + "\n");
+			output1.append("    " + temp + "\n");
 		}
-		Overviewinnerpanel5.add(scroll);
+		Overviewinnerpanel5.add(scroll1);
 		//Getting worst junction 
 		ArrayList<String> worstjuction = worstjuction(inrangedjounreytime,"fewef");
 		Overviewinnerpanel6
@@ -473,12 +487,7 @@ public class Startscreen implements ActionListener {
 				.add(new JLabel("Incidents:  " + worstjuction.get(4)));
 		
 		// Getting worst road
-				ArrayList<String> bestroad = bestroad(inrangedsortedroads);
-				Overviewinnerpanel3.add(new JLabel("Road Name: " + bestroad.get(0)));
-				Overviewinnerpanel3
-						.add(new JLabel("Current Time: " + bestroad.get(1)));
-				Overviewinnerpanel3.add(new JLabel("Delayed by:  " + bestroad.get(2)));
-				Overviewinnerpanel3.add(new JLabel("Incidents:  " + bestroad.get(3)));
+				
 
 		Overviewinnerpanel1.revalidate();
 		Overviewinnerpanel3.revalidate();
@@ -534,17 +543,7 @@ public class Startscreen implements ActionListener {
 						taoutput.append(item.getsmalltitle() + "\n");
 					}
 					JScrollPane scrollpane = new JScrollPane(taoutput);
-					
-					JButton ok = new JButton("Ok");
-					ok.addActionListener(new ActionListener() {
-						@Override
-						public void actionPerformed(ActionEvent actionEvent) {
-							incidentframe.setVisible(false);
-						}
-					});
-					main.add(scrollpane);
-					main.add(ok);
-					incidentframe.add(main);
+					incidentframe.add(scrollpane);
 					incidentframe.setSize(600, 500);
 					incidentframe.setLocationRelativeTo(null);
 					incidentframe.setVisible(true);
@@ -567,34 +566,7 @@ public class Startscreen implements ActionListener {
 		
 		
 		
-		// This will add a new panel to the grid for each road
 
-		/*
-		 * //Gets any issues on the road that the user has picked
-		 * 
-		 * ArrayList<String> allroadincidents = roadbyname( affectedIncidents,
-		 * model.getElementAt(traffic.getSelectedIndex()) .toString());
-		 * output.setVisible(true); output.setText(" "); for (String item :
-		 * allroadincidents) { String[] items = new String[2]; items =
-		 * item.split("#"); output.append(items[0] + "\n");
-		 * output.append("                 " + items[1] + "\n");
-		 * output.append("    \n"); } //Will get a list of affected jounreytimes
-		 * ArrayList<Journeytime> alljourneytime =
-		 * getinrangejourneytime(JourneyTime_input .getJourneys(false),tolong,
-		 * fromlong, tolat, fromlat); //This will work out if there is a delay
-		 * and then display message to user.
-		 * output.append(getjourneytimedata(alljourneytime, model
-		 * .getElementAt(traffic.getSelectedIndex()) .toString()));
-		 * 
-		 * //This will get any delays on the road and return a String array
-		 * which then will be print onto the screen; ArrayList<String>
-		 * affectedroads = getdelayedjuctions( alljourneytime,
-		 * model.getElementAt(traffic.getSelectedIndex()) .toString());
-		 * 
-		 * if (affectedroads.size() > 0) {
-		 * output.append("However there is minor issues at: \n"); } for (String
-		 * roadinfo : affectedroads) { output.append(roadinfo); }
-		 */
 	}
 
 	public String[] getcordsoftown(String intown) {
@@ -1228,7 +1200,18 @@ public class Startscreen implements ActionListener {
 		bestroad.add(currentbestroad.getRoadname());
 		bestroad.add(String.valueOf(currentbestroad.getTravelTime() + " Miniutes"));
 		bestroad.add(String.valueOf(currentbestroad.getdelay() + " Miniutes"));
-		bestroad.add("f");
+		if(currentbestroad.getRoadincidents().isEmpty())
+		{
+			bestroad.add("No Incidents!");
+		}else
+		{
+			String incidentlist = "Incidents: ";
+			for(Incident incidents : currentbestroad.getRoadincidents())
+			{
+				incidentlist = incidentlist + " ~ " +incidents.getsmalltitle();
+			}
+			bestroad.add(incidentlist);
+		}
 		return bestroad;
 	}
 
