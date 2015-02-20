@@ -87,7 +87,7 @@ public class Journey_input {
 			}
 			
 			//This saves the journey info as a journey object then adds to the array 
-			Journeytime temp = new Journeytime(tolat,fromlat,tolong,tolat,toroadname,toroadjuction,fromroadname,fromroadjuction,direction,sectionid);
+			Journeytime temp = new Journeytime(tolat,fromlat,tolong,fromlong,toroadname,toroadjuction,fromroadname,fromroadjuction,direction,sectionid);
 			allJourneytime.add(temp);
 		}
 	

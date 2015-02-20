@@ -37,8 +37,8 @@ public class traffic_input {
 					String[] cords = gettextvalue(el,"georss:point").split(" ");
 					double lat = Double.parseDouble(cords[0]);
 					double longitude = Double.parseDouble(cords[1]);
-					
-					Incident temp = new Incident(gettextvalue(el,"title"),gettextvalue(el,"description"),lat,longitude,"Incident",getdirectioncode(gettextvalue(el,"title")+gettextvalue(el,"description")),gettextvalue(el,"title")); 
+					String roadname = gettextvalue(el,"title").split(" ")[0];
+					Incident temp = new Incident(gettextvalue(el,"title"),gettextvalue(el,"description"),lat,longitude,"Incident",getdirectioncode(gettextvalue(el,"title")+gettextvalue(el,"description")),roadname); 
 					allincidents.add(temp);
 				}
 						
@@ -53,7 +53,8 @@ public class traffic_input {
 					String[] cords = gettextvalue(el,"georss:point").split(" ");
 					double lat = Double.parseDouble(cords[0]);
 					double longitude = Double.parseDouble(cords[1]);
-					Incident temp = new Incident(gettextvalue(el,"title"),gettextvalue(el,"description"),lat,longitude,"Roadworks",getdirectioncode(gettextvalue(el,"title")+gettextvalue(el,"description")),gettextvalue(el,"title")); 
+					String roadname = gettextvalue(el,"title").split(" ")[0];
+					Incident temp = new Incident(gettextvalue(el,"title"),gettextvalue(el,"description"),lat,longitude,"Roadworks",getdirectioncode(gettextvalue(el,"title")+gettextvalue(el,"description")),roadname); 
 					allincidents.add(temp);
 				}
 				

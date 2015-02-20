@@ -1,3 +1,5 @@
 Elgin,London
 Elgin,Bristol
 London,Elgin
+Elgin,Glasgow
+Elgin,Liverpool

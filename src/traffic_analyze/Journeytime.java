@@ -42,6 +42,22 @@ public class Journeytime {
 	{
 		return tolong;
 	}
+	public double gettolat()
+	{
+		return tolat;
+	}
+	public double getfromlat()
+	{
+		return fromlat;
+	}
+	public double gettolong()
+	{
+		return tolong;
+	}
+	public double getfromlong()
+	{
+		return fromlong;
+	}
 	public void setalltime(double travelTime, double freeFlowTravelTime,double normallyExpectedTravelTime )
 	{
 		//Used to set the time aspect to each 
