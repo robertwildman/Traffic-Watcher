@@ -1047,7 +1047,6 @@ public class Startscreen implements ActionListener {
 		tabs.addTab("Roads", roadscroll);
 		tabs.addTab("Map", mainmappanel);
 		offlineframe.add(tabs);
-		//offlineframe.add(info);
 		tabs.setVisible(false);
 		
 		
