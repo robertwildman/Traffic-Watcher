@@ -52,8 +52,10 @@ import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 import traffic_analyze.Directions;
 import traffic_analyze.Incident;
 import traffic_analyze.Journeytime;
+import traffic_analyze.Junction;
 import traffic_analyze.Postcode_Processing;
 import traffic_analyze.Road;
+import traffic_analyze.Route;
 import traffic_input.JourneyTime_input;
 import traffic_input.Postcodeinput;
 import traffic_input.traffic_input;
@@ -427,16 +429,17 @@ public class Startscreen implements ActionListener {
 		return null;
 	}
 
-	public void drawroad(ArrayList<Journeytime> all)
+	public void drawroad(ArrayList<Junction> all)
 	{
-		for(Journeytime journey:all)
+		for(int i =0; i < all.size()-1; i++)
 		{
-			Coordinate one = new Coordinate(journey.gettolat(),journey.gettolong());
-			Coordinate two = new Coordinate(journey.getfromlat(),journey.getfromlong());
+			/*Coordinate one = new Coordinate(all.get(i).getlat(),all.get(i).getlng());
+			Coordinate two = new Coordinate(all.get(i+1).getlat(),all.get(i+1).getlng());
 			List<Coordinate> route = new ArrayList<Coordinate>(Arrays.asList(one,two,two));
 			map.addMapPolygon(new MapPolygonImpl(route));
 			map.addMapMarker(new MapMarkerDot(one.getLat(),one.getLon()));
-			map.addMapMarker(new MapMarkerDot(two.getLat(),two.getLon()));
+			map.addMapMarker(new MapMarkerDot(two.getLat(),two.getLon()));*/
+			System.out.println(all.get(i).getroadname());
 		}
 	}
 	public void displaytraffic(String totown, String fromtown) {
@@ -462,7 +465,11 @@ public class Startscreen implements ActionListener {
 		ArrayList<Journeytime> inrangedjounreytime = getinrangejourneytime(
 				JourneyTime_input.getJourneys(false), tolong, fromlong, tolat,
 				fromlat);
-		drawroad(JourneyTime_input.getJourneys(false));
+		Coordinate one = new Coordinate(tolat,tolong);
+		Coordinate two = new Coordinate(fromlat,fromlong);
+		ArrayList<Coordinate> Cords = new ArrayList<Coordinate>(Arrays.asList(one,two));
+		ArrayList<Route> temproute= Directions.getroute(Cords);
+		drawroad(temproute.get(0).getJunctions());
 		ArrayList<Incident> inrangedincidents = getinranged(
 				traffic_input.gettraffic(true), tolong, fromlong, tolat,
 				fromlat);

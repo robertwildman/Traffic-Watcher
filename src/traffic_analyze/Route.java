@@ -12,11 +12,18 @@ public class Route {
 	public Route(ArrayList<Junction> alljunctions , ArrayList<Road> allroads)
 	{
 		this.junctions = alljunctions;
-		this.roads = allroads;
+		//this.roads = allroads;
 	}
 	public void addjunction(Junction temp)
 	{
 		junctions.add(temp);
+	}
+	
+	public ArrayList<Junction> getJunctions() {
+		return junctions;
+	}
+	public void setJunctions(ArrayList<Junction> junctions) {
+		this.junctions = junctions;
 	}
 	public void addroad(Road road)
 	{
