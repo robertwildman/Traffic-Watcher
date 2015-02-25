@@ -1,6 +1,5 @@
 package traffic_analyze;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import org.openstreetmap.gui.jmapviewer.Coordinate;
@@ -27,7 +26,7 @@ public class Directions {
 						Road temp = roads.get(i1);
 						roads.set(i1, roads.get(i1 + 1));
 						roads.set(i1+1, temp);
-						
+
 					}
 				}
 			}
@@ -50,7 +49,7 @@ public class Directions {
 		}
 		return roads;
 	}
-	
+
 	public static ArrayList<Route> getroute(ArrayList<Coordinate> cords)
 	{
 		//This methord will be the main methord dealing with the finding the best route 
@@ -67,7 +66,7 @@ public class Directions {
 		//Will be keeping a list of each of the different junctions that gets used 
 		//Then will allow the distance of each one 
 		//Also the time 
-		
+
 		//First getting raw data of jounrey locations 
 		ArrayList<Journeytime> allrawjourney = JourneyTime_input.getJourneys(false);
 		//Making a list of Junctions 
@@ -78,7 +77,7 @@ public class Directions {
 			allrawjunctions.add(tempjunction);
 		}
 		//Getting the closest junction
-		ArrayList<Junction>currentroute = new ArrayList<Junction>();
+		/*ArrayList<Junction>currentroute = new ArrayList<Junction>();
 		Junction startjunction = findclosestjunction(allrawjunctions,cords,true);
 		Junction endjunction = findclosestjunction(allrawjunctions,cords,false);
 		Junction currentjunction = startjunction;
@@ -88,14 +87,15 @@ public class Directions {
 		currentroute.add(currentjunction);
 		while(endjunction.getfromlat() != currentjunction.getfromlat())
 		{
-			currentjunction = findnextjunction(allrawjunctions,currentjunction,currentjunction.getdirection());
+			currentjunction = findnextjunction(allrawjunctions,currentroute,currentjunction,currentjunction.getdirection());
 			System.out.println(currentjunction.getfromlat() + " Compared to " + endjunction.getfromlat());
 			currentroute.add(currentjunction);
+			
 		}
-		currentroute.add(currentjunction);
+		currentroute.add(currentjunction);*/
 		//Getting the next ones till the end junction has been meet
 		//Setting up temp route for testing 
-		Route temp = new Route(currentroute, null);
+		Route temp = new Route(allrawjunctions, null);
 		ArrayList<Route> temproutes = new ArrayList<Route>();
 		temproutes.add(temp);
 		return temproutes;
@@ -108,7 +108,7 @@ public class Directions {
 			return temp;
 		}catch(Exception e)
 		{
-			
+
 		}
 		return 0;
 	}
@@ -161,16 +161,16 @@ public class Directions {
 				{
 					if(start == true)
 					{
-					double tempdistancefromlat = Math.abs(temp.getfromlat() - tolat);
-					double tempdistancefromlng = Math.abs(temp.getfromlng() - tolng);
-					double tempavgdistance = (tempdistancefromlat + tempdistancefromlng) % 2;
-					if(avgdistance > tempavgdistance)
-					{
-						//CLosest on avg 
-						
-						currentclosest = temp;
-						
-					}
+						double tempdistancefromlat = Math.abs(temp.getfromlat() - tolat);
+						double tempdistancefromlng = Math.abs(temp.getfromlng() - tolng);
+						double tempavgdistance = (tempdistancefromlat + tempdistancefromlng) % 2;
+						if(avgdistance > tempavgdistance)
+						{
+							//CLosest on avg 
+
+							currentclosest = temp;
+
+						}
 					}else
 					{
 						double tempdistancefromlat = Math.abs(temp.getfromlat() - fromlat);
@@ -181,7 +181,7 @@ public class Directions {
 							//CLosest on avg 
 							avgdistance = tempavgdistance;
 							currentclosest = temp;
-							
+
 						}
 					}
 				}else
@@ -196,16 +196,16 @@ public class Directions {
 				{
 					if(start == true)
 					{
-					double tempdistancefromlat = Math.abs(temp.getfromlat() - tolat);
-					double tempdistancefromlng = Math.abs(temp.getfromlng() - tolng);
-					double tempavgdistance = (tempdistancefromlat + tempdistancefromlng) % 2;
-					if(avgdistance > tempavgdistance)
-					{
-						//CLosest on avg 
-						
-						currentclosest = temp;
-						
-					}
+						double tempdistancefromlat = Math.abs(temp.getfromlat() - tolat);
+						double tempdistancefromlng = Math.abs(temp.getfromlng() - tolng);
+						double tempavgdistance = (tempdistancefromlat + tempdistancefromlng) % 2;
+						if(avgdistance > tempavgdistance)
+						{
+							//CLosest on avg 
+
+							currentclosest = temp;
+
+						}
 					}else
 					{
 						double tempdistancefromlat = Math.abs(temp.getfromlat() - fromlat);
@@ -216,7 +216,7 @@ public class Directions {
 							//CLosest on avg 
 							avgdistance = tempavgdistance;
 							currentclosest = temp;
-							
+
 						}
 					}
 				}else
@@ -224,13 +224,13 @@ public class Directions {
 					//Out of ranged 
 				}
 			}
-			
-				
+
+
 		}
 		return currentclosest;
-		
+
 	}
-	public static Junction findnextjunction(ArrayList<Junction> alljunctions,Junction current, int directioncode)
+	public static Junction findnextjunction(ArrayList<Junction> alljunctions,ArrayList<Junction> currentlyadded,Junction current, int directioncode)
 	{
 		//This methord will find out which junction will be based as a next junction 
 		//first in checks to see if there is a junction going in the right direction on the same road 
@@ -238,33 +238,33 @@ public class Directions {
 		//Then will check if there is a junction on the road going a different way
 		if(directioncode == 1)
 		{
-			
+
 			//Going North West
 			Junction currentclosest = alljunctions.get(0);
-			
+
 			double avgdistance = ( Math.abs(alljunctions.get(0).getfromlng() - current.gettolat()) + Math.abs(alljunctions.get(0).getfromlat() - current.gettolng())) % 2;
 			System.out.println(avgdistance);
 			for(Junction temp : alljunctions)
 			{
 				if(temp.getdirection() == 1 || temp.getdirection() == 2)
 				{
-					if(temp.getfromlat() == current.getfromlat())
+					if(temp.getfromlat() == current.getfromlat() || checkifinarray(currentlyadded,temp) == true)
 					{
-						
+						System.out.println("Caught");
 					}else
 					{
-					double tempdistancefromlat = Math.abs(temp.getfromlat() - current.gettolat());
-					double tempdistancefromlng = Math.abs(temp.getfromlng() - current.gettolng());
-					double tempavgdistance = (tempdistancefromlat + tempdistancefromlng) % 2;
-					
-					if(avgdistance > tempavgdistance)
-					{
-						//CLosest on avg 
-						System.out.println(tempavgdistance);
-						avgdistance = tempavgdistance;
-						currentclosest = temp;
-						
-					}
+						double tempdistancefromlat = Math.abs(temp.getfromlat() - current.gettolat());
+						double tempdistancefromlng = Math.abs(temp.getfromlng() - current.gettolng());
+						double tempavgdistance = (tempdistancefromlat + tempdistancefromlng) % 2;
+
+						if(avgdistance > tempavgdistance)
+						{
+							//CLosest on avg 
+							System.out.println(tempavgdistance);
+							avgdistance = tempavgdistance;
+							currentclosest = temp;
+
+						}
 					}
 				}
 			}		
@@ -274,30 +274,30 @@ public class Directions {
 		{
 			//Going North East	
 			Junction currentclosest = alljunctions.get(0);
-			
+
 			double avgdistance = ( Math.abs(alljunctions.get(0).getfromlng() - current.gettolat()) + Math.abs(alljunctions.get(0).getfromlat() - current.gettolng())) % 2;
 			for(Junction temp : alljunctions)
 			{
 				if(temp.getdirection() == 1 || temp.getdirection() == 2)
 				{
-					
-					if(temp.getfromlat() == current.getfromlat())
+
+					if(temp.getfromlat() == current.getfromlat() || checkifinarray(currentlyadded,temp) == true)
 					{
-						
+						System.out.println("Caught");
 					}else
 					{
-					double tempdistancefromlat = Math.abs(temp.getfromlat() - current.gettolat());
-					double tempdistancefromlng = Math.abs(temp.getfromlng() - current.gettolng());
-					double tempavgdistance = (tempdistancefromlat + tempdistancefromlng) % 2;
-					
-					if(avgdistance > tempavgdistance)
-					{
-						//CLosest on avg 
-						System.out.println(tempavgdistance);
-						avgdistance = tempavgdistance;
-						currentclosest = temp;
-						
-					}
+						double tempdistancefromlat = Math.abs(temp.getfromlat() - current.gettolat());
+						double tempdistancefromlng = Math.abs(temp.getfromlng() - current.gettolng());
+						double tempavgdistance = (tempdistancefromlat + tempdistancefromlng) % 2;
+
+						if(avgdistance > tempavgdistance)
+						{
+							//CLosest on avg 
+							System.out.println(tempavgdistance);
+							avgdistance = tempavgdistance;
+							currentclosest = temp;
+
+						}
 					}
 				}
 			}
@@ -307,30 +307,29 @@ public class Directions {
 		{
 			//Going South West
 			Junction currentclosest = alljunctions.get(0);
-			
+
 			double avgdistance = ( Math.abs(alljunctions.get(0).getfromlng() - current.gettolat()) + Math.abs(alljunctions.get(0).getfromlat() - current.gettolng())) % 2;
 			for(Junction temp : alljunctions)
 			{
 				if(temp.getdirection() == 3 || temp.getdirection() == 4)
 				{
-					
-					if(temp.getfromlat() == current.getfromlat())
+					if(temp.getfromlat() == current.getfromlat() || checkifinarray(currentlyadded,temp) == true)
 					{
-						
+						System.out.println("Caught");
 					}else
 					{
-					double tempdistancefromlat = Math.abs(temp.getfromlat() - current.gettolat());
-					double tempdistancefromlng = Math.abs(temp.getfromlng() - current.gettolng());
-					double tempavgdistance = (tempdistancefromlat + tempdistancefromlng) % 2;
-					
-					if(avgdistance > tempavgdistance)
-					{
-						//CLosest on avg 
-						System.out.println(tempavgdistance);
-						avgdistance = tempavgdistance;
-						currentclosest = temp;
-						
-					}
+						double tempdistancefromlat = Math.abs(temp.getfromlat() - current.gettolat());
+						double tempdistancefromlng = Math.abs(temp.getfromlng() - current.gettolng());
+						double tempavgdistance = (tempdistancefromlat + tempdistancefromlng) % 2;
+
+						if(avgdistance > tempavgdistance)
+						{
+							//CLosest on avg 
+							System.out.println(tempavgdistance);
+							avgdistance = tempavgdistance;
+							currentclosest = temp;
+
+						}
 					}
 				}
 			}
@@ -340,41 +339,56 @@ public class Directions {
 		{
 			//Going South East
 			Junction currentclosest = alljunctions.get(0);
-			
+
 			double avgdistance = ( Math.abs(alljunctions.get(0).getfromlng() - current.gettolat()) + Math.abs(alljunctions.get(0).getfromlat() - current.gettolng())) % 2;
 			System.out.println(avgdistance);
 			for(Junction temp : alljunctions)
 			{
 				if(temp.getdirection() == 3 || temp.getdirection() == 4)
 				{
-					
-					if(temp.getfromlat() == current.getfromlat())
+
+					if(temp.getfromlat() == current.getfromlat() || checkifinarray(currentlyadded,temp) == true)
 					{
-						
+						System.out.println("Caught");
 					}else
 					{
-					double tempdistancefromlat = Math.abs(temp.getfromlat() - current.gettolat());
-					double tempdistancefromlng = Math.abs(temp.getfromlng() - current.gettolng());
-					double tempavgdistance = (tempdistancefromlat + tempdistancefromlng) % 2;
-					
-					if(avgdistance > tempavgdistance)
-					{
-						//CLosest on avg 
-						System.out.println(tempavgdistance);
-						avgdistance = tempavgdistance;
-						currentclosest = temp;
-						
-					}
+						double tempdistancefromlat = Math.abs(temp.getfromlat() - current.gettolat());
+						double tempdistancefromlng = Math.abs(temp.getfromlng() - current.gettolng());
+						double tempavgdistance = (tempdistancefromlat + tempdistancefromlng) % 2;
+
+						if(avgdistance > tempavgdistance)
+						{
+							//CLosest on avg 
+							System.out.println(tempavgdistance);
+							avgdistance = tempavgdistance;
+							currentclosest = temp;
+
+						}
 					}
 				}
 			}
 			return currentclosest;
 		}
-		
+
 		return null;
 	}
 
+	public static boolean checkifinarray(ArrayList<Junction> inarray , Junction tempjunction)
+	{
+		for(Junction temp: inarray)
+		{
+			
+			if(tempjunction.getfromlat() == temp.getfromlat())
+			{
+				return true;
+			}else if(tempjunction.getfromlng() == temp.getfromlng())
+			{
+				return true;
+			}
 
+		}
+		return false;
+	}
 
 
 }
