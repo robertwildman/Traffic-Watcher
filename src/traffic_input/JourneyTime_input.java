@@ -43,7 +43,6 @@ public class JourneyTime_input {
 					Element alldatael = (Element) alldata;
 				}
 
-				 getroads(allJourneytime);
 				 return allJourneytime;
 			}else
 			{
@@ -84,44 +83,6 @@ public class JourneyTime_input {
 			e.printStackTrace();
 		}
 		return null;
-	}
-	public static void getroads(ArrayList<Journeytime> Journeys)
-	{
-		//This will collect the journey times on the spades.
-		ArrayList<String> roads = new ArrayList<String>();
-		for(int i = 0; i < Journeys.size(); i++)
-		{
-			for(int i2 = i+1;  i2 < Journeys.size(); i2++)
-			{
-				if(Journeys.get(i).getroad().equals(Journeys.get(i2).getroad()) & i != i2)
-				{
-					
-					
-					if(checkifroadadded(roads,Journeys.get(i).getroad()) == false)
-					{
-						//Adding Road 
-						roads.add(Journeys.get(i).getroad());
-
-						System.out.println("Road Added:" + Journeys.get(i).getroad());
-					}
-					
-				}
-			}
-		}
-		
-		
-	}
-	public static boolean checkifroadadded(ArrayList<String>Road, String Roadname)
-	{
-		for(int i = 0; i < Road.size(); i++)
-		{
-			if(Road.get(i).equalsIgnoreCase(Roadname))
-			{
-				return true;
-			}
-		}
-		return false;
-		
 	}
 	 public static String gettextvalue(Element el , String tag)
 	 {

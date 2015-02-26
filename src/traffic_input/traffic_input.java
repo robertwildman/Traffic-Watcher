@@ -70,7 +70,7 @@ public class traffic_input {
 					//Gets title
 					double lat = Double.parseDouble(gettextvalue(el,"latitude"));
 					double longitude = Double.parseDouble(gettextvalue(el,"longitude"));
-					
+					System.out.println(gettextvalue(el,"title"));
 					Incident temp = new Incident(gettextvalue(el,"title"),gettextvalue(el,"description"),lat,longitude,"Incident",getdirectioncode(gettextvalue(el,"title")+gettextvalue(el,"description")),roadname); 
 					allincidents.add(temp);
 				}
@@ -115,7 +115,7 @@ public class traffic_input {
 		 }
 		
 	}
-	public static String gettextvalue(Element el , String tag)
+	 public static String gettextvalue(Element el , String tag)
 	 {
 
 		try{
@@ -129,7 +129,6 @@ public class traffic_input {
 			 }
 		 
 	 }
-	 
 	 public static Document readdata(String filepath) throws ParserConfigurationException, SAXException, IOException
 	 {
 		 //This class will read the data from the file and return it in a way to be used in other classes

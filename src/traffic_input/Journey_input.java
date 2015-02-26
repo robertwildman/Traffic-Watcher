@@ -113,7 +113,6 @@ public class Journey_input {
 	 
 	 
 	}
-
 	public static String gettextvalue(Element el , String tag)
 	 {
 		 try{
@@ -126,8 +125,7 @@ public class Journey_input {
 			 return "error";
 		 }
 	 }
-	 
-	 
+ 
 	 public static Document readdata(String filepath) throws ParserConfigurationException, SAXException, IOException
 	 {
 		 //This class will read the data from the file and return it in a way to be used in other classes

@@ -1,4 +1,5 @@
 Psudeocode:
+Classes:
 Incident.java:
 	Setup the variables in class
 	Creating class with the inputs of Title,desc,lat,long,type of Incident, direction code and road
@@ -113,32 +114,6 @@ Directions.java:
 			next
 		end if
 		return the roads array
-Postcodeinput.java:
-	Method getcords that takes the inputs of a String for postcode and will return a String
-		Will replace any spaces with a %20 allowing it to be used in an array
-		Will make a String called url with a predefined start and the end being the Postcode url
-		Will call the readdata and readwebsite methods with the inputs of the url
-		Will set data to the inner result sections of the json file
-		Will create and set a string called cords that will take the string vaule of the the lat and long of the postcode and this infomation is recived from the JSON file and will add " , " between the vaules so they can be spilt.
-		return cords
-	End Method
-	Method readwebsite will take the input of the url and will return a string
-		try
-			Will start an inputstream to get the data from the URL that has been passed thought
-			Will then create a reader so this data can be read
-			Will create a Stringbuilder allowing us to add many strings together
-			Creates a holder to hold the temp vaules
-			while holder equal bufferedreader reading the next line is not equaling to null so there something there
-				Add holder to stringbuilder
-			next
-			return the String of Stringbuilder
-		catch An issue with the url
-		catch an issue will the readers and streaming in data
-	End Method
-	Method readdata takes the string data and will turn it into a JSONObject
-		Makes a JSONObject out of the String data
-		returns this data
-	End Method
 Journeytime.java:
 	Setup the variables in class
 	Class Journeytime takes the inputs of to and from lats,long,roadmain,juction,direction,sectionid
@@ -189,14 +164,6 @@ Journeytime.java:
 	End Method
 	Method inrange is the same as inrange for Incident
 	End Method
-Postcode_processing.java:
-	Method create_area has inputs of postcode1 and postcode 2 and will return a String array
-		Creates a String array called areacords and has the size of 2
-		Create a temp string and send the first postcode to the getcords method in postcodeinput
-		Sets the first item in the array to the temp string
-		Repeat the last two steps for adding the second array
-		return array
-	End Method
 Road.java
 	Setting up the variables to use
 	Class road has input name
@@ -219,6 +186,43 @@ Road.java
 	End Method
 	Method setroadlong will take the input of a double
 		set internal long to input
+	End Method
+
+
+Input:
+Postcodeinput.java:
+	Method getcords that takes the inputs of a String for postcode and will return a String
+		Will replace any spaces with a %20 allowing it to be used in an array
+		Will make a String called url with a predefined start and the end being the Postcode url
+		Will call the readdata and readwebsite methods with the inputs of the url
+		Will set data to the inner result sections of the json file
+		Will create and set a string called cords that will take the string vaule of the the lat and long of the postcode and this infomation is recived from the JSON file and will add " , " between the vaules so they can be spilt.
+		return cords
+	End Method
+	Method readwebsite will take the input of the url and will return a string
+		try
+			Will start an inputstream to get the data from the URL that has been passed thought
+			Will then create a reader so this data can be read
+			Will create a Stringbuilder allowing us to add many strings together
+			Creates a holder to hold the temp vaules
+			while holder equal bufferedreader reading the next line is not equaling to null so there something there
+				Add holder to stringbuilder
+			next
+			return the String of Stringbuilder
+		catch An issue with the url
+		catch an issue will the readers and streaming in data
+	End Method
+	Method readdata takes the string data and will turn it into a JSONObject
+		Makes a JSONObject out of the String data
+		returns this data
+	End Method
+Postcode_processing.java:
+	Method create_area has inputs of postcode1 and postcode 2 and will return a String array
+		Creates a String array called areacords and has the size of 2
+		Create a temp string and send the first postcode to the getcords method in postcodeinput
+		Sets the first item in the array to the temp string
+		Repeat the last two steps for adding the second array
+		return array
 	End Method
 traffic_input.java
 	Method gettraffic takes one input of a boolean and will return an array of Incidents
@@ -310,4 +314,36 @@ Journey_input.java
 			Create an element of the node above
 			if element attribute of xsi:trype is equal ignoring the case to TPEFJuction then
 
+Startscreen.java
+	Only showing advanced higher sections
+	Method saveroute will take the input of two string totown and from town
+		try
+			Finds the file or create if not there in the default file dirctory called Routes.txt
+			Creates an array of strings that will be filled by the method called readroutes
+			Creates a output writer that uses file writer that collects the file then a buffered writer that
+				Creates a for loop that will hold a the next string in the array of routes
+					Will add to the end of the file the routeinfo and then add the new line charcter
+				end for loop
+			Will add to the end of the file the totown input then a "," and finally a fromtown.
+			Closes the printwriter
+			Creates a message Dialog to show the user that the route has been saved with the title of Thank you and then information icon
+		catch any input or output Exception
+			print the error to the console
+		end catch
+	End Method
+	Method savetown with take the inputs of String townname townlat townlong
+		try
+			Finds the file or create if not there in the default file dirctory called Offlinetowns.txt
+			Creates an array of strings that will be filled by the method called readalltowninfo
+			Creates a output writer that uses file writer that collects the file then a buffered writer that
+				Creates a for loop that will hold a the next string in the array of routes
+					Will add to the end of the file the towninfo and then add the new line charcter
+				end for loop
+			Will add to the end of the file the Townname input then a "," then townlat then "," and finally townlong.
+			Closes the printwriter
+			Creates a message Dialog to show the user that the town has been saved with the title of Thank you and then information icon
+		catch any input or output Exception
+			print the error to the console
+		end catch
+	end method
 
