@@ -187,8 +187,6 @@ Road.java
 	Method setroadlong will take the input of a double
 		set internal long to input
 	End Method
-
-
 Input:
 Postcodeinput.java:
 	Method getcords that takes the inputs of a String for postcode and will return a String

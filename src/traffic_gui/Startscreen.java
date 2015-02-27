@@ -101,7 +101,7 @@ public class Startscreen{
 	public JFrame frame, routesframe, incidentframe, offlineframe,
 			postcodeframe, newrouteframe;
 	public JMenuBar menu;
-	public JCheckBox trafficlayer, incidentlayer;
+	public JCheckBox trafficlayer, incidentlayer,onlinecheckbox;
 	public JMapViewer map;
 	public JPanel combopanel, mainmappanel, roadpanel, Overviewpanel,
 			Overviewinnerpanel1, Overviewinnerpanel3, Overviewinnerpanel5;
@@ -415,7 +415,7 @@ public class Startscreen{
 	}
 
 	//Used to display traffic infomation
-	public void displaytraffic(String totown, String fromtown) {
+	public void displaytraffic(String totown, String fromtown,Boolean online) {
 		// Removes old infomation
 		info.setVisible(false);
 		Overviewinnerpanel1.removeAll();
@@ -434,12 +434,12 @@ public class Startscreen{
 
 		// Getting data used to display
 		final ArrayList<Journeytime> inrangedjounreytime = getinrangejourneytime(
-				JourneyTime_input.getJourneys(false), tolong, fromlong, tolat,
+				JourneyTime_input.getJourneys(online), tolong, fromlong, tolat,
 				fromlat);
 		new Coordinate(tolat, tolong);
 		new Coordinate(fromlat, fromlong);
 		final ArrayList<Incident> inrangedincidents = getinranged(
-				traffic_input.gettraffic(true), tolong, fromlong, tolat,
+				traffic_input.gettraffic(online), tolong, fromlong, tolat,
 				fromlat);
 		ArrayList<String> inrangedroads = getroads(inrangedincidents);
 		final ArrayList<Road> inrangedsortedroads = Directions.orderlist(
@@ -958,7 +958,18 @@ public class Startscreen{
 								clickedtable.getSelectedRow(), 0).toString();
 						String fromtown = clickedtable.getValueAt(
 								clickedtable.getSelectedRow(), 1).toString();
-						displaytraffic(totown, fromtown);
+						Boolean online;
+						if(JOptionPane.showConfirmDialog(null, "Use online?", "Question", 
+    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE)
+    == JOptionPane.YES_OPTION)
+						{
+							online = true;
+						}
+						else
+						{
+							online = false;
+						}
+						displaytraffic(totown, fromtown,online);
 						routesframe.setVisible(false);
 					}
 				});
@@ -1087,6 +1098,7 @@ public class Startscreen{
 		final JComboBox Tocombo = new JComboBox(alltowns);
 		JLabel fromcombolabel = new JLabel("Traveling from: ");
 		final JComboBox Fromcombo = new JComboBox(alltowns);
+		onlinecheckbox = new JCheckBox("Online", false);
 		JButton Findroutes = new JButton("Find Traffic");
 		Findroutes.addActionListener(new ActionListener() {
 			@Override
@@ -1094,7 +1106,7 @@ public class Startscreen{
 				// This will input the 2 towns into the function
 				totown = temptownarray.get(Tocombo.getSelectedIndex());
 				fromtown = temptownarray.get(Fromcombo.getSelectedIndex());
-				displaytraffic(totown, fromtown);
+				displaytraffic(totown, fromtown,onlinecheckbox.isSelected());
 				newrouteframe.setVisible(false);
 			}
 

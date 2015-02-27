@@ -2,6 +2,8 @@ package traffic_input;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -31,8 +33,8 @@ public class JourneyTime_input {
 		{
 			if(online == true)
 			{
-				allJourneytime = Journey_input.getJourneys(true);
-				Document journeytimeloc_doc = readdata("Test-Data/Journeytime.xml");
+				allJourneytime = Journey_input.getJourneys(false);
+				Document journeytimeloc_doc = readonlinedata("http://hatrafficinfo.dft.gov.uk/feeds/datex/England/JourneyTimeData/content.xml");
 				Element journeytimeloc_all = journeytimeloc_doc.getDocumentElement();
 				NodeList journeytimeloc_nl = journeytimeloc_all.getElementsByTagName("elaboratedData");
 				for(int i = 0; i < journeytimeloc_nl.getLength(); i++)
@@ -116,5 +118,14 @@ public class JourneyTime_input {
 		 DocumentBuilder db = dbf.newDocumentBuilder();
 		return db.parse(file);
 		 
+	 }
+	 public static Document readonlinedata(String inputurl) throws ParserConfigurationException, SAXException, IOException
+	 {
+		 //This class will read the data from the file and return it in a way to be used in other classes
+		 URL url = new URL(inputurl);
+	     URLConnection connection = url.openConnection();
+		 DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		 DocumentBuilder db = dbf.newDocumentBuilder();
+		return db.parse(connection.getInputStream());
 	 }
 }

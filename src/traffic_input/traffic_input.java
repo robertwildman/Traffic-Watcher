@@ -1,6 +1,8 @@
 package traffic_input;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 
 import traffic_analyze.*;
@@ -14,9 +16,9 @@ import org.xml.sax.SAXException;
 public class traffic_input {
 	public static ArrayList<Incident> allincidents;
 	
-	 public static ArrayList<Incident> gettraffic(boolean test){
+	 public static ArrayList<Incident> gettraffic(boolean online){
 		//This class will be called at the start of the program 
-		if(test == true)
+		if(online == false)
 		{
 			//Will work with the test data.
 			try {
@@ -92,7 +94,76 @@ public class traffic_input {
 		}else
 		{
 			//Will work with the online data.
-			return null;
+			//This will read all the traffic xml files
+			try
+			{
+			//This creates an array of objects that use the roadwork class
+			allincidents= new ArrayList<Incident>();
+			
+			//Scotland Current Incidents
+			Document currentincidents_sco_doc = readonlinedata("https://trafficscotland.org/rss/feeds/currentincidents.aspx");
+			Element currentincidents_sco_all = currentincidents_sco_doc.getDocumentElement();
+			NodeList currentincidents_sco_nl = currentincidents_sco_all.getElementsByTagName("item");
+			for (int i = 0; i < currentincidents_sco_nl.getLength();i++)
+			{
+				
+				Element el = (Element)currentincidents_sco_nl.item(i);
+				//Gets title
+				String[] cords = gettextvalue(el,"georss:point").split(" ");
+				double lat = Double.parseDouble(cords[0]);
+				double longitude = Double.parseDouble(cords[1]);
+				String roadname = gettextvalue(el,"title").split(" ")[0];
+				Incident temp = new Incident(gettextvalue(el,"title"),gettextvalue(el,"description"),lat,longitude,"Incident",getdirectioncode(gettextvalue(el,"title")+gettextvalue(el,"description")),roadname); 
+				allincidents.add(temp);
+			}
+					
+			//Scotland roadworks
+			Document roadworks_sco_doc = readonlinedata("https://trafficscotland.org/rss/feeds/roadworks.aspx");
+			Element roadworks_sco_all = roadworks_sco_doc.getDocumentElement();
+			NodeList roadworks_sco_nl = roadworks_sco_all.getElementsByTagName("item");
+			for (int i = 0; i < roadworks_sco_nl.getLength();i++)
+			{
+				Element el = (Element)roadworks_sco_nl.item(i);
+				//Gets title
+				String[] cords = gettextvalue(el,"georss:point").split(" ");
+				double lat = Double.parseDouble(cords[0]);
+				double longitude = Double.parseDouble(cords[1]);
+				String roadname = gettextvalue(el,"title").split(" ")[0];
+				Incident temp = new Incident(gettextvalue(el,"title"),gettextvalue(el,"description"),lat,longitude,"Roadworks",getdirectioncode(gettextvalue(el,"title")+gettextvalue(el,"description")),roadname); 
+				allincidents.add(temp);
+			}
+			
+			//England current Incident
+			Document roadworks_elg_doc = readonlinedata("http://hatrafficinfo.dft.gov.uk/feeds/rss/CurrentAndFutureEvents.xml");
+			Element roadworks_elg_all = roadworks_elg_doc.getDocumentElement();
+			NodeList roadworks_elg_nl = roadworks_elg_all.getElementsByTagName("item");
+			for (int i = 0; i < roadworks_elg_nl.getLength();i++)
+			{
+				Element el = (Element)roadworks_elg_nl.item(i);
+				//Getting the road
+				String roadname = gettextvalue(el,"road");
+				//Gets title
+				double lat = Double.parseDouble(gettextvalue(el,"latitude"));
+				double longitude = Double.parseDouble(gettextvalue(el,"longitude"));
+				System.out.println(gettextvalue(el,"title"));
+				Incident temp = new Incident(gettextvalue(el,"title"),gettextvalue(el,"description"),lat,longitude,"Incident",getdirectioncode(gettextvalue(el,"title")+gettextvalue(el,"description")),roadname); 
+				allincidents.add(temp);
+			}
+			
+			
+			
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return allincidents;
 		}
 	 }
 	 private static int getdirectioncode(String text) {
@@ -138,4 +209,14 @@ public class traffic_input {
 		return db.parse(file);
 		 
 	 }
+	 public static Document readonlinedata(String inputurl) throws ParserConfigurationException, SAXException, IOException
+	 {
+		 //This class will read the data from the file and return it in a way to be used in other classes
+		 URL url = new URL(inputurl);
+	     URLConnection connection = url.openConnection();
+		 DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		 DocumentBuilder db = dbf.newDocumentBuilder();
+		return db.parse(connection.getInputStream());
+	 }
+	 
 }
