@@ -328,22 +328,14 @@ public class Startscreen{
 	}
 
 	//Returns the correct junction
-	public String correctjuction(Journeytime journey, Boolean direction) {
-		if (direction == true) {
+	public String correctjuction(Journeytime journey) {
 			// This means that it is a to junction
 			if (journey.gettojuction().equalsIgnoreCase("Error")) {
 				return "Road  " + journey.gettoroad();
 			} else {
 				return "Junction " + journey.gettojuction();
 			}
-		} else {
-			// This means that the junction is a from junction
-			if (journey.getfromjuction().equalsIgnoreCase("Error")) {
-				return "The Road " + journey.getfromroad();
-			} else {
-				return "Junction " + journey.getfromjuction();
-			}
-		}
+		
 
 	}
 
@@ -351,7 +343,6 @@ public class Startscreen{
 	public String[] createarea(String postcode1, String postcode2) {
 		// Will get the lang and long and then will split it off to ints
 		String temp = Postcodeinput.getcords(postcode1);
-		System.out.println(temp);
 		String[] postcode1cords = temp.split(",");
 		int postcode1long = Integer.parseInt(postcode1cords[0]);
 		int postcode1lang = Integer.parseInt(postcode1cords[1]);
@@ -359,7 +350,6 @@ public class Startscreen{
 		// Will get the lang and long and then will split it off to ints
 		temp = Postcodeinput.getcords(postcode2);
 		String[] postcode2cords = temp.split(",");
-		System.out.println(temp);
 		int postcode2long = Integer.parseInt(postcode2cords[0]);
 		int postcode2lang = Integer.parseInt(postcode2cords[1]);
 		// This will put it into a an array that will then be used for the area.
@@ -368,8 +358,7 @@ public class Startscreen{
 				+ String.valueOf(postcode1long);
 		Areacords[1] = String.valueOf(postcode2lang) + ","
 				+ String.valueOf(postcode2long);
-		System.out.println(Areacords);
-
+		
 		return Areacords;
 
 	}
@@ -381,11 +370,9 @@ public class Startscreen{
 		String[] cords = getcordsoftown(totown2);
 		lat1 = Double.parseDouble(cords[0]);
 		lng1 = Double.parseDouble(cords[1]);
-		System.out.println(totown + " " + fromtown);
 		String[] cords1 = getcordsoftown(fromtown2);
 		lat2 = Double.parseDouble(cords1[0]);
 		lng2 = Double.parseDouble(cords1[1]);
-		System.out.println(lat1 + " " + lat2 + " " + lng1 + " " + lng2);
 		if (lat2 > lat1) {
 			double temp = lat1;
 			lat1 = lat2;
@@ -396,7 +383,6 @@ public class Startscreen{
 			lng1 = lng2;
 			lng2 = temp;
 		}
-		System.out.println(lat1 + " " + lat2 + " " + lng1 + " " + lng2);
 		// Now will work out the distances between lat and long using website
 		// formula
 		double earthRadius = 3958.75;
@@ -604,7 +590,6 @@ public class Startscreen{
 
 		// This will add markers to the map based on any incidents
 		for (int i = 0; i < inrangedincidents.size(); i++) {
-			System.out.println(i + "Hashcode " + inrangedincidents.get(i).gettitle());
 			map.addMapMarker(new MapMarkerDot(
 					inrangedincidents.get(i).getLat(), inrangedincidents.get(i)
 							.getLonga()));
@@ -648,14 +633,17 @@ public class Startscreen{
 							// if the radius is smaller then 23 (radius of a
 							// ball is 5), then it must be on the dot
 							if (radCircle < 8) {
+								String message = getincidentsat(inrangedincidents,
+										inrangedjounreytime,
+										mapMarker.getLat(),
+										mapMarker.getLon());
+								if(message.length() > 1)
+								{
 								JOptionPane.showMessageDialog(
-										frame,
-										getincidentsat(inrangedincidents,
-												inrangedjounreytime,
-												mapMarker.getLat(),
-												mapMarker.getLon()),
+										frame,message,
 										String.valueOf(mapMarker.hashCode()),
 										JOptionPane.PLAIN_MESSAGE);
+								}
 							}
 
 						}
@@ -706,12 +694,13 @@ public class Startscreen{
 		for (Journeytime temp : alljounreytime) {
 			if ((temp.getfromlat() == inlat) || (temp.getfromlong() == inlong)) {
 				return "Currently going between point: "
-						+ temp.getfromjuction() + " to " + temp.gettojuction()
+						+ correctjuction(temp) + " to " + correctjuction(temp) 
 						+ " Will take you " + temp.getcurrenttime() + " !";
 			}
 		}
-		return null;
+		return "";
 	}
+	
 	
 	//Find all the incidents in ranged 
 	public ArrayList<Incident> getinranged(ArrayList<Incident> allincidents,

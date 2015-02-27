@@ -72,7 +72,6 @@ public class traffic_input {
 					//Gets title
 					double lat = Double.parseDouble(gettextvalue(el,"latitude"));
 					double longitude = Double.parseDouble(gettextvalue(el,"longitude"));
-					System.out.println(gettextvalue(el,"title"));
 					Incident temp = new Incident(gettextvalue(el,"title"),gettextvalue(el,"description"),lat,longitude,"Incident",getdirectioncode(gettextvalue(el,"title")+gettextvalue(el,"description")),roadname); 
 					allincidents.add(temp);
 				}
@@ -145,7 +144,6 @@ public class traffic_input {
 				//Gets title
 				double lat = Double.parseDouble(gettextvalue(el,"latitude"));
 				double longitude = Double.parseDouble(gettextvalue(el,"longitude"));
-				System.out.println(gettextvalue(el,"title"));
 				Incident temp = new Incident(gettextvalue(el,"title"),gettextvalue(el,"description"),lat,longitude,"Incident",getdirectioncode(gettextvalue(el,"title")+gettextvalue(el,"description")),roadname); 
 				allincidents.add(temp);
 			}

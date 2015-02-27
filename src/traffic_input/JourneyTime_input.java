@@ -37,12 +37,24 @@ public class JourneyTime_input {
 				Document journeytimeloc_doc = readonlinedata("http://hatrafficinfo.dft.gov.uk/feeds/datex/England/JourneyTimeData/content.xml");
 				Element journeytimeloc_all = journeytimeloc_doc.getDocumentElement();
 				NodeList journeytimeloc_nl = journeytimeloc_all.getElementsByTagName("elaboratedData");
+				System.out.println(journeytimeloc_nl.getLength());
 				for(int i = 0; i < journeytimeloc_nl.getLength(); i++)
 				{
 					Element idel = (Element)journeytimeloc_nl.item(i);	
-					System.out.println(idel.getAttribute("id").substring(13));
 					Node alldata = idel.getChildNodes().item(1);
 					Element alldatael = (Element) alldata;
+					
+					travelTime = phasedouble(gettextvalue(alldatael,"travelTime"));
+					freeFlowTravelTime = phasedouble(gettextvalue(alldatael,"freeFlowTravelTime"));
+					normallyExpectedTravelTime = phasedouble(gettextvalue(alldatael,"normallyExpectedTravelTime"));
+					for(int i2 = 0; i2 < allJourneytime.size(); i2++ )
+					{
+						
+						if(allJourneytime.get(i2).getid().equals(idel.getAttribute("id").substring(13)))
+						{
+							allJourneytime.get(i2).setalltime(travelTime, freeFlowTravelTime, normallyExpectedTravelTime);
+						}
+					}
 				}
 
 				 return allJourneytime;
