@@ -12,6 +12,7 @@ public class Incident {
 
 	public Incident(String title, String desc, double lat,
 			double longa, String type, int directioncode, String road) {
+		//Makes an instance of the incident class
 		this.title = title;
 		this.desc = desc;
 		this.lat = lat;
@@ -22,14 +23,15 @@ public class Incident {
 	}
 
 	public String getroad() {
+		//Returns the roadname
 		return road;
 	}
 
 	public Boolean inrange(double inlong, double inlong2, double inlat,
 			double inlat2) {
 		// This will work out what lat and long is bigger
-		double highlat = 0, lowlat = 0, highlong = 0, lowlong = 0;
-		// This deals with setting the higgest and lowest lat and long.
+		double highlat = 0, lowlat = 0;
+		// This deals with setting the highest and lowest lat and long.
 		int tempdirectioncode, rangedirectioncode;
 		if (inlat > inlat2) {
 			highlat = inlat;
@@ -44,8 +46,6 @@ public class Incident {
 		}
 
 		if (inlong > inlong2) {
-			highlong = inlong;
-			lowlong = inlong2;
 			// Going East
 			if (tempdirectioncode == 0) {
 				// Going North East
@@ -55,8 +55,6 @@ public class Incident {
 				rangedirectioncode = 2;
 			}
 		} else {
-			highlong = inlong2;
-			lowlong = inlong;
 			// Going West
 			if (tempdirectioncode == 0) {
 				// Going North West
@@ -114,10 +112,12 @@ public class Incident {
 	}
 
 	public String getdesc() {
+		//Returns the desc
 		return desc;
 	}
 
 	public String getsmalltitle() {
+		//Spilits the title and returns 
 		if (title.contains("|")) {
 			return title.split("|")[0];
 		} else if (title.contains("-")) {
@@ -129,32 +129,39 @@ public class Incident {
 	}
 
 	public String getdirection() {
+		//Returns a string version of the direction
 		return String.valueOf(directioncode);
 	}
 
 	public String gettitle() {
+		//Returns the title
 		return title;
 	}
 
 	public String printdata() {
+		//Returns the title as printed 
 		String output = "Title: " + title + "\n";
 		return output;
 
 	}
 
 	public double getLat() {
+		//Returns the lat
 		return lat;
 	}
 
 	public void setLat(double lat) {
+		//Sets the lat
 		this.lat = lat;
 	}
 
 	public double getLonga() {
+		//Returns the long
 		return longa;
 	}
 
 	public void setLonga(double longa) {
+		//Sets the Long
 		this.longa = longa;
 	}
 

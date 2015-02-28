@@ -9,8 +9,6 @@ import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
@@ -22,10 +20,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -51,22 +47,37 @@ import javax.swing.border.Border;
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
-import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
 import traffic_analyze.Directions;
 import traffic_analyze.Incident;
 import traffic_analyze.Journeytime;
-import traffic_analyze.Junction;
 import traffic_analyze.Road;
 import traffic_input.JourneyTime_input;
 import traffic_input.Postcodeinput;
 import traffic_input.traffic_input;
 
-public class Startscreen{
+public class Startscreen {
 
+	public JPanel main, mainRoadpanel;
+	public JTextField townname, townlat, townlong, townpostcode;
+	public JTabbedPane tabs;
+	public String totown, fromtown;
+	public JFrame frame, routesframe, incidentframe, offlineframe,
+			postcodeframe, newrouteframe;
+	public JMenuBar menu;
+	public JCheckBox onlinecheckbox;
+	public JMapViewer map;
+	public JPanel mainmappanel, Overviewpanel, Overviewinnerpanel1,
+			Overviewinnerpanel3, Overviewinnerpanel5;
+	public ArrayList<String> Towninfo;
+	public Double tolat, fromlat, tolong, fromlong;
+
+	
 	public static boolean checkifroadadded(ArrayList<String> Road,
 			String Roadname) {
+		// Will check to see if the road inputed has been in the array that has
+		// been inputed.
 		for (int i = 0; i < Road.size(); i++) {
 			if (Road.get(i).equalsIgnoreCase(Roadname)) {
 				return true;
@@ -77,40 +88,9 @@ public class Startscreen{
 	}
 
 	public static void main(String[] args) {
+		// Creates a new instances of the startscreen.
 		new Startscreen();
 	}
-
-	public static ArrayList<String> roadbyname(ArrayList<Incident> Journeys,
-			String name) {
-		ArrayList<String> roadinfo = new ArrayList<String>();
-		for (int i = 0; i < Journeys.size(); i++) {
-			if (Journeys.get(i).getroad().equalsIgnoreCase(name)) {
-				roadinfo.add(Journeys.get(i).gettitle() + " # "
-						+ Journeys.get(i).getdesc());
-			}
-		}
-		return roadinfo;
-	}
-
-	public JPanel postcodepanel, setcordpanel, main, sp, mainRoadpanel;
-	public JTextField tfpostcode1, tfpostcode2, townname, townlat, townlong,
-			townpostcode;
-	public JTextArea output;
-	public JTabbedPane tabs;
-	public String totown, fromtown;
-	public JFrame frame, routesframe, incidentframe, offlineframe,
-			postcodeframe, newrouteframe;
-	public JMenuBar menu;
-	public JCheckBox trafficlayer, incidentlayer,onlinecheckbox;
-	public JMapViewer map;
-	public JPanel combopanel, mainmappanel, roadpanel, Overviewpanel,
-			Overviewinnerpanel1, Overviewinnerpanel3, Overviewinnerpanel5;
-	public JScrollPane Scrollpane;
-	public ArrayList<String> Towninfo, smalltitle, fulltitle, fulldesc;
-	public ArrayList<Incident> affectedIncidents;
-	public Boolean Toaddress;
-	public Double tolat, fromlat, tolong, fromlong;
-	public JLabel lpostcode1, lpostcode2, info, JLTitle, JLDesc;
 
 	public Startscreen() {
 		super();
@@ -118,82 +98,14 @@ public class Startscreen{
 		layout();
 	}
 
-	/*
-	 * @Override public void actionPerformed(ActionEvent e) { // This will deal
-	 * with the handling the to and from button pushes if (Toaddress == true) {
-	 * // This will add the cords to the to address String[] address =
-	 * getcordsoftown(e.getActionCommand()); tolat = Double.valueOf(address[0]);
-	 * tolong = Double.valueOf(address[1]); // Then it will set the ToAddress to
-	 * false Toaddress = false; // Then will set the to: to from:
-	 * info.setText("     From:"); // Sets the to town totown =
-	 * e.getActionCommand();
-	 * 
-	 * } else { // This means that it wants to get the from address and has the
-	 * to // address String[] address = getcordsoftown(e.getActionCommand());
-	 * fromlat = Double.valueOf(address[0]); fromlong =
-	 * Double.valueOf(address[1]); // Then it will set the ToAddress to true
-	 * Toaddress = true; // Then will set the From: to To:
-	 * info.setText("     To:"); fromtown = e.getActionCommand();
-	 * traffic_input.gettraffic(true); final ArrayList<Incident> incidentlist =
-	 * traffic_input.allincidents; affectedIncidents = new
-	 * ArrayList<Incident>(); smalltitle = new ArrayList<String>(); fulltitle =
-	 * new ArrayList<String>(); fulldesc = new ArrayList<String>(); for (int i =
-	 * 0; i < incidentlist.size(); i++) {
-	 * 
-	 * // This will use the function inrange and if true will add the // titles
-	 * to a JList // Then set full titles and descrtion in an other array if
-	 * (incidentlist.get(i).inrange(tolong, fromlong, tolat, fromlat) == true) {
-	 * smalltitle.add(incidentlist.get(i).getsmalltitle());
-	 * fulltitle.add(incidentlist.get(i).gettitle());
-	 * fulldesc.add(incidentlist.get(i).getdesc());
-	 * affectedIncidents.add(incidentlist.get(i)); } else {
-	 * 
-	 * }
-	 * 
-	 * } String[] smalltitlelist = new String[smalltitle.size()]; smalltitlelist
-	 * = smalltitle.toArray(smalltitlelist); model = (DefaultComboBoxModel)
-	 * trafficlist.getModel(); model.removeAllElements(); roadpanel.removeAll();
-	 * JLabel fromtownlabel = new JLabel(fromtown); JLabel totownlabel = new
-	 * JLabel(totown); roadpanel.add(fromtownlabel); for (String item :
-	 * getroads(affectedIncidents)) { if (item.equalsIgnoreCase("Error")) { item
-	 * = "Other"; } model.addElement(item); JButton tempbutton = new
-	 * JButton(item); roadpanel.add(tempbutton); } roadpanel.add(totownlabel);
-	 * roadpanel.revalidate(); if (model.getSize() == 0) {
-	 * model.addElement("No roads affected!"); }
-	 * 
-	 * trafficlist.setModel(model); trafficlist.addActionListener(new
-	 * ActionListener() {
-	 * 
-	 * @Override public void actionPerformed(ActionEvent actionEvent) { //
-	 * Happens when the user clicks on the combo box JComboBox traffic =
-	 * (JComboBox) actionEvent.getSource(); if
-	 * (model.getElementAt(traffic.getSelectedIndex())
-	 * .toString().equalsIgnoreCase("test")) { test(affectedIncidents); } //
-	 * Gets any issues on the road that the user has picked ArrayList<String>
-	 * allroadincidents = roadbyname( affectedIncidents,
-	 * model.getElementAt(traffic.getSelectedIndex()) .toString());
-	 * output.setVisible(true); output.setText(" "); for (String item :
-	 * allroadincidents) { String[] items = new String[2]; items =
-	 * item.split("#"); output.append(items[0] + "\n");
-	 * output.append("                 " + items[1] + "\n");
-	 * output.append("    \n"); } // Will get a list of affected jounreytimes
-	 * ArrayList<Journeytime> alljourneytime = getinrangejourneytime(
-	 * JourneyTime_input.getJourneys(false), tolong, fromlong, tolat, fromlat);
-	 * // This will work out if there is a delay and then display // message to
-	 * user. output.append(getjourneytimedata(alljourneytime, model
-	 * .getElementAt(traffic.getSelectedIndex()) .toString()));
-	 * 
-	 * }
-	 * 
-	 * }); }
-	 * 
-	 * }
-	 */
-	//Deals with the screen for adding in the town
+	// Deals with the screen for adding in the town
 	public void addtown() {
 		// Custom view allowing to enter Town Name and lat and long;
+		// Setting up the frame
 		frame = new JFrame("Add New Town");
+		// Setting up the main panel
 		main = new JPanel();
+		// Adding Labels and Textsfields to main panel
 		main.add(new JLabel("Enter Town Name: "));
 		townname = new JTextField(15);
 		main.add(townname);
@@ -203,11 +115,12 @@ public class Startscreen{
 		main.add(new JLabel("Enter Town Long: "));
 		townlong = new JTextField(15);
 		main.add(townlong);
+		// Checking buttons and there onclicklisteners
 		JButton ok = new JButton("Create Town");
-		JButton Cancel = new JButton("Cancel");
 		ok.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
+				// Make sure that there is something in all textfield
 				if ((townname.getText().length() > 0)
 						&& (townlat.getText().length() > 0)
 						&& (townlong.getText().length() > 0)) {
@@ -224,51 +137,50 @@ public class Startscreen{
 							frame.setVisible(false);
 							layout();
 						} else {
+							// Error message
 							JOptionPane.showMessageDialog(frame,
 									"Lat or Long are not in the uk!", "Error",
 									JOptionPane.ERROR_MESSAGE);
 						}
 
 					} else {
+						// Error message
 						JOptionPane.showMessageDialog(frame,
 								"Incorrect Lat or Long", "Error",
 								JOptionPane.ERROR_MESSAGE);
 					}
 				} else {
+					// Error message
 					JOptionPane.showMessageDialog(frame,
 							"Please enter data in each field!", "Thank You",
 							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
-		Cancel.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent actionEvent) {
-				frame.setVisible(false);
-
-			}
-		});
+		// Adding buttons to the panel
 		main.add(ok);
-		main.add(Cancel);
+		// Finishing up the frame
 		frame.add(main);
 		frame.setSize(200, 260);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
 
-	//Deals with the screen for adding in the town with postcode
+	// Deals with the screen for adding in the town with postcode
 	public void addtownwithpostcode() {
-		// This will look after the postcode
+		// This will deal with the input of postcodes for adding towns
 		postcodeframe = new JFrame("Add New Town");
+		// Setting up the panel
 		main = new JPanel();
+		// Setting up textfields and labels and adding them to the panel
 		main.add(new JLabel("Enter Town Name "));
 		townname = new JTextField(15);
 		main.add(townname);
 		main.add(new JLabel("Enter To Town Postcode:  "));
 		townpostcode = new JTextField(15);
 		main.add(townpostcode);
+		// Setting up buttons and there listeners
 		JButton ok = new JButton("Create Town");
-		JButton Cancel = new JButton("Cancel");
 		ok.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
@@ -286,22 +198,15 @@ public class Startscreen{
 				}
 			}
 		});
-		Cancel.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent actionEvent) {
-				frame.setVisible(false);
-
-			}
-		});
 		main.add(ok);
-		main.add(Cancel);
+		// Adding panel to the frame then setting it up to show the user
 		postcodeframe.add(main);
 		postcodeframe.setSize(200, 260);
 		postcodeframe.setLocationRelativeTo(null);
 		postcodeframe.setVisible(true);
 	}
 
-	//Find the best road
+	// Find the best road
 	public ArrayList<String> bestroad(ArrayList<Road> all) {
 		// Will find the best road best on the amount of delays or lack of
 		// delays
@@ -311,6 +216,8 @@ public class Startscreen{
 				currentbestroad = all.get(i);
 			}
 		}
+		// Its found the best road now to get infomation on the road and return
+		// them in a string array
 		ArrayList<String> bestroad = new ArrayList<String>();
 		bestroad.add(currentbestroad.getRoadname());
 		bestroad.add(String.valueOf(currentbestroad.getTravelTime()));
@@ -327,43 +234,19 @@ public class Startscreen{
 		return bestroad;
 	}
 
-	//Returns the correct junction
+	// Returns the correct junction
 	public String correctjuction(Journeytime journey) {
-			// This means that it is a to junction
-			if (journey.gettojuction().equalsIgnoreCase("Error")) {
-				return "Road  " + journey.gettoroad();
-			} else {
-				return "Junction " + journey.gettojuction();
-			}
-		
+		// if there is an error as the junction that means its a road so we
+		// change it here
+		if (journey.gettojuction().equalsIgnoreCase("Error")) {
+			return "Road  " + journey.gettoroad();
+		} else {
+			return "Junction " + journey.gettojuction();
+		}
 
 	}
 
-	//Creates a string array of cords
-	public String[] createarea(String postcode1, String postcode2) {
-		// Will get the lang and long and then will split it off to ints
-		String temp = Postcodeinput.getcords(postcode1);
-		String[] postcode1cords = temp.split(",");
-		int postcode1long = Integer.parseInt(postcode1cords[0]);
-		int postcode1lang = Integer.parseInt(postcode1cords[1]);
-
-		// Will get the lang and long and then will split it off to ints
-		temp = Postcodeinput.getcords(postcode2);
-		String[] postcode2cords = temp.split(",");
-		int postcode2long = Integer.parseInt(postcode2cords[0]);
-		int postcode2lang = Integer.parseInt(postcode2cords[1]);
-		// This will put it into a an array that will then be used for the area.
-		String[] Areacords = new String[2];
-		Areacords[0] = String.valueOf(postcode1lang) + ","
-				+ String.valueOf(postcode1long);
-		Areacords[1] = String.valueOf(postcode2lang) + ","
-				+ String.valueOf(postcode2long);
-		
-		return Areacords;
-
-	}
-
-	//Finds the distance between town points
+	// Finds the distance between town points
 	public String currentdistance(String totown2, String fromtown2) {
 		// First will get the lat and long of the town
 		double lat1, lat2, lng1, lng2;
@@ -400,10 +283,9 @@ public class Startscreen{
 
 	}
 
-	//Used to display traffic infomation
-	public void displaytraffic(String totown, String fromtown,Boolean online) {
-		// Removes old infomation
-		info.setVisible(false);
+	// Used to display traffic information
+	public void displaytraffic(String totown, String fromtown, Boolean online) {
+		// Removes old information
 		Overviewinnerpanel1.removeAll();
 		Overviewinnerpanel3.removeAll();
 		Overviewinnerpanel5.removeAll();
@@ -474,10 +356,13 @@ public class Startscreen{
 		}
 		Overviewinnerpanel5.add(scroll1);
 
+		// Refresh the panels.
 		Overviewinnerpanel1.revalidate();
 		Overviewinnerpanel3.revalidate();
 		Overviewinnerpanel5.revalidate();
 
+		// Changes the panel size based on the amount of roads that will be
+		// shown in the panel
 		if (inrangedroads.size() < 5) {
 			mainRoadpanel.setPreferredSize(new Dimension(1000, 200));
 			mainRoadpanel.setMaximumSize(new Dimension(1000, 200));
@@ -494,22 +379,29 @@ public class Startscreen{
 			mainRoadpanel.setPreferredSize(new Dimension(1000, 1200));
 			mainRoadpanel.setMaximumSize(new Dimension(1000, 1200));
 		}
-		// Setting up the roads infomation
+
+		// Setting up the roads information
 		for (int i = 0; i < inrangedroads.size(); i++) {
 			// This is where the grid layout will be made and enter in based on
 			// how many roads there is
 			JPanel temproadpanel = new JPanel();
 			BoxLayout templayout = new BoxLayout(temproadpanel,
 					BoxLayout.Y_AXIS);
+			// Creates a border and then sets the border ot the panel
+
 			temproadpanel.setLayout(templayout);
 			Border tempborder = BorderFactory
 					.createTitledBorder(inrangedsortedroads.get(i)
 							.getRoadname());
 			temproadpanel.setBorder(tempborder);
+			// Sets the preferred size
 			temproadpanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 			temproadpanel.setPreferredSize(new Dimension(100, 100));
 			temproadpanel.setMaximumSize(new Dimension(100, 100));
+			// Adds padding to the left hand side
 			temproadpanel.add(Box.createRigidArea(new Dimension(0, 5)));
+			// Then will see if there is a delay and if there is then it will
+			// display it however if not then it will create black space
 			if (inrangedsortedroads.get(i).getdelay() != null) {
 				int delay = inrangedsortedroads.get(i).getintdelay();
 				if (delay > 0) {
@@ -520,6 +412,8 @@ public class Startscreen{
 							.add(Box.createRigidArea(new Dimension(0, 10)));
 				}
 			}
+			// Display the amount of incident and then allows the user to find
+			// out more
 			temproadpanel.add(new JLabel("Number of Incidents: "
 					+ inrangedsortedroads.get(i).incidentsize()));
 			temproadpanel.add(Box.createRigidArea(new Dimension(0, 10)));
@@ -529,7 +423,8 @@ public class Startscreen{
 			tempbutton.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent actionEvent) {
-					incidentframe = new JFrame("Add New Town");
+					// Creates and incident frame and display them in a textarea
+					incidentframe = new JFrame("View Incidents");
 					main = new JPanel();
 					JTextArea taoutput = new JTextArea();
 					for (Incident item : incidents) {
@@ -542,51 +437,13 @@ public class Startscreen{
 					incidentframe.setVisible(true);
 				}
 			});
+			// Adding them to the panel
 			temproadpanel.add(tempbutton);
 			mainRoadpanel.add(temproadpanel);
 
 		}
+		// Refresh the main road panel
 		mainRoadpanel.revalidate();
-		trafficlayer.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				// Will look and see if the the traffic layer has been selected
-				// if so then will see if it needs to add the incdent layer as
-				// well
-				if (trafficlayer.isSelected() == true) {
-					if (incidentlayer.isSelected()) {
-						// Will show both Inicdent and traffic
-
-					} else {
-						// Will show only the traffic
-					}
-				} else {
-					if (incidentlayer.isSelected()) {
-						// Will show only incidents
-					} else {
-						// Will show nothing but the map
-					}
-				}
-			}
-		});
-		incidentlayer.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				if (incidentlayer.isSelected() == true) {
-					if (trafficlayer.isSelected()) {
-						// Will show both Inicdent and traffic
-					} else {
-						// Will show only the Incidents
-					}
-				} else {
-					if (trafficlayer.isSelected()) {
-						// Will show only traffic
-					} else {
-						// Will show nothing but the map
-					}
-				}
-			}
-		});
 
 		// This will add markers to the map based on any incidents
 		for (int i = 0; i < inrangedincidents.size(); i++) {
@@ -604,6 +461,7 @@ public class Startscreen{
 			map.addMapMarker(temp);
 		}
 
+		// Adding a Mouse Listener so you can tell when the user has clicked
 		map.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -633,16 +491,14 @@ public class Startscreen{
 							// if the radius is smaller then 23 (radius of a
 							// ball is 5), then it must be on the dot
 							if (radCircle < 8) {
-								String message = getincidentsat(inrangedincidents,
-										inrangedjounreytime,
-										mapMarker.getLat(),
-										mapMarker.getLon());
-								if(message.length() > 1)
-								{
-								JOptionPane.showMessageDialog(
-										frame,message,
-										String.valueOf(mapMarker.hashCode()),
-										JOptionPane.PLAIN_MESSAGE);
+								String message = getincidentsat(
+										inrangedincidents, inrangedjounreytime,
+										mapMarker.getLat(), mapMarker.getLon());
+								if (message.length() > 1) {
+									JOptionPane.showMessageDialog(frame,
+											message, String.valueOf(mapMarker
+													.hashCode()),
+											JOptionPane.PLAIN_MESSAGE);
 								}
 							}
 
@@ -654,7 +510,7 @@ public class Startscreen{
 
 	}
 
-	//Returns a string array of the town
+	// Returns a string array of the town
 	public String[] getcordsoftown(String intown) {
 		// Returns the cords of the town
 		Towninfo = readalltowninfo();
@@ -670,21 +526,11 @@ public class Startscreen{
 		return null;
 	}
 
-	//Gets the correct delay based on Journeytime
-	public String getcorrectdelay(Journeytime journeytime) {
-		// This will return the correct amount of time the delay
-		if (journeytime.delayed()) {
-			long delayedtime = (long) (journeytime.getcurrenttime() - journeytime
-					.getnormaltime());
-
-			return String.valueOf(TimeUnit.SECONDS.toMinutes(delayedtime));
-		}
-		return null;
-	}
-
-	//Returns a string message based on where the user click
+	// Returns a string message based on where the user click
 	public String getincidentsat(ArrayList<Incident> allincidents,
 			ArrayList<Journeytime> alljounreytime, double inlat, double inlong) {
+		// Finds the incident or journeytime on where the user has clicked as it
+		// will have to be one of them.
 		for (Incident temp : allincidents) {
 			if ((temp.getLat() == inlat) || (temp.getLonga() == inlong)) {
 				return "Issue at " + temp.gettitle() + "\n " + temp.getdesc();
@@ -693,18 +539,19 @@ public class Startscreen{
 		}
 		for (Journeytime temp : alljounreytime) {
 			if ((temp.getfromlat() == inlat) || (temp.getfromlong() == inlong)) {
-				return "Currently going between point: "
-						+ correctjuction(temp) + " to " + correctjuction(temp) 
-						+ " Will take you " + temp.getcurrenttime() + " !";
+				return "Currently going between point: " + correctjuction(temp)
+						+ " to " + correctjuction(temp) + " Will take you "
+						+ temp.getcurrenttime() + " !";
 			}
 		}
 		return "";
 	}
-	
-	
-	//Find all the incidents in ranged 
+
+	// Find all the incidents in ranged
 	public ArrayList<Incident> getinranged(ArrayList<Incident> allincidents,
 			double tolong, double fromlong, double tolat, double fromlat) {
+		// Returns an array of all the in ranged incidents by checking each
+		// instance
 		ArrayList<Incident> inrangedincident = new ArrayList<Incident>();
 		for (int i = 0; i < allincidents.size(); i++) {
 			if (allincidents.get(i).inrange(tolong, fromlong, tolat, fromlat)) {
@@ -715,10 +562,12 @@ public class Startscreen{
 
 	}
 
-	//Finds all the Journeytimes in range
+	// Finds all the Journeytimes in range
 	public ArrayList<Journeytime> getinrangejourneytime(
 			ArrayList<Journeytime> all, double tolong, double fromlong,
 			double tolat, double fromlat) {
+		// Returns an array of all the in ranged Journeytime by checking each
+		// instance
 		ArrayList<Journeytime> inrangejourneys = new ArrayList<Journeytime>();
 		for (int i = 0; i < all.size(); i++) {
 			if (all.get(i).inrange(tolong, fromlong, tolat, fromlat) == true) {
@@ -729,38 +578,8 @@ public class Startscreen{
 		return inrangejourneys;
 	}
 
-	//Will return a message based on the journey time of a road 
-	public String getjourneytimedata(ArrayList<Journeytime> alljourneytime,
-			String road) {
-		// This will get a list of all the journey time data and return the data
-		// based on the road
-
-		String journeyinfo;
-		long normaltime = 0;
-		long currenttime = 0;
-		long delayedtime = 0;
-		for (int i = 0; i < alljourneytime.size(); i++) {
-
-			if (alljourneytime.get(i).gettoroad().equalsIgnoreCase(road)) {
-				normaltime = (long) (normaltime + alljourneytime.get(i)
-						.getnormaltime());
-				currenttime = (long) (currenttime + alljourneytime.get(i)
-						.getcurrenttime());
-
-			}
-			delayedtime = currenttime - normaltime;
-		}
-		if (delayedtime > 0) {
-			journeyinfo = "Current delay is: "
-					+ String.valueOf(TimeUnit.SECONDS.toMinutes(delayedtime));
-		} else {
-			// Delay
-			journeyinfo = "No Major delay! \n";
-		}
-		return journeyinfo;
-	}
-
-	//Gets a String array of roads based on the incidents that have been inputted
+	// Gets a String array of roads based on the incidents that have been
+	// inputted
 	public ArrayList<String> getroads(ArrayList<Incident> Journeys) {
 		// This will collect the journey times on the spades.
 		ArrayList<String> roads = new ArrayList<String>();
@@ -787,11 +606,14 @@ public class Startscreen{
 
 	}
 
-	//Creates a road classes based on incident 
+	// Creates a road classes based on incident
 	public ArrayList<Road> getroadsasclass(ArrayList<Incident> Journeys) {
 		// This will collect the journey times on the spades.
 		ArrayList<String> roads = new ArrayList<String>();
 		ArrayList<Road> allroads = new ArrayList<Road>();
+		// Will first check to see if the road from the first array is the same
+		// of the second array
+		// Then will see if its been added before if its hasn't then it will
 		for (int i = 0; i < Journeys.size(); i++) {
 			for (int i2 = i + 1; i2 < Journeys.size(); i2++) {
 				if (Journeys.get(i).getroad()
@@ -803,6 +625,7 @@ public class Startscreen{
 						Road Temp = new Road(Journeys.get(i).getroad());
 						Temp.setRoadlat(Journeys.get(i).getLat());
 						Temp.setRoadlong(Journeys.get(i).getLonga());
+						// Adding the new instace to the array
 						allroads.add(Temp);
 						roads.add(Journeys.get(i).getroad());
 					}
@@ -813,7 +636,7 @@ public class Startscreen{
 		return allroads;
 	}
 
-	//Formatts time 
+	// Formats time
 	public String gettime(String time) {
 		int inttime = (int) Math.round(Double.parseDouble(time));
 		if (inttime < 60) {
@@ -822,7 +645,8 @@ public class Startscreen{
 			return String.valueOf(inttime / 60) + "Hour(s).";
 		}
 	}
-	//Gives color based on delay
+
+	// Gives color based on delay
 	public Color gettrafficcolor(Journeytime tempinput) {
 		Double delay = tempinput.getcurrenttime()
 				- (tempinput.getnormaltime() % 60);
@@ -841,8 +665,9 @@ public class Startscreen{
 
 	}
 
-	//Checks to see if the input is double
+	// Checks to see if the input is double
 	public Boolean isdouble(String input) {
+		// Will try to parse if it can't then its not a double
 		try {
 			Double.parseDouble(input);
 			return true;
@@ -851,29 +676,28 @@ public class Startscreen{
 		}
 	}
 
-	//Creates the main layout
+	// Creates the main layout
 	public void layout() {
 		// This will display the starting screen for the program with input of
 		// postcodes.
 		offlineframe = new JFrame("Traffic Watcher");
 		offlineframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		// Setting up the panel of set cords for offline testing
-		setcordpanel = new JPanel();
-		// Setting up the temp label
-		info = new JLabel(
-				"To start a new route please click on Route in the menu bar and then click Start new Route!");
 		// Setting up a menu bar
 		menu = new JMenuBar();
 		offlineframe.setJMenuBar(menu);
 		JMenu add = new JMenu("Add");
 		menu.add(add);
+		// Making Menu Items to add to the main menu drop down
 		JMenuItem newtownlat = new JMenuItem("New Town with Lat and Long");
 		JMenuItem newtownpostcode = new JMenuItem("New Town with Postcode");
+		// Adding Action Listener so that we have events when clicked
 		add.add(newtownlat);
 		add.add(newtownpostcode);
+
 		newtownlat.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
+				// Allows user to add a new town
 				addtown();
 			}
 
@@ -886,17 +710,21 @@ public class Startscreen{
 			}
 
 		});
+		// Creating a new route menu bar
 		JMenu Route = new JMenu("Route");
 		menu.add(Route);
+		// Adds Menu Items to the menu
 		JMenuItem newroute = new JMenuItem("Start new route");
 		JMenuItem saveroute = new JMenuItem("Save current route");
 		JMenuItem loadroute = new JMenuItem("Load route");
 		Route.add(newroute);
 		Route.add(saveroute);
 		Route.add(loadroute);
+		// Adds onactionlisteners
 		newroute.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
+				// Open up the new route layout
 				newroute();
 			}
 
@@ -904,15 +732,20 @@ public class Startscreen{
 		saveroute.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
+				// Will try and save the route however can't save if the user is
+				// not in a route
 				try {
 					if (totown.isEmpty() || fromtown.isEmpty()) {
+						// Display error message
 						JOptionPane.showMessageDialog(offlineframe,
 								"Please start a route to save it.", "Error",
 								JOptionPane.ERROR_MESSAGE);
 					} else {
+						// Saving route
 						saveroute(totown, fromtown);
 					}
 				} catch (Exception a) {
+					// Display error message
 					JOptionPane.showMessageDialog(offlineframe,
 							"Please start a route to save it.", "Error",
 							JOptionPane.ERROR_MESSAGE);
@@ -923,60 +756,61 @@ public class Startscreen{
 		loadroute.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				// TODO
+				// This loads in a all saved routes
 				ArrayList<String> routes = readroutes();
+
 				String[][] realroutes = new String[routes.size()][2];
 				for (int i = 0; i < routes.size(); i++) {
 					String[] temparray = routes.get(i).split(",");
 					realroutes[i][0] = temparray[0];
 					realroutes[i][1] = temparray[1];
 				}
+				// Starting to create the table
 				String[] columns = { "To", "From" };
-				JButton ok = new JButton("Ok");
 
+				// Creates the frame and panel for the routes
 				routesframe = new JFrame();
-
 				JPanel routespanel = new JPanel();
+				// Adds the 2D array and headers into the JTable
 				JTable routestable = new JTable(realroutes, columns);
+				// Makes the table scrollable
 				JScrollPane routespane = new JScrollPane(routestable);
 				routestable.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
+						// Finds the JTable then finds what row had been click
+						// and pull the to town and from town
 						JTable clickedtable = (JTable) e.getSource();
 						String totown = clickedtable.getValueAt(
 								clickedtable.getSelectedRow(), 0).toString();
 						String fromtown = clickedtable.getValueAt(
 								clickedtable.getSelectedRow(), 1).toString();
 						Boolean online;
-						if(JOptionPane.showConfirmDialog(null, "Use online?", "Question", 
-    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE)
-    == JOptionPane.YES_OPTION)
-						{
+						// Asks the user if they are online or offline
+						if (JOptionPane.showConfirmDialog(null, "Use online?",
+								"Question", JOptionPane.YES_NO_OPTION,
+								JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
 							online = true;
-						}
-						else
-						{
+						} else {
 							online = false;
 						}
-						displaytraffic(totown, fromtown,online);
+						// Displays the traffic based on the information
+						displaytraffic(totown, fromtown, online);
+						// Removes the frame
 						routesframe.setVisible(false);
 					}
 				});
+				// Adds the routes panel and add the header to the pnale
 				routespanel.add(routestable.getTableHeader());
 				routesframe.add(routespanel);
 				routesframe.add(routespane);
-				ok.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent actionEvent) {
-						routesframe.setVisible(false);
-					}
-				});
+				// Display the panel
 				routesframe.setVisible(true);
 				routesframe.setSize(600, 300);
 			}
 
 		});
-		// Will setup the main panels
+		// Setting the main panels
 		Overviewpanel = new JPanel();
 		Overviewpanel.setLayout(new BorderLayout());
 		Box leftsidebox = Box.createVerticalBox();
@@ -1048,26 +882,20 @@ public class Startscreen{
 		roadscroll.getVerticalScrollBar().setUnitIncrement(16);
 		// Setting up the Maps Panel
 		mainmappanel = new JPanel();
-		trafficlayer = new JCheckBox("Traffic Layer", false);
-		incidentlayer = new JCheckBox("Incident Layer", false);
-		mainmappanel.add(trafficlayer);
-		mainmappanel.add(incidentlayer);
 		map = new JMapViewer();
 		map.setSize(1000, 1000);
 		map.setDisplayPositionByLatLon(53.508804, -1.702287, 6);
 		map.setPreferredSize(new Dimension(1000, 800));
 		map.setMaximumSize(new Dimension(1000, 800));
 		mainmappanel.add(map);
-
+		// Setting up the tabs
 		tabs = new JTabbedPane();
 		tabs.addTab("Overview", Overviewpanel);
 		tabs.addTab("Roads", roadscroll);
 		tabs.addTab("Map", mainmappanel);
+		// Addings tabs to the frame
 		offlineframe.add(tabs);
 		tabs.setVisible(false);
-
-		// offlineframe.add(Scrollpane, BorderLayout.CENTER);
-		// Sets the size of the Frame
 		// ONLINE AT
 		// http://stackoverflow.com/questions/11570356/jframe-in-full-screen-java
 		offlineframe.setExtendedState(Frame.MAXIMIZED_BOTH);
@@ -1075,7 +903,7 @@ public class Startscreen{
 		offlineframe.setVisible(true);
 	}
 
-	//Create the layout for creating a new route
+	// Create the layout for creating a new route
 	public void newroute() {
 		// This will display the route finding items
 		newrouteframe = new JFrame("Starting new route");
@@ -1083,11 +911,14 @@ public class Startscreen{
 		final ArrayList<String> temptownarray = readtowns();
 		String[] alltowns = new String[temptownarray.size()];
 		alltowns = temptownarray.toArray(alltowns);
+		// Creates dropdown boxs for the user ot pick from filled with
+		// information from the towns stored
 		JLabel tocombolabel = new JLabel("Traveling to: ");
 		final JComboBox Tocombo = new JComboBox(alltowns);
 		JLabel fromcombolabel = new JLabel("Traveling from: ");
 		final JComboBox Fromcombo = new JComboBox(alltowns);
 		onlinecheckbox = new JCheckBox("Online", false);
+		// Creates a button and its listener.
 		JButton Findroutes = new JButton("Find Traffic");
 		Findroutes.addActionListener(new ActionListener() {
 			@Override
@@ -1095,19 +926,21 @@ public class Startscreen{
 				// This will input the 2 towns into the function
 				totown = temptownarray.get(Tocombo.getSelectedIndex());
 				fromtown = temptownarray.get(Fromcombo.getSelectedIndex());
-				displaytraffic(totown, fromtown,onlinecheckbox.isSelected());
+				displaytraffic(totown, fromtown, onlinecheckbox.isSelected());
 				newrouteframe.setVisible(false);
 			}
 
 		});
-
+		// Giving the dropdown box its labels
 		tocombolabel.setLabelFor(Tocombo);
 		fromcombolabel.setLabelFor(Fromcombo);
+		// Adding to the main panel
 		mainpanel.add(tocombolabel);
 		mainpanel.add(Tocombo);
 		mainpanel.add(fromcombolabel);
 		mainpanel.add(Fromcombo);
 		mainpanel.add(Findroutes);
+		// Setting up the frame
 		newrouteframe.add(mainpanel);
 		newrouteframe.setSize(220, 200);
 		newrouteframe.setLocationRelativeTo(null);
@@ -1115,7 +948,7 @@ public class Startscreen{
 
 	}
 
-	//Reads the town file and returns all data held 
+	// Reads the town file and returns all data held
 	public ArrayList<String> readalltowninfo() {
 		try {
 			// This class will read the file then will return 2 arrays one with
@@ -1146,7 +979,7 @@ public class Startscreen{
 		return null;
 	}
 
-	//Reads the route file and returns all possible routes
+	// Reads the route file and returns all possible routes
 	public ArrayList<String> readroutes() {
 		try {
 			// This class will read the file then will return the routes info
@@ -1174,7 +1007,7 @@ public class Startscreen{
 		return null;
 	}
 
-	//Reads the town file and returns town names not lat and long 
+	// Reads the town file and returns town names not lat and long
 	public ArrayList<String> readtowns() {
 
 		try {
@@ -1212,45 +1045,56 @@ public class Startscreen{
 		return null;
 	}
 
-	//Saves the Routes
+	// Saves the Routes
 	public void saveroute(String totown, String fromtown) {
 		// This will add to the file which holds all of the user
 		try {
 			File routefile = new File("Routes.txt");
+			// Creates an array of data currently in the file
 			ArrayList<String> Routes = readroutes();
+			// Creates an output writer
 			PrintWriter out = new PrintWriter(new BufferedWriter(
 					new FileWriter(routefile)));
 			for (String routeinfo : Routes) {
+				// Adds all the old infomation back into the file
 				out.append(routeinfo + "\n");
 			}
+			// Adds the new information to the file
 			out.append(totown + "," + fromtown);
+			// Closes the file
 			out.close();
+			// Lets the user know that the route has been saved
 			JOptionPane.showMessageDialog(offlineframe, "Route has been Saved",
 					"Thank You", JOptionPane.INFORMATION_MESSAGE);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			// Catch Errors
 			e.printStackTrace();
 		}
 
 	}
 
-	//Saves the Towns 
+	// Saves the Towns
 	public void savetown(String Townname, String TownLat, String TownLong) {
 		// This will add to the file which holds all of the saved town data
 		try {
 			File townfile = new File("Offlinetowns.txt");
+			// Creates an array of the old data
 			ArrayList<String> Towns = readalltowninfo();
+			// Creates an output stream
 			PrintWriter out = new PrintWriter(new BufferedWriter(
 					new FileWriter(townfile)));
 			for (String towninfo : Towns) {
+				// Saving old data
 				out.append(towninfo + "\n");
 			}
+			// Adding the new data
 			out.append(Townname + "," + TownLat + "," + TownLong);
 			out.close();
+			// Letting the user know its been saved
 			JOptionPane.showMessageDialog(offlineframe, "Town has been Saved",
 					"Thank You", JOptionPane.INFORMATION_MESSAGE);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			// Catch Errors
 			e.printStackTrace();
 		}
 
@@ -1261,6 +1105,7 @@ public class Startscreen{
 			ArrayList<Incident> inrangedincidents,
 			ArrayList<Road> inrangedsortedroads) {
 		for (Road road : inrangedsortedroads) {
+			// This will add the information on journeytime to the correct road
 			for (Journeytime item : inrangedjounreytime) {
 				if (item.gettoroad().equalsIgnoreCase(road.getRoadname())
 						|| item.getfromroad().equalsIgnoreCase(
@@ -1275,6 +1120,7 @@ public class Startscreen{
 					road.addjuctions(item);
 				}
 			}
+			// This will add the information on Incident to the correct road
 			for (Incident currentincident : inrangedincidents) {
 				if (currentincident.getroad().equalsIgnoreCase(
 						road.getRoadname())) {
@@ -1286,9 +1132,9 @@ public class Startscreen{
 		}
 	}
 
-	//Collects infomation based on the worstroad.
+	// Collects information based on the worstroad.
 	public ArrayList<String> worstroad(ArrayList<Road> all) {
-		// TODO Auto-generated method stub
+		// This will find the worst road and return infomation based on it.
 		if (all.size() < 1) {
 			return null;
 		}
@@ -1298,6 +1144,7 @@ public class Startscreen{
 				currentworstroad = all.get(i);
 			}
 		}
+		// Found worst road now save the information to a string array
 		ArrayList<String> worstroad = new ArrayList<String>();
 		worstroad.add(currentworstroad.getRoadname());
 		worstroad.add(String.valueOf(currentworstroad.getTravelTime()));

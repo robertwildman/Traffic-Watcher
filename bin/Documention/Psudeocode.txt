@@ -344,4 +344,12 @@ Startscreen.java
 			print the error to the console
 		end catch
 	end method
+	Method actionperformed
+		Creates a 2D array called realroutes
+		For the size of the routes array
+			Creates temp array with the spilit value of the routes array at the current postiton of i
+			Save 2D array at i part 0 with part 0 of the temp array
+			Saves 2D array at i part 1 with part 1 of the temp array
+		Next
+	End Method
 

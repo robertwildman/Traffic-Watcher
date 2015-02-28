@@ -21,7 +21,7 @@ public class Journeytime {
 			double fromlong, String toroadmain,
 			String tojunction, String fromroadmain,
 			String fromjunction, String direction,String sectionid) {
-
+			//Creates an instance of the journeytime class
 		this.sectionid = sectionid;
 		this.tolong = tolong;
 		this.tolat = tolat;
@@ -36,26 +36,32 @@ public class Journeytime {
 	}
 	public double getlat()
 	{
+		//Returns the to junction lat
 		return tolat;
 	}
 	public double getlong()
 	{
+		//Returns the to junction long
 		return tolong;
 	}
 	public double gettolat()
 	{
+		//Returns the to junction lat
 		return tolat;
 	}
 	public double getfromlat()
 	{
+		//Returns the from junction lat
 		return fromlat;
 	}
 	public double gettolong()
 	{
+		//Returns the to junction long
 		return tolong;
 	}
 	public double getfromlong()
 	{
+		//Returns the from junction long
 		return fromlong;
 	}
 	public void setalltime(double travelTime, double freeFlowTravelTime,double normallyExpectedTravelTime )
@@ -69,18 +75,22 @@ public class Journeytime {
 	}
 	public Boolean gottime()
 	{
+		//Returns the time
 		return this.gottime;
 	}
 	public String getid()
 	{
+		//Returns the roadid
 		return sectionid;
 	}
 	public double getnormaltime()
 	{
+		//Returns the normaltime
 		return normallyExpectedTravelTime;
 	}
 	public double getcurrenttime()
 	{
+		//Returns the current time
 		return travelTime;
 	}
 	public Boolean delayed()
@@ -98,28 +108,33 @@ public class Journeytime {
 	}
 	public String getroad()
 	{
+		//Returns the main to road
 		return toroadmain;
 	}
 	public String gettoroad()
 	{
+		//Returns the main to road
 		return toroadmain;
 	}
 	public String getfromroad()
 	{
+		//Return the main from road
 		return fromroadmain;
 	}
 	public String gettojuction()
 	{
+		//Returns the main to junction
 		return tojunction;
 	}
 	public String getfromjuction()
 	{
+		//Returns the from junction
 		return fromjunction;
 	}
 	public Boolean inrange(double inlong,double inlong2,double inlat,double inlat2)
 	{
 		//This will work out what lat and long is bigger
-		double highlat = 0,lowlat = 0,highlong = 0,lowlong = 0;
+		double highlat = 0,lowlat = 0;
 		//This deals with setting the higgest and lowest lat and long. 
 		int tempdirectioncode,rangedirectioncode;
 		if(inlat > inlat2)
@@ -138,8 +153,6 @@ public class Journeytime {
 		
 		if(inlong > inlong2)
 		{
-			highlong = inlong;
-			lowlong = inlong2;
 			//Going East
 			if(tempdirectioncode == 0)
 			{
@@ -152,8 +165,6 @@ public class Journeytime {
 			}
 		}else
 		{
-			highlong = inlong2;
-			lowlong = inlong;
 			//Going West 
 			if(tempdirectioncode == 0)
 			{
